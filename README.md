@@ -1,8 +1,8 @@
 # [GOintegro](http://www.gointegro.com/en/) / HATEOAS
 
-[![Build Status](https://travis-ci.org/skqr/hateoas-bundle.svg?branch=master)](https://travis-ci.org/skqr/hateoas-bundle) [![Code Climate](https://codeclimate.com/github/skqr/hateoas-bundle/badges/gpa.svg)](https://codeclimate.com/github/skqr/hateoas-bundle)
+[![Build Status](https://travis-ci.org/gointegro/hateoas.svg?branch=master)](https://travis-ci.org/gointegro/hateoas/) [![Code Climate](https://codeclimate.com/github/gointegro/hateoas/badges/gpa.svg)](https://codeclimate.com/github/gointegro/hateoas/)
 
-This is a library and Symfony 2 bundle that uses a Doctrine 2 entity map and a [RAML](http://raml.org/) API definition to conjure a [HATEOAS](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) API, following the [JSON-API](http://jsonapi.org/) specification.
+This is a library that uses a Doctrine 2 entity map and a [RAML](http://raml.org/) API definition to conjure a [HATEOAS](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) API, following the [JSON-API](http://jsonapi.org/) specification.
 
 You don't get scaffolds. You get a working API.
 
@@ -46,61 +46,7 @@ ___
 
 # Installation
 
-## Step 1: Download the Bundle
-
-Open a command console, enter your project directory and execute the
-following command to download the latest stable version of this bundle:
-
-```bash
-$ composer require gointegro/hateoas-bundle
-```
-
-This command requires you to have Composer installed globally, as explained
-in the [installation chapter](https://getcomposer.org/doc/00-intro.md)
-of the Composer documentation.
-
-## Step 2: Enable the Bundle
-
-Then, enable the bundle by adding the following line in the `app/AppKernel.php`
-file of your project:
-
-```php
-<?php
-// app/AppKernel.php
-
-class AppKernel extends Kernel
-{
-    public function registerBundles()
-    {
-        $bundles = array(
-            new GoIntegro\Bundle\HateoasBundle\GoIntegroHateoasBundle(),
-        );
-    }
-}
-?>
-```
-
-## Step 3: Add these parameters
-
-```yaml
-# app/config/parameters.yml
-
-# HATEOAS API
-api.base_url: "http://api.gointegro.com"
-api.url_path: "/api/v2"
-api.resource_class_path: "Rest2/Resource"
-```
-
-## Step 4: Add these routes
-
-```yaml
-# app/config/routing.yml
-
-# Place it underneath it all - it contains a catch-all route.
-go_integro_hateoas:
-    resource: "@GoIntegroHateoasBundle/Resources/config/routing.yml"
-    prefix: /api/v2
-```
+Check out the [Symfony 2 bundle](https://github.com/GoIntegro/hateoas-bundle/) for a full-stack framework implementation.
 
 ___
 
