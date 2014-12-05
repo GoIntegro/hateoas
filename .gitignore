@@ -1,0 +1,18 @@
+# Git
+!.gitignore
+
+# Vim, nano, etc.
+*~
+.*
+
+# Composer
+composer.phar
+composer.lock
+vendor/*
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Example app db
+example/app/data/*
