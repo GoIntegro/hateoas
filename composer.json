@@ -20,13 +20,23 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "symfony/framework-bundle": "*",
         "symfony/doctrine-bridge": "*",
         "doctrine/doctrine-bundle": "*",
         "doctrine/orm": "*",
         "justinrainbow/json-schema": "*",
         "rhumsaa/uuid": "*",
-        "predis/predis": "*"
+        "predis/predis": "*",
+
+        "symfony/http-foundation": "*",
+        "symfony/http-kernel": "*",
+        "symfony/filesystem": "*",
+        "symfony/routing": "*",
+        "symfony/security-core": "*",
+        "symfony/translation": "*",
+        "doctrine/annotations": "*",
+        "symfony/security": "*",
+        "symfony/validator": "*",
+        "symfony/yaml": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
