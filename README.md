@@ -1,6 +1,6 @@
 # [GOintegro](http://www.gointegro.com/en/) / HATEOAS
 
-[![Build Status](https://travis-ci.org/gointegro/hateoas.svg?branch=master)](https://travis-ci.org/gointegro/hateoas/) [![Code Climate](https://codeclimate.com/github/gointegro/hateoas/badges/gpa.svg)](https://codeclimate.com/github/gointegro/hateoas/)
+[![Build Status](https://travis-ci.org/GoIntegro/hateoas.svg?branch=master)](https://travis-ci.org/GoIntegro/hateoas) [![Code Climate](https://codeclimate.com/github/GoIntegro/hateoas/badges/gpa.svg)](https://codeclimate.com/github/GoIntegro/hateoas)
 
 This is a library that uses a Doctrine 2 entity map and a [RAML](http://raml.org/) API definition to conjure a [HATEOAS](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) API, following the [JSON-API](http://jsonapi.org/) specification.
 
