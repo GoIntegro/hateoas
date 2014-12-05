@@ -28,6 +28,7 @@ Here's what I mean.
     * [Entity validation](#validation) using Symfony's validator;
     * [Create, update, and delete](#creating-updating-and-deleting) out of the box;
     * Assign services to handle any of the above for specific resources.
+* [Translatable content](#translatable-content) out-of-the-box.
 * [Metadata caching](#caching), similar to that of Doctrine 2;
   * Redis,
   * Or Memcached.
@@ -307,6 +308,74 @@ Tag | Interface
 hateoas.entity.builder | `GoIntegro\Bundle\HateoasBundle\Entity\BuilderInterface`
 hateoas.entity.mutator | `GoIntegro\Bundle\HateoasBundle\Entity\MutatorInterface`
 hateoas.entity.deleter | `GoIntegro\Bundle\HateoasBundle\Entity\DeleterInterface`
+
+## Translatable content
+
+The framework provides support for working with the translatable entities feature of @l3pp4rd's [Doctrine Extensions](https://github.com/l3pp4rd/DoctrineExtensions) (AKA *Gedmo*) through @stof's [Bundle](https://github.com/stof/StofDoctrineExtensionsBundle/).
+
+When fetching or updating a translatable resource, the framework will act upon the translation corresponding to the locale negotiated by the `GoIntegro\Bundle\HateoasBundle\JsonApi\Request\DefaultLocaleNegotiator`.
+
+You can override the default locale negotiator by having your negotiator class implement `GoIntegro\Bundle\HateoasBundle\JsonApi\Request\LocaleNegotiatorInterface` and exposing it as a service using the tag `hateoas.request_parser.locale`.
+
+You can fetch all translations for one or many resources by passing the query string parameter `meta=i18n`. You can also update them by making a `PUT` request with the same body you get.
+
+This is an example out of [the example app](https://github.com/skqr/hateoas-bundle-example).
+
+```
+GET /articles/1?meta=i18n
+
+Accept-Language: en_GB
+```
+
+```json
+{
+    "links": {
+        "articles.owner": {
+            "href": "/api/v1/users/{articles.owner}",
+            "type": "users"
+        }
+    },
+    "articles": {
+        "id": "1",
+        "type": "articles",
+        "title": "This is my standing on stuff",
+        "content": "Here's me, standing on stuff. E.g. a carrot.",
+        "links": {
+            "owner": "1"
+        }
+    },
+    "meta": {
+        "articles": {
+            "translations": {
+                "content": [
+                    {
+                        "locale": "fr",
+                        "value": "Ici est moi, debout sur des trucs. Par exemple une carotte."
+                    },
+                    {
+                        "locale": "it",
+                        "value": "Qui sono io, in piedi su roba. E.g. una carota."
+                    }
+                ],
+                "title": [
+                    {
+                        "locale": "fr",
+                        "value": "Ce est ma position sur la substance"
+                    },
+                    {
+                        "locale": "it",
+                        "value": "Questa è la mia posizione su roba"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+Parlez-vous JSON-API? Oui, oui.
+
+-
 
 # Extending
 
