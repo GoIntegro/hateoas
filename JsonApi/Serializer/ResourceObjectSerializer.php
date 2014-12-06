@@ -12,8 +12,7 @@ use Doctrine\Common\Collections\Collection as CollectionInterface;
 // Inflection.
 use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentResource,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource;
+use GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource;
 // Security.
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
@@ -22,7 +21,7 @@ class ResourceObjectSerializer implements SerializerInterface
     const ACCESS_VIEW = 'view';
 
     const ERROR_FIELD_IS_RELATIONSHIP = "El campo \"%s\" es en sí un recurso vinculado.",
-        ERROR_UNKOWN_FIELD = "El campo \"%s\" no existe.";
+        ERROR_UNKNOWN_FIELD = "El campo \"%s\" no existe.";
 
     public $resource;
     public $fields = [];
@@ -32,12 +31,12 @@ class ResourceObjectSerializer implements SerializerInterface
     private $securityContext;
 
     /**
-     * @param DocumentResource $resource
+     * @param EntityResource $resource
      * @param SecurityContextInterface $securityContext
      * @param array $sparseFields
      */
     public function __construct(
-        DocumentResource $resource,
+        EntityResource $resource,
         SecurityContextInterface $securityContext,
         array $sparseFields = []
     )
@@ -62,19 +61,25 @@ class ResourceObjectSerializer implements SerializerInterface
         foreach ($this->fields as $field) {
             if ($metadata->isRelationship($field)) {
                 $message = sprintf(self::ERROR_FIELD_IS_RELATIONSHIP, $field);
-                throw new InvalidFieldException($message);
+                throw new InvalidFieldException(
+                    $field, $this->resource, $message
+                );
             }
 
             if ($this->resource->isFieldBlacklisted($field)) {
-                $message = sprintf(self::ERROR_UNKOWN_FIELD, $field);
-                throw new InvalidFieldException($message);
+                $message = sprintf(self::ERROR_UNKNOWN_FIELD, $field);
+                throw new InvalidFieldException(
+                    $field, $this->resource, $message
+                );
             }
 
             try {
                 $value = $this->resource->callGetter($field);
             } catch (\Exception $e) {
-                $message = sprintf(self::ERROR_UNKOWN_FIELD, $field);
-                throw new InvalidFieldException($message);
+                $message = sprintf(self::ERROR_UNKNOWN_FIELD, $field);
+                throw new InvalidFieldException(
+                    $field, $this->resource, $message
+                );
             }
 
             if ('object' == gettype($value)) {
@@ -102,7 +107,7 @@ class ResourceObjectSerializer implements SerializerInterface
         return $serializer->serialize();
     }
 
-    private function getResourceLinks(DocumentResource $resource)
+    private function getResourceLinks(EntityResource $resource)
     {
         $links = [];
 
