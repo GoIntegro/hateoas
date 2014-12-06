@@ -41,7 +41,8 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpdocumentor/phpdocumentor": "*",
-        "codeception/codeception": "*"
+        "codeception/codeception": "*",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "suggest": {
         "stof/doctrine-extensions-bundle": "*",
