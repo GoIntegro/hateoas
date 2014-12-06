@@ -43,6 +43,10 @@
         "phpdocumentor/phpdocumentor": "*",
         "codeception/codeception": "*"
     },
+    "suggest": {
+        "stof/doctrine-extensions-bundle": "*",
+        "nelmio/solarium-bundle": "*"
+    },
     "autoload": {
         "psr-0": { "GoIntegro\\Bundle\\HateoasBundle": "" }
     },
