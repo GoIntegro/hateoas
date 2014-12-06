@@ -27,25 +27,13 @@ class FilterParser
      * @var MetadataMinerInterface
      */
     private $metadataMiner;
-    /**
-     * @var string
-     */
-    private $magicServices;
 
     /**
      * @param MetadataMinerInterface $metadataMiner
-     * @param array $magicServices
      */
-    public function __construct(
-        MetadataMinerInterface $metadataMiner,
-        array $magicServices = []
-    )
+    public function __construct(MetadataMinerInterface $metadataMiner)
     {
         $this->metadataMiner = $metadataMiner;
-        // @todo Esta verificación debería estar en el DI.
-        $this->magicServices = isset($config['magic_services'])
-            ? $config['magic_services']
-            : [];
     }
 
     /**

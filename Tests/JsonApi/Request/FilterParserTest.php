@@ -25,62 +25,60 @@ class FilterParserTest extends TestCase
 }
 JSON;
 
-    /**
-     * @var array
-     */
-    private static $config = [
-        'magic_services' => [
-            [
-                'resource_type' => 'users',
-                'entity_class' => 'Entity\User'
-            ]
-        ]
-    ];
-
     public function testParsingARequestWithFilters()
     {
-        $this->markTestIncomplete("TODO.");
+        /* Given... (Fixture) */
+        $mm = self::createMetadataMiner();
+        $request = self::createRequest();
+        $params = self::createParams();
+        $parser = new FilterParser($mm);
+        /* When... (Action) */
+        $actual = $parser->parse($request, $params);
+        /* Then... (Assertions) */
+        $expected = ['field' => ['name' => ['John']]];
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @param string $pathInfo
-     * @param array $queryOverrides
-     * @param string $method
-     * @param string $body
      * @return Request
      */
-    private static function createRequest(
-        $pathInfo,
-        array $queryOverrides,
-        $method = Parser::HTTP_GET,
-        $body = NULL
-    )
+    private static function createRequest()
     {
-        $defaultOverrides = [
-            'getIterator' => function() { return new \ArrayIterator([]); }
-        ];
-        $queryOverrides = array_merge($defaultOverrides, $queryOverrides);
-        $query = Stub::makeEmpty(
-            'Symfony\Component\HttpFoundation\ParameterBag',
-            $queryOverrides
-        );
         $request = Stub::makeEmpty(
-            'Symfony\Component\HttpFoundation\Request',
-            [
-                'query' => $query,
-                'getPathInfo' => $pathInfo,
-                'getMethod' => $method,
-                'getContent' => $body
-            ]
+            'Symfony\\Component\\HttpFoundation\\Request',
+            ['query' => ['name' => "John"]]
         );
 
         return $request;
     }
 
+    /**
+     * @return Params
+     */
+    private static function createParams()
+    {
+        return Stub::makeEmpty(
+            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            [
+                'primaryClass'
+                    => 'HateoasInc\\Bundle\\ExampleBundle\\Entity\\User'
+            ]
+        );
+    }
+
+    /**
+     * @return \GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata
+     */
     private static function createMetadataMiner()
     {
-        $this->miner = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface'
+        $metadata = Stub::makeEmpty(
+            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceMetadata',
+            ['isField' => TRUE]
+        );
+
+        return Stub::makeEmpty(
+            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\MetadataMinerInterface',
+            ['mine' => $metadata]
         );
     }
 }
