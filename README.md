@@ -715,6 +715,8 @@ Feel free to **open an issue** if you have valuable (or otherwise) feedback. Hop
 
 If you're going to dare rocking so hard as to make a pull request, use the `master` branch for fixes, and the `develop` branch for proposed features.
 
+We are using the [Git Flow branching model](http://nvie.com/posts/a-successful-git-branching-model/). Here's [a nice cheat-sheet](http://danielkummer.github.io/git-flow-cheatsheet/) that can give you a general idea of how it goes.
+
 New code should not exceed the legendary eighty char boundary, and [be fully documented](http://www.phpdoc.org/docs/latest/index.html).
 
 # Roadmap
