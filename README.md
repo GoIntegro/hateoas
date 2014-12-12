@@ -719,9 +719,15 @@ We are using the [Git Flow branching model](http://nvie.com/posts/a-successful-g
 
 New code should not exceed the legendary eighty char boundary, and [be fully documented](http://www.phpdoc.org/docs/latest/index.html).
 
+FYI: we still need to migrate the issues from [the bundle repo](https://github.com/GoIntegro/hateoas-bundle).
+
 # Roadmap
 
 Any [issue labeled *enhancement* goes](https://github.com/GoIntegro/hateoas-bundle/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement+author%3Askqr+).
+
+PATCH support [is coming soon](https://github.com/GoIntegro/hateoas-bundle/issues/63).
+
+(Most of the enhancement issues are still in [the bundle repo](https://github.com/GoIntegro/hateoas-bundle).)
 
 # Disclaimer
 
