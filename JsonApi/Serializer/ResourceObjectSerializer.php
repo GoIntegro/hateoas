@@ -116,15 +116,11 @@ class ResourceObjectSerializer implements SerializerInterface
                 as $relationship => $relation
         ) {
             $entity = $this->resource->callGetter($relationship);
-
-            if (!$this->securityContext->isGranted(
-                static::ACCESS_VIEW, $entity
-            )) {
-                continue;
-            }
-
             EntityResource::validateToOneRelation($entity, $relationship);
-            $links[$relationship] = EntityResource::getStringId($entity);
+
+            $links[$relationship] = $this->securityContext->isGranted(
+                static::ACCESS_VIEW, $entity
+            ) ? EntityResource::getStringId($entity) : NULL;
         }
 
         foreach (
@@ -135,6 +131,7 @@ class ResourceObjectSerializer implements SerializerInterface
             $collection = EntityResource::normalizeToManyRelation(
                 $collection, $relationship
             );
+            $links[$relationship] = [];
 
             foreach ($collection as $entity) {
                 if (!$this->securityContext->isGranted(

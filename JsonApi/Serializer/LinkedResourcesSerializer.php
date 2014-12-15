@@ -21,11 +21,14 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class LinkedResourcesSerializer implements DocumentSerializerInterface
 {
-    const RECURSION_DEPTH_LIMIT = 3,
-        ERROR_RECURSION_DEPTH = "El nivel de recursión es demasiado profundo",
-        ERROR_INHERITANCE_MAPPING = "La herencia del mapeo del ORM para la relación \"%s\" no está siendo bien manejada.",
-        ERROR_LINK_ONLY_RELATIONSHIP = "La relación \"%s\" no puede ser incluída, posiblemente por su tamaño. Debe obtener este recurso haciendo un pedido a %s.",
-        ERROR_UNKOWN_RELATIONSHIP = "La relación \"%s\" no existe.";
+    const RECURSION_DEPTH_LIMIT = 3;
+
+    const ACCESS_VIEW = 'view';
+
+    const ERROR_RECURSION_DEPTH = "The recursion level is too deep.",
+        ERROR_INHERITANCE_MAPPING = "The mapping inheritance in the ORM for the relationship \"%s\" is not being properly handled.",
+        ERROR_LINK_ONLY_RELATIONSHIP = "The relationship \"%s\" cannot be included, possibly because of its size. You must fetch this resource by getting %s.",
+        ERROR_UNKOWN_RELATIONSHIP = "The relationship \"%s\" does not exist.";
 
     private $document;
     /**
@@ -253,10 +256,12 @@ class LinkedResourcesSerializer implements DocumentSerializerInterface
         LinkedResourcesSerialization $resourcesSerialization
     )
     {
-        // Serialización de recursos embebidos.
-        if ($this->document->linkedResources->hasResource(
-            $relationship->type, EntityResource::getStringId($entity)
-        )) {
+        if (
+            !$this->securityContext->isGranted(static::ACCESS_VIEW, $entity)
+            || $this->document->linkedResources->hasResource(
+                $relationship->type, EntityResource::getStringId($entity)
+            )
+        ) {
             return;
         }
 
