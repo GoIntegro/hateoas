@@ -77,7 +77,7 @@ class DefaultMutator implements MutatorInterface
         array $metadata = []
     )
     {
-        $class = $this->metadataCache->getReflection($class);
+        $class = $this->metadataCache->getReflection($entity);
         $translations = !empty($metadata['translations'])
             ? $metadata['translations']
             : [];
