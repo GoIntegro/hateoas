@@ -12,7 +12,6 @@ You get a working API with features sweeter than [a Bobcat's self-esteem](http:/
 
 Here's what I mean.
 
-* Modeling, documenting, and creating your API are [one step](#api-definition).
 * Flat, referenced JSON serialization.
   * Clear distinction between scalar fields and linked resources.
 * Magic controllers.
@@ -53,7 +52,58 @@ ___
 
 # Usage
 
-Just point the bundle to your RAML API definition and register an entity as a *magic service*.
+Design your API in [the RAML language](http://raml.org/docs.html) following [the JSON-API spec](http://jsonapi.org/format/#document-structure-resource-urls).
+
+Something like this.
+
+```yaml
+#%RAML 0.8
+title: HATEOAS Inc. Example API
+version: v1
+baseUri: http://localhost:8000/api/{version}
+mediaType: application/vnd.api+json
+/users:
+  get:
+    description: Fetches all users.
+    responses:
+      200:
+  post:
+    description: Creates one or more users.
+    responses:
+      201:
+  /{user-ids}:
+    get:
+      description: Fetches users by Id.
+      responses:
+        200:
+    put:
+      description: Updates one or more users by Id.
+      responses:
+        200:
+    delete:
+      description: Deletes one or more users by Id.
+    /links:
+      /{relationship}:
+        get:
+          description: Fetches the related resources.
+          responses:
+            200:
+        post:
+          description: Relates one or more resources.
+          responses:
+            201:
+        put:
+          description: Updates the relationship.
+          responses:
+            204:
+        delete:
+          description: Removes the relationship.
+        /{relationship-ids}:
+          delete:
+            description: Removes to-many relationships by Id.
+```
+
+Point the bundle to your RAML API definition and register an entity as a *magic service*.
 
 ```yaml
 # app/config/config.yml
@@ -77,7 +127,7 @@ class User implements ResourceEntityInterface {}
 ?>
 ```
 
-And you get the following for free.
+And voilà - you get the following for free.
 
 ```
 GET /users
@@ -96,7 +146,7 @@ GET /users?page=1
 GET /users?page=1&size=10
 ```
 
-And any combination.
+Any combination.
 
 You also get these.
 
@@ -126,13 +176,7 @@ Sweet, right?
 
 > The `resource_type` **must** match the calculated type - for now. E.g. `UserGroup`, `user-groups`.
 
-# API Definition
-
-The HATEOAS bundle needs to know which magic actions you want enabled for your resources. That's why we add a `raml_doc` key in the `config.yml`.
-
-Check out the [RAML docs](http://raml.org/docs.html) in order to learn more about what your API definition could look like. Nevertheless, the bundle will only pay attention to the [JSON-API URLs](http://jsonapi.org/format/#document-structure-resource-urls).
-
-## JSON Schema
+# JSON Schema
 
 Requests that create or update resources have the content of their bodies validated against the schema defined in the RAML for that resource and method.
 
