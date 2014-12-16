@@ -176,25 +176,6 @@ Sweet, right?
 
 > The `resource_type` **must** match the calculated type - for now. E.g. `UserGroup`, `user-groups`.
 
-# JSON Schema
-
-Requests that create or update resources have the content of their bodies validated against the schema defined in the RAML for that resource and method.
-
-Since bodies in JSON-API [look pretty similar](http://jsonapi.org/format/#document-structure-resource-representations) whether you are fetching, creating, or updating, you can use a *default* schema, defined in the root of the RAML document with the resource type as key.
-
-For example, this could be the RAML definition for the `/users` resource.
-
-```yaml
-#%RAML 0.8
-title: HATEOAS Inc. Example API
-version: v1
-baseUri: http://api.hateoas-example.net/{version}
-mediaType: application/vnd.api+json
-schemas:
-  - users: !include users.schema.json
-/users:
-```
-
 # Resources
 
 But you need to have some control over what you expose, right? Got you covered.
@@ -257,6 +238,25 @@ class UserResource extends EntityResource implements ContainerAwareInterface
 ```
 
 Check out the unit tests for more details.
+
+## JSON Schema
+
+Requests that create or update resources have the content of their bodies validated against the schema defined in the RAML for that resource and method.
+
+Since bodies in JSON-API [look pretty similar](http://jsonapi.org/format/#document-structure-resource-representations) whether you are fetching, creating, or updating, you can use a *default* schema, defined in the root of the RAML document with the resource type as key.
+
+For example, this could be the RAML definition for the `/users` resource.
+
+```yaml
+#%RAML 0.8
+title: HATEOAS Inc. Example API
+version: v1
+baseUri: http://api.hateoas-example.net/{version}
+mediaType: application/vnd.api+json
+schemas:
+  - users: !include users.schema.json
+/users:
+```
 
 # Entities
 
