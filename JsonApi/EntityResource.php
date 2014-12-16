@@ -22,7 +22,9 @@ class EntityResource implements DocumentResource
 
     const ERROR_NOT_RESOURCE_ENTITY = "The relationship \"%s\" contains a \"%s\", an entity implementing GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface was expected.",
         ERROR_TO_MANY_RELATION_NULL = "The to-many relationship \"%s\" returns neither an array nor a collection. The corresponding property needs to be initialized with either during the construction of the entity.",
-        ERROR_NOT_ENTITY_COLLECTION = "The relationship \"%s\" contains a \"%s\", a collection of entities that implements Doctrine\\Common\\Collections\\Collection was expected.";
+        ERROR_NOT_ENTITY_COLLECTION = "The relationship \"%s\" contains a \"%s\", a collection of entities that implements Doctrine\\Common\\Collections\\Collection was expected.",
+        ERROR_INACCESSIBLE_MEMBER = "For some reason the field is known or is a relationship, but its value can't be accessed.",
+        ERROR_UNCALLABLE_GETTER = "The \"%s\" getter cannot be invoked.";
 
     /**
      * @var ResourceEntityInterface
@@ -131,10 +133,10 @@ class EntityResource implements DocumentResource
                 return $this->entity->$getter();
             }
 
-            throw new \LogicException("For some reason the field is known or is a relationship, but its value can't be accessed.");
+            throw new \LogicException(self::ERROR_INACCESSIBLE_MEMBER);
         }
 
-        throw new \Exception("El método \"$getter\" no es invocable.");
+        throw new \Exception(sprintf(self::ERROR_UNCALLABLE_GETTER, $getter));
     }
 
     /**
