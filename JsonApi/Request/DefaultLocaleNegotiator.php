@@ -17,6 +17,6 @@ class DefaultLocaleNegotiator implements LocaleNegotiatorInterface
      */
     public function negotiate(Request $request)
     {
-        return substr($request->getPreferredLanguage(), 0, 2);
+        return $request->getPreferredLanguage();
     }
 }
