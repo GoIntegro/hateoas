@@ -65,7 +65,7 @@ JSON;
         $hydrant = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ResourceLinksHydrant');
         $parser = new BodyParser(
             self::createJsonCoder(),
-            self::createDocFinder(),
+            self::createDocNavigator(),
             $hydrant,
             self::createCreationBodyParser(),
             self::createMutationBodyParser(),
@@ -111,7 +111,7 @@ JSON;
         $hydrant = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ResourceLinksHydrant');
         $parser = new BodyParser(
             self::createJsonCoder(),
-            self::createDocFinder(),
+            self::createDocNavigator(),
             $hydrant,
             self::createCreationBodyParser(),
             self::createMutationBodyParser(),
@@ -160,7 +160,7 @@ JSON;
         $hydrant = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ResourceLinksHydrant');
         $parser = new BodyParser(
             self::createJsonCoder(),
-            self::createDocFinder(),
+            self::createDocNavigator(),
             $hydrant,
             self::createCreationBodyParser(),
             self::createMutationBodyParser(),
@@ -240,9 +240,9 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Raml\DocFinder
+     * @return \GoIntegro\Bundle\HateoasBundle\Raml\DocNavigator
      */
-    private static function createDocFinder()
+    private static function createDocNavigator()
     {
         $schema = (object) [
             'properties' => (object) [
@@ -256,12 +256,8 @@ JSON;
         $ramlDoc = Stub::makeEmpty(
             'GoIntegro\\Bundle\\HateoasBundle\\Raml\\RamlDoc'
         );
-        $docFinder = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Raml\\DocFinder',
-            ['find' => $ramlDoc, 'createNavigator' => $docNavigator]
-        );
 
-        return $docFinder;
+        return $docNavigator;
     }
 
     /**

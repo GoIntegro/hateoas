@@ -38,9 +38,9 @@ JSON;
      */
     protected $jsonCoder;
     /**
-     * @var Raml\DocFinder
+     * @var Raml\DocNavigator
      */
-    protected $docFinder;
+    protected $docNavigator;
     /**
      * @var ResourceLinksHydrant
      */
@@ -64,7 +64,7 @@ JSON;
 
     /**
      * @param Util\JsonCoder $jsonCoder
-     * @param Raml\DocFinder $docFinder
+     * @param Raml\DocNavigator $docNavigator
      * @param ResourceLinksHydrant $hydrant
      * @param CreateBodyParser $creationBodyParser
      * @param UpdateBodyParser $mutationBodyParser
@@ -74,7 +74,7 @@ JSON;
      */
     public function __construct(
         Util\JsonCoder $jsonCoder,
-        Raml\DocFinder $docFinder,
+        Raml\DocNavigator $docNavigator,
         ResourceLinksHydrant $hydrant,
         CreateBodyParser $creationBodyParser,
         UpdateBodyParser $mutationBodyParser,
@@ -84,7 +84,7 @@ JSON;
     )
     {
         $this->jsonCoder = $jsonCoder;
-        $this->docFinder = $docFinder;
+        $this->docNavigator = $docNavigator;
         $this->hydrant = $hydrant;
         $this->creationBodyParser = $creationBodyParser;
         $this->mutationBodyParser = $mutationBodyParser;
@@ -169,10 +169,9 @@ JSON;
      */
     protected function findResourceObjectSchema(Params $params, $method)
     {
-        $ramlDoc = $this->docFinder->find($params->primaryType);
-        $jsonSchema = $this->docFinder
-            ->createNavigator($ramlDoc)
-            ->findRequestSchema($method, '/' . $params->primaryType);
+        $jsonSchema = $this->docNavigator->findRequestSchema(
+            $method, '/' . $params->primaryType
+        );
 
         if (empty($jsonSchema)) {
             $message = sprintf(

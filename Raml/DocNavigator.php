@@ -169,4 +169,12 @@ class DocNavigator
     {
         return 1 === preg_match('/^\/[0-9]+[,0-9]*$/', $value);
     }
+
+    /**
+     * @return RamlDoc
+     */
+    public function getDoc()
+    {
+        return $this->ramlDoc;
+    }
 }

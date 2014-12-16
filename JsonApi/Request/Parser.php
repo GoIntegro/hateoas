@@ -10,7 +10,7 @@ namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
 // HTTP.
 use Symfony\Component\HttpFoundation\Request;
 // RAML.
-use GoIntegro\Bundle\HateoasBundle\Raml\DocFinder;
+use GoIntegro\Bundle\HateoasBundle\Raml\DocNavigator;
 // JSON-API.
 use GoIntegro\Bundle\HateoasBundle\JsonApi\Document;
 // Metadata.
@@ -46,9 +46,9 @@ class Parser
         ERROR_CONTENT_ON_DELETE = "JSON-API expects DELETE requests not to have a body.";
 
     /**
-     * @var DocFinder
+     * @var DocNavigator
      */
-    private $docFinder;
+    private $docNavigator;
     /**
      * @var string
      */
@@ -91,7 +91,7 @@ class Parser
     private $mm;
 
     /**
-     * @param DocFinder $docFinder
+     * @param DocNavigator $docNavigator
      * @param FilterParser $filterParser
      * @param PaginationParser $paginationParser
      * @param BodyParser $bodyParser
@@ -103,7 +103,7 @@ class Parser
      * @param array $config
      */
     public function __construct(
-        DocFinder $docFinder,
+        DocNavigator $docNavigator,
         FilterParser $filterParser,
         PaginationParser $paginationParser,
         BodyParser $bodyParser,
@@ -115,7 +115,7 @@ class Parser
         array $config = []
     )
     {
-        $this->docFinder = $docFinder;
+        $this->docNavigator = $docNavigator;
         $this->apiUrlPath = $apiUrlPath;
         // @todo Esta verificación debería estar en el DI.
         $this->magicServices = isset($config['magic_services'])
@@ -302,7 +302,7 @@ class Parser
     {
         $parts = $this->parsePathParts($request);
         $path = '/' . implode('/', $parts);
-        $ramlDoc = $this->docFinder->find($parts[self::PRIMARY_RESOURCE_TYPE]);
+        $ramlDoc = $this->docNavigator->getDoc();
         $method = strtolower($request->getMethod());
 
         if (!$ramlDoc->isDefined($method, $path)) {

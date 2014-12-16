@@ -38,7 +38,7 @@ class ParserTest extends TestCase
             ['has' => function() { return FALSE; }]
         );
         $parser = new Parser(
-            self::createDocFinder(),
+            self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
             self::createBodyParser(),
@@ -65,7 +65,7 @@ class ParserTest extends TestCase
         $queryOverrides = ['has' => $has, 'get' => $get];
         $request = self::createRequest('/api/v1/users', $queryOverrides);
         $parser = new Parser(
-            self::createDocFinder(),
+            self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
             self::createBodyParser(),
@@ -96,7 +96,7 @@ class ParserTest extends TestCase
         $queryOverrides = ['has' => $has, 'get' => $get];
         $request = self::createRequest('/api/v1/users', $queryOverrides);
         $parser = new Parser(
-            self::createDocFinder(),
+            self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
             self::createBodyParser(),
@@ -127,7 +127,7 @@ class ParserTest extends TestCase
         $queryOverrides = ['has' => $has, 'get' => $get];
         $request = self::createRequest('/api/v1/users', $queryOverrides);
         $parser = new Parser(
-            self::createDocFinder(),
+            self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
             self::createBodyParser(),
@@ -256,9 +256,9 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Raml\DocFinder
+     * @return \GoIntegro\Bundle\HateoasBundle\Raml\DocNavigator
      */
-    private static function createDocFinder()
+    private static function createDocNavigator()
     {
         $ramlDoc = Stub::makeEmpty(
             'GoIntegro\\Bundle\\HateoasBundle\\Raml\\RamlDoc',
@@ -266,8 +266,8 @@ class ParserTest extends TestCase
         );
 
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Raml\\DocFinder',
-            ['find' => $ramlDoc]
+            'GoIntegro\\Bundle\\HateoasBundle\\Raml\\DocNavigator',
+            ['getDoc' => $ramlDoc]
         );
     }
 
