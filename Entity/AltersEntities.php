@@ -38,13 +38,13 @@ trait AltersEntities
     /**
      * @param \ReflectionClass $class
      * @param ResourceEntityInterface $entity
-     * @param array $fields
+     * @param array $relationships
      * @return self
      */
     protected function setRelationships(
         \ReflectionClass $class,
         ResourceEntityInterface $entity,
-        array $fields
+        array $relationships
     )
     {
         foreach ($relationships as $relationship => $value) {

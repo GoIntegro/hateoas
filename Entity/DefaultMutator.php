@@ -17,6 +17,8 @@ use Doctrine\ORM\EntityManagerInterface,
     Gedmo\Exception as GedmoException;
 // Validator.
 use Symfony\Component\Validator\ValidatorInterface;
+// Metadata.
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache;
 
 class DefaultMutator implements MutatorInterface
 {
@@ -38,18 +40,25 @@ class DefaultMutator implements MutatorInterface
      * @var ValidatorInterface
      */
     private $validator;
+    /**
+     * @var MetadataCache
+     */
+    private $metadataCache;
 
     /**
      * @param EntityManagerInterface $em
      * @param ValidatorInterface $validator
+     * @param MetadataCache $metadataCache
      */
     public function __construct(
         EntityManagerInterface $em,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        MetadataCache $metadataCache
     )
     {
         $this->em = $em;
         $this->validator = $validator;
+        $this->metadataCache = $metadataCache;
     }
 
     /**
@@ -68,13 +77,12 @@ class DefaultMutator implements MutatorInterface
         array $metadata = []
     )
     {
-        $class = new \ReflectionClass($entity);
-
+        $class = $this->metadataCache->getReflection($class);
         $translations = !empty($metadata['translations'])
             ? $metadata['translations']
             : [];
 
-        $this->setFields($class, $entity, $relationships)
+        $this->setFields($class, $entity, $fields)
             ->setRelationships($class, $entity, $relationships)
             ->updateTranslations($entity, $translations)
             ->validate($entity);

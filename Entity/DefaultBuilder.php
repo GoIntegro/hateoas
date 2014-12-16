@@ -17,6 +17,8 @@ use Symfony\Component\Validator\ValidatorInterface,
     Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 // Security.
 use Symfony\Component\Security\Core\SecurityContextInterface;
+// Metadata.
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache;
 
 class DefaultBuilder implements AbstractBuilderInterface
 {
@@ -39,21 +41,28 @@ class DefaultBuilder implements AbstractBuilderInterface
      * @var SecurityContextInterface
      */
     private $securityContext;
+    /**
+     * @var MetadataCache
+     */
+    private $metadataCache;
 
     /**
      * @param EntityManagerInterface $em
      * @param ValidatorInterface $validator
      * @param SecurityContextInterface $securityContext
+     * @param MetadataCache $metadataCache
      */
     public function __construct(
         EntityManagerInterface $em,
         ValidatorInterface $validator,
-        SecurityContextInterface $securityContext
+        SecurityContextInterface $securityContext,
+        MetadataCache $metadataCache
     )
     {
         $this->em = $em;
         $this->validator = $validator;
         $this->securityContext = $securityContext;
+        $this->metadataCache = $metadataCache;
     }
 
     /**
@@ -72,20 +81,14 @@ class DefaultBuilder implements AbstractBuilderInterface
         array $metadata = []
     )
     {
-        $class = new \ReflectionClass($class);
+        $class = $this->metadataCache->getReflection($class);
         $entity = $class->newInstance();
 
         if ($class->implementsInterface(self::AUTHOR_IS_OWNER)) {
             $entity->setOwner($this->securityContext->getToken()->getUser());
         }
 
-        foreach ($fields as $field => $value) {
-            $method = self::SET . Inflector::camelize($field);
-
-            if ($class->hasMethod($method)) $entity->$method($value);
-        }
-
-        $this->setFields($class, $entity, $relationships)
+        $this->setFields($class, $entity, $fields)
             ->setRelationships($class, $entity, $relationships)
             ->validate($entity);
 
