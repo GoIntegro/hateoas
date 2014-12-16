@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 /**
  * La metadata de una relación.

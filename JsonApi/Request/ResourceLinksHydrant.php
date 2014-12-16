@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // ORM.
 use Doctrine\ORM\EntityManagerInterface;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface;
+use GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface;
 
 /**
  * @see http://jsonapi.org/format/#crud-updating-relationships

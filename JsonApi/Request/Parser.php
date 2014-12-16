@@ -5,16 +5,16 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // HTTP.
 use Symfony\Component\HttpFoundation\Request;
 // RAML.
-use GoIntegro\Bundle\HateoasBundle\Raml\DocNavigator;
+use GoIntegro\Hateoas\Raml\DocNavigator;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Document;
+use GoIntegro\Hateoas\JsonApi\Document;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface;
+use GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface;
 // Events.
 use Doctrine\Common\EventSubscriber;
 

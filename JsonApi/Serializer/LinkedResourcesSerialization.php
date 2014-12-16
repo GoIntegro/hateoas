@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Recursos.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource;
+use GoIntegro\Hateoas\JsonApi\EntityResource;
 
 class LinkedResourcesSerialization
 {

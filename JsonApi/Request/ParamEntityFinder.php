@@ -5,17 +5,17 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // ORM.
 use Doctrine\ORM\EntityManagerInterface;
 // Security.
 use Symfony\Component\Security\Core\SecurityContextInterface,
-    GoIntegro\Bundle\HateoasBundle\Security\VoterFilterException;
+    GoIntegro\Hateoas\Security\VoterFilterException;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 // Utils.
-use GoIntegro\Bundle\HateoasBundle\Util;
+use GoIntegro\Hateoas\Util;
 // Collections.
 use Doctrine\Common\Collections\Collection,
     Doctrine\Common\Collections\ArrayCollection;

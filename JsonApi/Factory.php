@@ -1,6 +1,6 @@
 <?php
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 interface Factory
 {

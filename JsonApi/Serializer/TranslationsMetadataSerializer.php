@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // JSON-API
-use GoIntegro\Bundle\HateoasBundle\JsonApi;
+use GoIntegro\Hateoas\JsonApi;
 // ORM.
 use Doctrine\ORM\EntityManagerInterface;
 

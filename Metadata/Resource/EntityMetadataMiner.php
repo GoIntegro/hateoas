@@ -5,16 +5,16 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache;
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache;
 // Utils.
-use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
+use GoIntegro\Hateoas\Util\Inflector;
 // ORM.
 use Doctrine\ORM\Mapping\ClassMetadata;
 // Reflection.
-use GoIntegro\Bundle\HateoasBundle\Util\Reflection;
+use GoIntegro\Hateoas\Util\Reflection;
 
 class EntityMetadataMiner implements MetadataMinerInterface
 {
@@ -44,7 +44,7 @@ class EntityMetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $entityClassName
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClassName
      * @param ResourceMetadata
      */
     public function mine($entityClassName)
@@ -65,7 +65,7 @@ class EntityMetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $entityClass
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClass
      * @return string
      */
     protected function parseType($entityClassName)
@@ -76,7 +76,7 @@ class EntityMetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $entityClass
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClass
      * @return string
      */
     protected function getEntityClass($entityClassName)
@@ -99,7 +99,7 @@ class EntityMetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $entityClassName
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClassName
      * @param string $primaryType
      * @return array
      * @todo Publicar o eliminar el parámetro $entityClassName.

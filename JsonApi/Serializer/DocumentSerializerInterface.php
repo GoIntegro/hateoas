@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Recursos REST.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Document;
+use GoIntegro\Hateoas\JsonApi\Document;
 
 interface DocumentSerializerInterface
 {

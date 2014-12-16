@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -23,7 +23,7 @@ class PaginationMetadataSerializerTest extends TestCase
         $offset = 10;
         $resources = self::createResourcesMock($size, $offset);
         $pagination = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentPagination',
+            'GoIntegro\Hateoas\JsonApi\DocumentPagination',
             [
                 'total' => 1000,
                 'size' => $size,
@@ -32,7 +32,7 @@ class PaginationMetadataSerializerTest extends TestCase
             ]
         );
         $document = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\Document',
+            'GoIntegro\Hateoas\JsonApi\Document',
             [
                 'wasCollection' => TRUE, // Key to this test.
                 'resources' => $resources,
@@ -57,7 +57,7 @@ class PaginationMetadataSerializerTest extends TestCase
         $offset = 10;
         $resources = self::createResourcesMock(0, $offset);
         $pagination = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentPagination',
+            'GoIntegro\Hateoas\JsonApi\DocumentPagination',
             [
                 'total' => 0,
                 'size' => 0,
@@ -66,7 +66,7 @@ class PaginationMetadataSerializerTest extends TestCase
             ]
         );
         $document = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\Document',
+            'GoIntegro\Hateoas\JsonApi\Document',
             [
                 'wasCollection' => TRUE, // Key to this test.
                 'resources' => $resources,
@@ -88,12 +88,12 @@ class PaginationMetadataSerializerTest extends TestCase
     /**
      * @param integer $amount
      * @param integer $offset
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollection
+     * @return \GoIntegro\Hateoas\JsonApi\ResourceCollection
      */
     private static function createResourcesMock($amount, $offset = 0)
     {
         $metadata = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata',
             [
                 'type' => self::RESOURCE_TYPE,
                 'subtype' => self::RESOURCE_TYPE,
@@ -104,7 +104,7 @@ class PaginationMetadataSerializerTest extends TestCase
         $resources = [];
         for ($i = 0; $i < $amount; ++$i) {
             $resources[] = Stub::makeEmpty(
-                'GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource',
+                'GoIntegro\Hateoas\JsonApi\EntityResource',
                 [
                     'id' => (string) $offset,
                     'getMetadata' => function() use ($metadata) {
@@ -116,7 +116,7 @@ class PaginationMetadataSerializerTest extends TestCase
         }
 
         $collection = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollection',
+            'GoIntegro\Hateoas\JsonApi\ResourceCollection',
             [
                 'getMetadata' => function() use ($metadata) {
                     return $metadata;

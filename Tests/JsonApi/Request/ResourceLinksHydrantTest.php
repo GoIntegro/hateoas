@@ -12,7 +12,7 @@ use Codeception\Util\Stub;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Request.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\ResourceLinksHydrant;
+use GoIntegro\Hateoas\JsonApi\Request\ResourceLinksHydrant;
 
 class ResourceLinksHydrantTest extends TestCase
 {
@@ -38,17 +38,17 @@ class ResourceLinksHydrantTest extends TestCase
                 }
             ]
         );
-        $authorRelationship = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceRelationship');
-        $commentsRelationship = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceRelationship');
+        $authorRelationship = Stub::makeEmpty('GoIntegro\\Hateoas\\Metadata\\Resource\\ResourceRelationship');
+        $commentsRelationship = Stub::makeEmpty('GoIntegro\\Hateoas\\Metadata\\Resource\\ResourceRelationship');
         $relationships = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceRelationships',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\ResourceRelationships',
             [
                 'toOne' => ['author' => $authorRelationship],
                 'toMany' => ['comments' => $commentsRelationship]
             ]
         );
         $metadata = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceMetadata',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\ResourceMetadata',
             [
                 'relationships' => $relationships,
                 'isToOneRelationship' => TRUE,
@@ -60,12 +60,12 @@ class ResourceLinksHydrantTest extends TestCase
             ['getRepository' => $repository]
         );
         $mm = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\MetadataMinerInterface',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\MetadataMinerInterface',
             ['mine' => $metadata]
         );
         $hydrant = new ResourceLinksHydrant($em, $mm);
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             [
                 'primaryClass'
                     => "HateoasInc\\Bundle\\ExampleBundle\\Entity\\User"

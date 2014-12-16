@@ -5,14 +5,14 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // HTTP.
 use Symfony\Component\HttpFoundation\Request;
 // JSON.
-use GoIntegro\Bundle\HateoasBundle\Util;
+use GoIntegro\Hateoas\Util;
 // RAML.
-use GoIntegro\Bundle\HateoasBundle\Raml;
+use GoIntegro\Hateoas\Raml;
 
 /**
  * @see http://jsonapi.org/format/#crud

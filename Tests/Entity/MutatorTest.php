@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -18,18 +18,18 @@ class MutatorTest extends TestCase
     {
         /* Given... (Fixture) */
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             ['primaryType' => 'users']
         );
         $entity = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface'
+            'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface'
         );
         $defaultMutator = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\MutatorInterface',
+            'GoIntegro\\Hateoas\\Entity\\MutatorInterface',
             ['create' => Stub::once()]
         );
         $postMutator = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\MutatorInterface',
+            'GoIntegro\\Hateoas\\Entity\\MutatorInterface',
             ['create' => Stub::never()]
         );
         $mutator = new Mutator;
@@ -44,18 +44,18 @@ class MutatorTest extends TestCase
     {
         /* Given... (Fixture) */
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             ['primaryType' => 'users']
         );
         $entity = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface'
+            'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface'
         );
         $defaultMutator = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\MutatorInterface',
+            'GoIntegro\\Hateoas\\Entity\\MutatorInterface',
             ['create' => Stub::never()]
         );
         $userMutator = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\MutatorInterface',
+            'GoIntegro\\Hateoas\\Entity\\MutatorInterface',
             ['create' => Stub::once()]
         );
         $mutator = new Mutator;

@@ -5,19 +5,19 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Reflection.
-use GoIntegro\Bundle\HateoasBundle\Util\Reflection;
+use GoIntegro\Hateoas\Util\Reflection;
 
 /**
  * @pattern facade
  */
 class MetadataMiner implements MetadataMinerInterface
 {
-    const RESOURCE_ENTITY_INTERFACE = 'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface',
-        GHOST_ENTITY_INTERFACE = 'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\GhostResourceEntity',
-        DEFAULT_RESOURCE_CLASS = 'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\EntityResource';
+    const RESOURCE_ENTITY_INTERFACE = 'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface',
+        GHOST_ENTITY_INTERFACE = 'GoIntegro\\Hateoas\\JsonApi\\GhostResourceEntity',
+        DEFAULT_RESOURCE_CLASS = 'GoIntegro\\Hateoas\\JsonApi\\EntityResource';
 
     /**
      * @param MinerProvider
@@ -28,7 +28,7 @@ class MetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $ore
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $ore
      * @param ResourceMetadata
      */
     public function mine($ore)
@@ -56,7 +56,7 @@ class MetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $ore
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $ore
      * @return \ReflectionClass
      */
     public function getResourceClass($ore)

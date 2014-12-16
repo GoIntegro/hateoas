@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 
 interface MutatorInterface
 {
@@ -17,9 +17,9 @@ interface MutatorInterface
      * @param array $fields
      * @param array $relationships
      * @param array $metadata
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface
-     * @throws \GoIntegro\Bundle\HateoasBundle\Entity\Validation\EntityConflictExceptionInterface
-     * @throws \GoIntegro\Bundle\HateoasBundle\Entity\Validation\ValidationExceptionInterface
+     * @return \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface
+     * @throws \GoIntegro\Hateoas\Entity\Validation\EntityConflictExceptionInterface
+     * @throws \GoIntegro\Hateoas\Entity\Validation\ValidationExceptionInterface
      */
     public function update(
         ResourceEntityInterface $entity,

@@ -10,8 +10,8 @@ namespace JsonApi;
 // Mocks.
 use Codeception\Util\Stub;
 // Recursos.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ArrayResourceCache,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ArrayResourceCache,
+    GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
@@ -20,9 +20,9 @@ class ArrayResourceCacheTest extends TestCase
     public function testAddingAResource()
     {
         /* Given... (Fixture) */
-        $entity = Stub::makeEmpty('GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface');
+        $entity = Stub::makeEmpty('GoIntegro\Hateoas\JsonApi\ResourceEntityInterface');
         $entityResource = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource',
+            'GoIntegro\Hateoas\JsonApi\EntityResource',
             ['entity' => $entity]
         );
         $classReflection = Stub::makeEmpty(
@@ -30,7 +30,7 @@ class ArrayResourceCacheTest extends TestCase
             ['getName' => function() { return 'GoIntegro\Entity\User'; }]
         );
         $metadataCache = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache',
+            'GoIntegro\Hateoas\Metadata\Entity\MetadataCache',
             [
                 'getReflection'
                     => function($object) use ($entity, $classReflection) {
@@ -41,7 +41,7 @@ class ArrayResourceCacheTest extends TestCase
             ]
         );
         $metadataMiner = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface'
+            'GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface'
         );
         $serviceContainer = Stub::makeEmpty(
             'Symfony\Component\DependencyInjection\ContainerInterface'

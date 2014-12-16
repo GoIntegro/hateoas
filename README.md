@@ -121,7 +121,7 @@ Have your entity implement the resource interface.
 
 ```php
 <?php
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface
 
 class User implements ResourceEntityInterface {}
 ?>
@@ -190,7 +190,7 @@ namespace GoIntegro\Bundle\ExampleBundle\Rest2\Resource;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface,
   Symfony\Component\DependencyInjection\ContainerAwareTrait;
 // HATEOAS.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource;
+use GoIntegro\Hateoas\JsonApi\EntityResource;
 
 class UserResource extends EntityResource implements ContainerAwareInterface
 {
@@ -266,7 +266,7 @@ This bundle is pretty entity-centric. The way your entities look and the relatio
 
 Access control is handled by [Symfony's Security Component](http://symfony.com/doc/current/components/security/introduction.html), so either [security voters](http://symfony.com/doc/current/cookbook/security/voters_data_permission.html) or [ACL](http://symfony.com/doc/current/cookbook/security/acl.html) must be configured.
 
-If you don't want security at all, just configure a single voter accepting anything that implements `GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface`. Not the best advice ever, though.
+If you don't want security at all, just configure a single voter accepting anything that implements `GoIntegro\Hateoas\JsonApi\ResourceEntityInterface`. Not the best advice ever, though.
 
 What about pagination? I'm pretty sure `isGranted` will not be called against every single entity in the collection - right?
 
@@ -274,7 +274,7 @@ Absolutely.
 
 In order to address this, we came up with a really simple solution. We mixed the security voter and custom filter interfaces.
 
-Have your voter/filter implement `GoIntegro\Bundle\HateoasBundle\Security\VoterFilterInterface` and tag it with both the `security.voter` and `hateoas.repo_helper.filter` tags.
+Have your voter/filter implement `GoIntegro\Hateoas\Security\VoterFilterInterface` and tag it with both the `security.voter` and `hateoas.repo_helper.filter` tags.
 
 ```yaml
 # src/Example/Bundle/AppBundle/Resources/config/services.yml
@@ -303,7 +303,7 @@ Violations of the [unique entity constraint](http://symfony.com/doc/current/refe
 
 > JSON-API requires 409 to only be used when attempting to create [a relationship that already exists](http://jsonapi.org/format/#crud-updating-responses). We are expanding its application to include any instance in which validation fails due to a conflict with another resource.
 
-If you'd like to create a custom constraint in which a violation is taken to mean conflict between resources, just have it implement `GoIntegro\Bundle\HateoasBundle\Entity\Validation\ConflictConstraintInterface`.
+If you'd like to create a custom constraint in which a violation is taken to mean conflict between resources, just have it implement `GoIntegro\Hateoas\Entity\Validation\ConflictConstraintInterface`.
 
 ## Transactions
 
@@ -337,17 +337,17 @@ This builder class should implement a certain interface. Here are the available 
 
 Tag | Interface
 --- | ---------
-hateoas.entity.builder | `GoIntegro\Bundle\HateoasBundle\Entity\BuilderInterface`
-hateoas.entity.mutator | `GoIntegro\Bundle\HateoasBundle\Entity\MutatorInterface`
-hateoas.entity.deleter | `GoIntegro\Bundle\HateoasBundle\Entity\DeleterInterface`
+hateoas.entity.builder | `GoIntegro\Hateoas\Entity\BuilderInterface`
+hateoas.entity.mutator | `GoIntegro\Hateoas\Entity\MutatorInterface`
+hateoas.entity.deleter | `GoIntegro\Hateoas\Entity\DeleterInterface`
 
 ## Translatable content
 
 The framework provides support for working with the translatable entities feature of @l3pp4rd's [Doctrine Extensions](https://github.com/l3pp4rd/DoctrineExtensions) (AKA *Gedmo*) through @stof's [Bundle](https://github.com/stof/StofDoctrineExtensionsBundle/).
 
-When fetching or updating a translatable resource, the framework will act upon the translation corresponding to the locale negotiated by the `GoIntegro\Bundle\HateoasBundle\JsonApi\Request\DefaultLocaleNegotiator`.
+When fetching or updating a translatable resource, the framework will act upon the translation corresponding to the locale negotiated by the `GoIntegro\Hateoas\JsonApi\Request\DefaultLocaleNegotiator`.
 
-You can override the default locale negotiator by having your negotiator class implement `GoIntegro\Bundle\HateoasBundle\JsonApi\Request\LocaleNegotiatorInterface` and exposing it as a service using the tag `hateoas.request_parser.locale`.
+You can override the default locale negotiator by having your negotiator class implement `GoIntegro\Hateoas\JsonApi\Request\LocaleNegotiatorInterface` and exposing it as a service using the tag `hateoas.request_parser.locale`.
 
 You can fetch all translations for one or many resources by passing the query string parameter `meta=i18n`. You can also update them by making a `PUT` request with the same body you get.
 
@@ -421,14 +421,14 @@ Here's a pretty basic example.
 
 ```php
 <?php
-use GoIntegro\Bundle\HateoasBundle\Controller\Controller,
+use GoIntegro\Hateoas\Controller\Controller,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class UsersController extends Controller
 {
     /**
      * @Route("/users/{user}", name="api_get_user", methods="GET")
-     * @return \GoIntegro\Bundle\HateoasBundle\Http\JsonResponse
+     * @return \GoIntegro\Hateoas\Http\JsonResponse
      */
     public function getUserAction(User $user)
     {
@@ -466,9 +466,9 @@ namespace GoIntegro\Bundle\SomeBundle\Rest2\Ghost;
 // Entidades.
 use GoIntegro\Bundle\SomeBundle\Entity\Star;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\GhostResourceEntity,
-    GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceRelationship,
-    GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceRelationships;
+use GoIntegro\Hateoas\JsonApi\GhostResourceEntity,
+    GoIntegro\Hateoas\Metadata\Resource\ResourceRelationship,
+    GoIntegro\Hateoas\Metadata\Resource\ResourceRelationships;
 // Colecciones.
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -581,7 +581,7 @@ This is the service providing them.
 # GoIntegro/HateoasBundle/Resources/config/services.yml
 
   hateoas.repo_helper.default_filter:
-    class: GoIntegro\Bundle\HateoasBundle\JsonApi\Request\DefaultFilter
+    class: GoIntegro\Hateoas\JsonApi\Request\DefaultFilter
     public: false
     tags:
       - name: hateoas.repo_helper.filter
@@ -589,7 +589,7 @@ This is the service providing them.
 
 If you're somewhat familiar with [tagged services](http://symfony.com/doc/current/components/dependency_injection/tags.html), you probably guessed that you can add your own.
 
-Just have your filter class implement `GoIntegro\Bundle\HateoasBundle\JsonApi\Request\FilterInterface`, and add the `hateoas.repo_helper.filter` tag when you declare it as a service.
+Just have your filter class implement `GoIntegro\Hateoas\JsonApi\Request\FilterInterface`, and add the `hateoas.repo_helper.filter` tag when you declare it as a service.
 
 > Your filter should use the entity and filter parameters it gets in order to decide whether or not to act. Make sure a single class doesn't get [too much filtering responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 
@@ -662,7 +662,7 @@ Our implementation isn't trully as complete as could be, but you can tell Twig t
 # app/config/config.yml
 
 twig:
-  exception_controller: 'GoIntegro\Bundle\HateoasBundle\Controller\ExceptionController::showAction'
+  exception_controller: 'GoIntegro\Hateoas\Controller\ExceptionController::showAction'
 ```
 
 # Fetching multiple URLs
@@ -701,14 +701,14 @@ Here's how. Add this parameter.
 # app/config/parameters.yml
 
 parameters:
-    hateoas.resource_cache.class: GoIntegro\Bundle\HateoasBundle\JsonApi\ArrayResourceCache
+    hateoas.resource_cache.class: GoIntegro\Hateoas\JsonApi\ArrayResourceCache
 ```
 
 Cache type | Parameter value
 ---------- | ---------
-Array (none) | `GoIntegro\Bundle\HateoasBundle\JsonApi\ArrayResourceCache`
-Redis | `GoIntegro\Bundle\HateoasBundle\JsonApi\RedisResourceCache`
-Memcached | `GoIntegro\Bundle\HateoasBundle\JsonApi\MemcachedResourceCache`
+Array (none) | `GoIntegro\Hateoas\JsonApi\ArrayResourceCache`
+Redis | `GoIntegro\Hateoas\JsonApi\RedisResourceCache`
+Memcached | `GoIntegro\Hateoas\JsonApi\MemcachedResourceCache`
 
 You can customize your Redis or Memcached configuration by using any of the following options. Below are the default values.
 

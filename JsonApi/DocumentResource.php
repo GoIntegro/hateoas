@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 interface DocumentResource
 {
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Metadata\ResourceMetadata
+     * @return \GoIntegro\Hateoas\Metadata\ResourceMetadata
      */
     public function getMetadata();
 }

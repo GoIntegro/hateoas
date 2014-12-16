@@ -5,11 +5,11 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Params,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\Request\Params,
+    GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 
 class Deleter
 {

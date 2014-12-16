@@ -10,7 +10,7 @@ namespace JsonApi\Request;
 // Mocks.
 use Codeception\Util\Stub;
 // Request.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Merge\Blender;
+use GoIntegro\Hateoas\JsonApi\Merge\Blender;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
@@ -1187,7 +1187,7 @@ class BlenderTest extends TestCase
     }
 
     /**
-     * @expectedException \GoIntegro\Bundle\HateoasBundle\JsonApi\Merge\UnmergeableResourcesException
+     * @expectedException \GoIntegro\Hateoas\JsonApi\Merge\UnmergeableResourcesException
      */
     public function testMergingSingleAndCollectionDocuments()
     {
@@ -1201,7 +1201,7 @@ class BlenderTest extends TestCase
     }
 
     /**
-     * @expectedException \GoIntegro\Bundle\HateoasBundle\JsonApi\Merge\UnmergeableResourcesException
+     * @expectedException \GoIntegro\Hateoas\JsonApi\Merge\UnmergeableResourcesException
      */
     public function testMergingDifferentSingleDocuments()
     {
@@ -1258,7 +1258,7 @@ class BlenderTest extends TestCase
     }
 
     /**
-     * @expectedException \GoIntegro\Bundle\HateoasBundle\JsonApi\Merge\UnmergeableResourcesException
+     * @expectedException \GoIntegro\Hateoas\JsonApi\Merge\UnmergeableResourcesException
      */
     public function testMergingDocumentsWithSameTypeMeta()
     {

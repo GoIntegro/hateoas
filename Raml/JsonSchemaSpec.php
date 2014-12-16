@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Raml;
+namespace GoIntegro\Hateoas\Raml;
 
 /**
  * @see http://json-schema.org/documentation.html

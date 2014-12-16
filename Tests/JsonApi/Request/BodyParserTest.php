@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -49,20 +49,20 @@ JSON;
             self::HTTP_POST_BODY
         );
         $action = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\RequestAction',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\RequestAction',
             [
                 'name' => RequestAction::ACTION_CREATE,
                 'target' => RequestAction::TARGET_RESOURCE
             ]
         );
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             [
                 'primaryType' => self::RESOURCE_TYPE,
                 'action' => $action
             ]
         );
-        $hydrant = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ResourceLinksHydrant');
+        $hydrant = Stub::makeEmpty('GoIntegro\\Hateoas\\JsonApi\\Request\\ResourceLinksHydrant');
         $parser = new BodyParser(
             self::createJsonCoder(),
             self::createDocNavigator(),
@@ -95,20 +95,20 @@ JSON;
             self::HTTP_PUT_BODY
         );
         $action = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\RequestAction',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\RequestAction',
             [
                 'name' => RequestAction::ACTION_UPDATE,
                 'target' => RequestAction::TARGET_RESOURCE
             ]
         );
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             [
                 'primaryType' => self::RESOURCE_TYPE,
                 'action' => $action
             ]
         );
-        $hydrant = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ResourceLinksHydrant');
+        $hydrant = Stub::makeEmpty('GoIntegro\\Hateoas\\JsonApi\\Request\\ResourceLinksHydrant');
         $parser = new BodyParser(
             self::createJsonCoder(),
             self::createDocNavigator(),
@@ -144,20 +144,20 @@ JSON;
             self::HTTP_PUT_BODY
         );
         $action = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\RequestAction',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\RequestAction',
             [
                 'name' => RequestAction::ACTION_UPDATE,
                 'target' => RequestAction::TARGET_RELATIONSHIP
             ]
         );
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             [
                 'primaryType' => self::RESOURCE_TYPE,
                 'action' => $action
             ]
         );
-        $hydrant = Stub::makeEmpty('GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ResourceLinksHydrant');
+        $hydrant = Stub::makeEmpty('GoIntegro\\Hateoas\\JsonApi\\Request\\ResourceLinksHydrant');
         $parser = new BodyParser(
             self::createJsonCoder(),
             self::createDocNavigator(),
@@ -222,12 +222,12 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Util\JsonCoder
+     * @return \GoIntegro\Hateoas\Util\JsonCoder
      */
     private static function createJsonCoder()
     {
         $jsonCoder = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Util\JsonCoder',
+            'GoIntegro\Hateoas\Util\JsonCoder',
             [
                 'decode' => function($json) {
                     return json_decode($json, TRUE);
@@ -240,7 +240,7 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Raml\DocNavigator
+     * @return \GoIntegro\Hateoas\Raml\DocNavigator
      */
     private static function createDocNavigator()
     {
@@ -250,23 +250,23 @@ JSON;
             ]
         ];
         $docNavigator = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Raml\\DocNavigator',
+            'GoIntegro\\Hateoas\\Raml\\DocNavigator',
             ['findRequestSchema' => $schema]
         );
         $ramlDoc = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Raml\\RamlDoc'
+            'GoIntegro\\Hateoas\\Raml\\RamlDoc'
         );
 
         return $docNavigator;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\CreateBodyParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\CreateBodyParser
      */
     private static function createCreationBodyParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\CreateBodyParser',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\CreateBodyParser',
             ['parse' => [[
                 'name' => 'John',
                 'surname' => 'Connor'
@@ -275,12 +275,12 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\UpdateBodyParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\UpdateBodyParser
      */
     private static function createMutationBodyParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\UpdateBodyParser',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\UpdateBodyParser',
             ['parse' => [
                 '7' => [
                     'id' => '7',
@@ -292,12 +292,12 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\LinkBodyParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\LinkBodyParser
      */
     private static function createLinkingBodyParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\LinkBodyParser',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\LinkBodyParser',
             ['parse' => [
                 '7' => [
                     'links' => [
@@ -309,22 +309,22 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\UnlinkBodyParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\UnlinkBodyParser
      */
     private static function createUnlinkingBodyParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\UnlinkBodyParser'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\UnlinkBodyParser'
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\TranslationsParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\TranslationsParser
      */
     private static function createTranslationsParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\TranslationsParser'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\TranslationsParser'
         );
     }
 }

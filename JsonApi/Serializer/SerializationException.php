@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Exception\ErrorException;
+use GoIntegro\Hateoas\JsonApi\Exception\ErrorException;
 
 class SerializationException extends ErrorException
 {

@@ -5,7 +5,7 @@
  * @author Tito Miguel Costa <titomiguelcosta@gmail.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -15,13 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 class ResourceObjectSerializerTest extends TestCase
 {
     /**
-     * @expectedException \GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer\InvalidFieldException
+     * @expectedException \GoIntegro\Hateoas\JsonApi\Serializer\InvalidFieldException
      */
     public function testSerializingWithUnknownFieldThrowsException()
     {
         /* Given... (Fixture) */
         $metadata = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata',
             [
                 'type' => 'type',
                 'subtype' => 'users',
@@ -32,7 +32,7 @@ class ResourceObjectSerializerTest extends TestCase
             ]
         );
         $entityResource = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource',
+            'GoIntegro\Hateoas\JsonApi\EntityResource',
             [
                 'id' => '10',
                 'getMetadata' => function () use ($metadata) {

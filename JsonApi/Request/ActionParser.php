@@ -5,18 +5,18 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // HTTP.
 use Symfony\Component\HttpFoundation\Request,
-    GoIntegro\Bundle\HateoasBundle\Http\Url;
+    GoIntegro\Hateoas\Http\Url;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentPagination,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\JsonApiSpec;
+use GoIntegro\Hateoas\JsonApi\DocumentPagination,
+    GoIntegro\Hateoas\JsonApi\JsonApiSpec;
 // JSON.
-use GoIntegro\Bundle\HateoasBundle\Util;
+use GoIntegro\Hateoas\Util;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface;
+use GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface;
 
 /**
  * @see http://jsonapi.org/format/#introduction

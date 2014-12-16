@@ -6,10 +6,10 @@
  * @author Tito Miguel Costa <titomiguelcosta@gmail.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi;
+use GoIntegro\Hateoas\JsonApi;
 
 class InvalidFieldException extends JsonApi\Exception\BadRequestException
 {

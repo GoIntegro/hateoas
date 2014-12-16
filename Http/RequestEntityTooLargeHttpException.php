@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Http;
+namespace GoIntegro\Hateoas\Http;
 
 // Exceptions.
 use Symfony\Component\HttpKernel\Exception\HttpException,

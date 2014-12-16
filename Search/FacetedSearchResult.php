@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Search;
+namespace GoIntegro\Hateoas\Search;
 
 // Array.
 use Countable, IteratorAggregate;

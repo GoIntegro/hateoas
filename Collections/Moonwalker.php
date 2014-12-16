@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Collections;
+namespace GoIntegro\Hateoas\Collections;
 
 // Datos.
 use Closure;

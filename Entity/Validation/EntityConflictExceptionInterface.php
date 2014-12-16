@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity\Validation;
+namespace GoIntegro\Hateoas\Entity\Validation;
 
 interface EntityConflictExceptionInterface
 {

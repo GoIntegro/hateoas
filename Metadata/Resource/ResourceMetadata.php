@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Reflexión.
-use GoIntegro\Bundle\HateoasBundle\Util\Reflection;
+use GoIntegro\Hateoas\Util\Reflection;
 // Inflexión.
-use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
+use GoIntegro\Hateoas\Util\Inflector;
 
 /**
  * Los datos comunes a todos los recursos de un mismo tipo.

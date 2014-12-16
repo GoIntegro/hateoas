@@ -5,17 +5,17 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Recursos REST.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\Document,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollectionInterface,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollection,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentResource;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface,
+    GoIntegro\Hateoas\JsonApi\Document,
+    GoIntegro\Hateoas\JsonApi\EntityResource,
+    GoIntegro\Hateoas\JsonApi\ResourceCollectionInterface,
+    GoIntegro\Hateoas\JsonApi\ResourceCollection,
+    GoIntegro\Hateoas\JsonApi\DocumentResource;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceRelationship;
+use GoIntegro\Hateoas\Metadata\Resource\ResourceRelationship;
 // Security.
 use Symfony\Component\Security\Core\SecurityContextInterface;
 

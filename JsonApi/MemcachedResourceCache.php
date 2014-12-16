@@ -5,11 +5,11 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache,
-    GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface;
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache,
+    GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface;
 // Excepciones.
 use Exception;
 // Servicios.

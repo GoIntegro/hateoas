@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Merge;
+namespace GoIntegro\Hateoas\JsonApi\Merge;
 
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Exception\BadRequestException;
+use GoIntegro\Hateoas\JsonApi\Exception\BadRequestException;
 
 class UnmergeableResourcesException extends BadRequestException
 {

@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Security;
+namespace GoIntegro\Hateoas\Security;
 
 // Exception.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Exception\LogicException;
+use GoIntegro\Hateoas\JsonApi\Exception\LogicException;
 
 /**
  * When access controls are not being enforced properly through filters.

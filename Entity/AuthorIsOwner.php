@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // Security.
 use Symfony\Component\Security\Core\User\UserInterface;

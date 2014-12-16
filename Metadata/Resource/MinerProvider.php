@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache;
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache;
 
 /**
  * @pattern multiton
@@ -41,7 +41,7 @@ class MinerProvider
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string
      * @return MetadataMinerInterface
      */
     public function getMiner($ore)

@@ -5,14 +5,14 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Iteración.
 use IteratorAggregate, AppendIterator, Countable;
 // Request.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Params as RequestParams;
+use GoIntegro\Hateoas\JsonApi\Request\Params as RequestParams;
 // Colecciones.
-use GoIntegro\Bundle\HateoasBundle\Collections\Paginated;
+use GoIntegro\Hateoas\Collections\Paginated;
 
 class Document implements IteratorAggregate, Countable
 {

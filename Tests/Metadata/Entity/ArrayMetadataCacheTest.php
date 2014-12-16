@@ -10,7 +10,7 @@ namespace Metadata\Entity;
 // Mocks.
 use Codeception\Util\Stub;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Entity\ArrayMetadataCache;
+use GoIntegro\Hateoas\Metadata\Entity\ArrayMetadataCache;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
@@ -42,9 +42,9 @@ class ArrayMetadataCacheTest extends TestCase
         $metadataCache = new ArrayMetadataCache($entityManager);
         /* When... (Action) */
         $classMapping
-            = $metadataCache->getMapping('GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface');
+            = $metadataCache->getMapping('GoIntegro\Hateoas\JsonApi\ResourceEntityInterface');
         $sameMapping
-            = $metadataCache->getMapping('GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface');
+            = $metadataCache->getMapping('GoIntegro\Hateoas\JsonApi\ResourceEntityInterface');
         /* Then... (Assertions) */
         $this->assertEquals('The mapping.', $classMapping);
         $this->assertEquals($classMapping, $sameMapping);

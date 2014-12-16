@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // ORM.
 use Doctrine\ORM\QueryBuilder;
@@ -17,7 +17,7 @@ class DefaultFilter implements FilterInterface
      */
     public function supportsClass($class)
     {
-        return is_a($class, 'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface', TRUE);
+        return is_a($class, 'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface', TRUE);
     }
 
     /**

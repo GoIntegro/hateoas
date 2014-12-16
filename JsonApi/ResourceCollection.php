@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Colecciones.
 use Doctrine\Common\Collections\ArrayCollection;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata;
+use GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata;
 // Datos.
 use Closure;
 // Excepciones.

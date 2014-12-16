@@ -5,14 +5,14 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Interfaces.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata;
+use GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata;
 // Datos.
-use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
+use GoIntegro\Hateoas\Util\Inflector;
 // Colecciones.
 use Doctrine\Common\Collections\Collection as CollectionInterface;
 
@@ -20,7 +20,7 @@ class EntityResource implements DocumentResource
 {
     const DEFAULT_PAGE_SIZE = 10;
 
-    const ERROR_NOT_RESOURCE_ENTITY = "The relationship \"%s\" contains a \"%s\", an entity implementing GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface was expected.",
+    const ERROR_NOT_RESOURCE_ENTITY = "The relationship \"%s\" contains a \"%s\", an entity implementing GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface was expected.",
         ERROR_TO_MANY_RELATION_NULL = "The to-many relationship \"%s\" returns neither an array nor a collection. The corresponding property needs to be initialized with either during the construction of the entity.",
         ERROR_NOT_ENTITY_COLLECTION = "The relationship \"%s\" contains a \"%s\", a collection of entities that implements Doctrine\\Common\\Collections\\Collection was expected.",
         ERROR_INACCESSIBLE_MEMBER = "For some reason the field is known or is a relationship, but its value can't be accessed.",

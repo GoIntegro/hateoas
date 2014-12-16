@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Paginación.
 use Doctrine\ORM\Tools\Pagination\Paginator;
 // Colecciones.
-use GoIntegro\Bundle\HateoasBundle\Collections\Paginated;
+use GoIntegro\Hateoas\Collections\Paginated;
 
 /**
  * @see http://doctrine-orm.readthedocs.org/en/latest/tutorials/pagination.html

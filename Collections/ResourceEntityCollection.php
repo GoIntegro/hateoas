@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Collections;
+namespace GoIntegro\Hateoas\Collections;
 
 // Colecciones.
 use Doctrine\Common\Collections\ArrayCollection;
 // Recursos REST.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 // Excepciones.
 use Exception;
 

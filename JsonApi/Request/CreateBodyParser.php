@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // HTTP.
 use Symfony\Component\HttpFoundation\Request;
 // Utils.
-use GoIntegro\Bundle\HateoasBundle\Util;
+use GoIntegro\Hateoas\Util;
 
 /**
  * @see http://jsonapi.org/format/#crud-creating-resources

@@ -49,9 +49,9 @@
         "nelmio/solarium-bundle": "*"
     },
     "autoload": {
-        "psr-0": { "GoIntegro\\Bundle\\HateoasBundle": "" }
+        "psr-0": { "GoIntegro\\Hateoas": "" }
     },
-    "target-dir": "GoIntegro/Bundle/HateoasBundle",
+    "target-dir": "GoIntegro/Hateoas",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "extra": {

@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache;
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache;
 
 /**
  * @pattern abstract factory

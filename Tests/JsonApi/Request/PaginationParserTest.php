@@ -12,8 +12,8 @@ use Codeception\Util\Stub;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Request.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\PaginationParser,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Parser;
+use GoIntegro\Hateoas\JsonApi\Request\PaginationParser,
+    GoIntegro\Hateoas\JsonApi\Request\Parser;
 
 class PaginationParserTest extends TestCase
 {
@@ -39,7 +39,7 @@ class PaginationParserTest extends TestCase
         $queryOverrides = ['has' => $has, 'get' => $get];
         $request = self::createRequest('/api/v1/users', $queryOverrides);
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             ['primaryClass' => self::RESOURCE_CLASS]
         );
         $parser = new PaginationParser(
@@ -55,7 +55,7 @@ class PaginationParserTest extends TestCase
         $this->assertEquals(4, $pagination->size);
         $this->assertEquals(4, $pagination->offset);
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Http\Url',
+            'GoIntegro\Hateoas\Http\Url',
             $pagination->paginationlessUrl
         );
     }
@@ -98,7 +98,7 @@ class PaginationParserTest extends TestCase
     private static function createMetadataMiner()
     {
         return Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface'
+            'GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface'
         );
     }
 }

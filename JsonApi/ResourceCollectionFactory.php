@@ -5,20 +5,20 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Interfaces.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface;
+use GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface;
 // Colecciones.
-use GoIntegro\Bundle\HateoasBundle\Collections\ResourceEntityCollection;
+use GoIntegro\Hateoas\Collections\ResourceEntityCollection;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Params;
+use GoIntegro\Hateoas\JsonApi\Request\Params;
 // Paginación.
 use Doctrine\ORM\Tools\Pagination\Paginator;
 // Búsqueda.
-use GoIntegro\Bundle\HateoasBundle\Search\FacetedSearchResult as SearchResult;
+use GoIntegro\Hateoas\Search\FacetedSearchResult as SearchResult;
 
 class ResourceCollectionFactory implements Factory
 {

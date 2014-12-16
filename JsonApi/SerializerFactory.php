@@ -5,14 +5,14 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Interfaces.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 // HTTP.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Parser as RequestParser;
+use GoIntegro\Hateoas\JsonApi\Request\Parser as RequestParser;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Params;
+use GoIntegro\Hateoas\JsonApi\Request\Params;
 // Security.
 use Symfony\Component\Security\Core\SecurityContextInterface;
 

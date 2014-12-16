@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // Resources.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentResource;
+use GoIntegro\Hateoas\JsonApi\DocumentResource;
 // ORM.
 use Doctrine\Common\Collections\Criteria;
 

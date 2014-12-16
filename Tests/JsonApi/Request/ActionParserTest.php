@@ -12,9 +12,9 @@ use Codeception\Util\Stub;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Request.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\ActionParser,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\Request\RequestAction,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Parser;
+use GoIntegro\Hateoas\JsonApi\Request\ActionParser,
+    GoIntegro\Hateoas\JsonApi\Request\RequestAction,
+    GoIntegro\Hateoas\JsonApi\Request\Parser;
 
 class ActionParserTest extends TestCase
 {
@@ -37,7 +37,7 @@ JSON;
             'getContent' => function() { return self::UPDATE_BODY; }
         ];
         $jsonCoder = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Util\\JsonCoder',
+            'GoIntegro\\Hateoas\\Util\\JsonCoder',
             ['decode' => json_decode(self::HTTP_PUT_BODY, TRUE)]
         );
         $request = self::createRequest(
@@ -47,7 +47,7 @@ JSON;
             self::HTTP_PUT_BODY
         );
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             [
                 'primaryIds' => ['27'],
                 'primaryType' => 'users'
@@ -98,17 +98,17 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface
+     * @return \GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface
      */
     private static function createMetadataMiner()
     {
         $metadata = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceMetadata',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\ResourceMetadata',
             ['isRelationship' => TRUE, 'isLinkOnlyRelationship' => FALSE]
         );
 
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\MetadataMinerInterface',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\MetadataMinerInterface',
             ['mine' => $metadata]
         );
     }

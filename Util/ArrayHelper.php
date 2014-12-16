@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Util;
+namespace GoIntegro\Hateoas\Util;
 
 class ArrayHelper
 {

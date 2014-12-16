@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Serializers.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+use GoIntegro\Hateoas\JsonApi\Serializer;
 // Security.
 use Symfony\Component\Security\Core\SecurityContextInterface;
 

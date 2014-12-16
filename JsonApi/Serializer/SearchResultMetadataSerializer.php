@@ -5,13 +5,13 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Document,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\SearchResultResourceCollection;
+use GoIntegro\Hateoas\JsonApi\Document,
+    GoIntegro\Hateoas\JsonApi\SearchResultResourceCollection;
 // Utils.
-use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
+use GoIntegro\Hateoas\Util\Inflector;
 
 /**
  * @todo Move a un sub-namespace "JsonApi\Extension".

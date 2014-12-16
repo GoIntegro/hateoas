@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // Inflection.
 use Doctrine\Common\Util\Inflector;
@@ -24,7 +24,7 @@ class DefaultBuilder implements AbstractBuilderInterface
 
     const GET = 'get', ADD = 'add', SET = 'set';
 
-    const AUTHOR_IS_OWNER = 'GoIntegro\\Bundle\\HateoasBundle\\Entity\\AuthorIsOwner',
+    const AUTHOR_IS_OWNER = 'GoIntegro\\Hateoas\\Entity\\AuthorIsOwner',
         ERROR_COULD_NOT_CREATE = "Could not create the resource.";
 
     /**

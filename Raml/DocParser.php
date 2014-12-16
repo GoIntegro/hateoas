@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Raml;
+namespace GoIntegro\Hateoas\Raml;
 
 // YAML.
 use Symfony\Component\Yaml\Yaml;
 // JSON.
-use GoIntegro\Bundle\HateoasBundle\Util\JsonCoder;
+use GoIntegro\Hateoas\Util\JsonCoder;
 
 class DocParser
 {

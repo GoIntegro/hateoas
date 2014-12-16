@@ -5,18 +5,18 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Recursos REST.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentResource;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface,
+    GoIntegro\Hateoas\JsonApi\DocumentResource;
 // Colecciones.
 use Doctrine\Common\Collections\Collection as CollectionInterface;
 // Utils.
-use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
+use GoIntegro\Hateoas\Util\Inflector;
 // JSON-API
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Document,
-    GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentPagination;
+use GoIntegro\Hateoas\JsonApi\Document,
+    GoIntegro\Hateoas\JsonApi\DocumentPagination;
 
 /**
  * @see https://github.com/json-api/json-api/issues/236#issuecomment-45655029

@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Exception;
+namespace GoIntegro\Hateoas\JsonApi\Exception;
 
 // Exceptions.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Exception\ErrorException;
+use GoIntegro\Hateoas\JsonApi\Exception\ErrorException;
 
 class FactoryRequisiteException extends ErrorException
 {

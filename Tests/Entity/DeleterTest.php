@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -18,18 +18,18 @@ class DeleterTest extends TestCase
     {
         /* Given... (Fixture) */
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             ['primaryType' => 'users']
         );
         $entity = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface'
+            'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface'
         );
         $defaultDeleter = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\DeleterInterface',
+            'GoIntegro\\Hateoas\\Entity\\DeleterInterface',
             ['create' => Stub::once()]
         );
         $postDeleter = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\DeleterInterface',
+            'GoIntegro\\Hateoas\\Entity\\DeleterInterface',
             ['create' => Stub::never()]
         );
         $deleter = new Deleter;
@@ -44,18 +44,18 @@ class DeleterTest extends TestCase
     {
         /* Given... (Fixture) */
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             ['primaryType' => 'users']
         );
         $entity = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface'
+            'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface'
         );
         $defaultDeleter = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\DeleterInterface',
+            'GoIntegro\\Hateoas\\Entity\\DeleterInterface',
             ['create' => Stub::never()]
         );
         $userDeleter = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\DeleterInterface',
+            'GoIntegro\\Hateoas\\Entity\\DeleterInterface',
             ['create' => Stub::once()]
         );
         $deleter = new Deleter;

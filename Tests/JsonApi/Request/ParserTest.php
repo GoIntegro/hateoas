@@ -12,7 +12,7 @@ use Codeception\Util\Stub;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Request.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request\Parser;
+use GoIntegro\Hateoas\JsonApi\Request\Parser;
 
 class ParserTest extends TestCase
 {
@@ -196,93 +196,93 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\FilterParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\FilterParser
      */
     private static function createFilterParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\FilterParser'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\FilterParser'
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\PaginationParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\PaginationParser
      */
     private static function createPaginationParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\PaginationParser'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\PaginationParser'
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\BodyParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\BodyParser
      */
     private static function createBodyParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\BodyParser'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\BodyParser'
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\ActionParser
+     * @return \GoIntegro\Hateoas\JsonApi\Request\ActionParser
      */
     private static function createActionParser()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ActionParser'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\ActionParser'
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\ParamEntityFinder
+     * @return \GoIntegro\Hateoas\JsonApi\Request\ParamEntityFinder
      */
     private static function createParamEntityFinder()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\ParamEntityFinder'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\ParamEntityFinder'
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\Request\LocaleNegotiator
+     * @return \GoIntegro\Hateoas\JsonApi\Request\LocaleNegotiator
      */
     private static function createLocaleNegotiator()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\LocaleNegotiator'
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\LocaleNegotiator'
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Raml\DocNavigator
+     * @return \GoIntegro\Hateoas\Raml\DocNavigator
      */
     private static function createDocNavigator()
     {
         $ramlDoc = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Raml\\RamlDoc',
+            'GoIntegro\\Hateoas\\Raml\\RamlDoc',
             ['isDefined' => TRUE]
         );
 
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Raml\\DocNavigator',
+            'GoIntegro\\Hateoas\\Raml\\DocNavigator',
             ['getDoc' => $ramlDoc]
         );
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface
+     * @return \GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface
      */
     private static function createMetadataMiner()
     {
         $metadata = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceMetadata',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\ResourceMetadata',
             ['isRelationship' => TRUE, 'isLinkOnlyRelationship' => FALSE]
         );
 
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\MetadataMinerInterface',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\MetadataMinerInterface',
             ['mine' => $metadata]
         );
     }

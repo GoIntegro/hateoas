@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Raml;
+namespace GoIntegro\Hateoas\Raml;
 
 // JSON.
-use GoIntegro\Bundle\HateoasBundle\Util\JsonCoder;
+use GoIntegro\Hateoas\Util\JsonCoder;
 
 /**
  * Uses JSON-API assumptions to navigate a RAML.

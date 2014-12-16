@@ -5,20 +5,20 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Util;
+namespace GoIntegro\Hateoas\Util;
 
 // ORM.
 use Doctrine\ORM\EntityManagerInterface;
 // Paginadores
 use Doctrine\ORM\Tools\Pagination\Paginator;
 // Colecciones
-use GoIntegro\Bundle\HateoasBundle\Collections\PaginatedCollection;
+use GoIntegro\Hateoas\Collections\PaginatedCollection;
 // Request.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+use GoIntegro\Hateoas\JsonApi\Request;
 
 class RepositoryHelper
 {
-    const RESOURCE_ENTITY_INTERFACE = 'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface';
+    const RESOURCE_ENTITY_INTERFACE = 'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface';
 
     /**
      * @var EntityManagerInterface

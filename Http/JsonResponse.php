@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Http;
+namespace GoIntegro\Hateoas\Http;
 
 // HTTP.
 use Symfony\Component\HttpFoundation\JsonResponse as SymfonyJsonResponse;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\JsonApiSpec;
+use GoIntegro\Hateoas\JsonApi\JsonApiSpec;
 
 class JsonResponse extends SymfonyJsonResponse
 {

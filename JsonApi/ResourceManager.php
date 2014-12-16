@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\MetadataMinerInterface
+use GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface
     as MetadataMiner;
 // DI.
 use Symfony\Component\DependencyInjection\ContainerInterface;

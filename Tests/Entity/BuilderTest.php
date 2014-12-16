@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -18,15 +18,15 @@ class BuilderTest extends TestCase
     {
         /* Given... (Fixture) */
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             ['primaryType' => 'users']
         );
         $defaultBuilder = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\AbstractBuilderInterface',
+            'GoIntegro\\Hateoas\\Entity\\AbstractBuilderInterface',
             ['create' => Stub::once()]
         );
         $postBuilder = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\BuilderInterface',
+            'GoIntegro\\Hateoas\\Entity\\BuilderInterface',
             ['create' => Stub::never()]
         );
         $builder = new Builder;
@@ -41,15 +41,15 @@ class BuilderTest extends TestCase
     {
         /* Given... (Fixture) */
         $params = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             ['primaryType' => 'users']
         );
         $defaultBuilder = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\AbstractBuilderInterface',
+            'GoIntegro\\Hateoas\\Entity\\AbstractBuilderInterface',
             ['create' => Stub::never()]
         );
         $userBuilder = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Entity\\BuilderInterface',
+            'GoIntegro\\Hateoas\\Entity\\BuilderInterface',
             ['create' => Stub::once()]
         );
         $builder = new Builder;

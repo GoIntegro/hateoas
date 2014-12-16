@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -23,7 +23,7 @@ class MetadataSerializerTest extends TestCase
         $offset = 10;
         $resources = self::createResourcesMock($size, $offset);
         $pagination = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentPagination',
+            'GoIntegro\Hateoas\JsonApi\DocumentPagination',
             [
                 'total' => 1000,
                 'size' => $size,
@@ -32,7 +32,7 @@ class MetadataSerializerTest extends TestCase
             ]
         );
         $document = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\Document',
+            'GoIntegro\Hateoas\JsonApi\Document',
             [
                 'wasCollection' => TRUE, // Key to this test.
                 'resources' => $resources,
@@ -58,12 +58,12 @@ class MetadataSerializerTest extends TestCase
     /**
      * @param integer $amount
      * @param integer $offset
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollection
+     * @return \GoIntegro\Hateoas\JsonApi\ResourceCollection
      */
     private static function createResourcesMock($amount, $offset = 0)
     {
         $metadata = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata',
             [
                 'type' => self::RESOURCE_TYPE,
                 'subtype' => self::RESOURCE_TYPE,
@@ -74,7 +74,7 @@ class MetadataSerializerTest extends TestCase
         $resources = [];
         for ($i = 0; $i < $amount; ++$i) {
             $resources[] = Stub::makeEmpty(
-                'GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource',
+                'GoIntegro\Hateoas\JsonApi\EntityResource',
                 [
                     'id' => (string) $offset,
                     'getMetadata' => function() use ($metadata) {
@@ -86,7 +86,7 @@ class MetadataSerializerTest extends TestCase
         }
 
         $collection = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollection',
+            'GoIntegro\Hateoas\JsonApi\ResourceCollection',
             [
                 'getMetadata' => function() use ($metadata) {
                     return $metadata;
@@ -109,7 +109,7 @@ class MetadataSerializerTest extends TestCase
     public static function buildPaginationSerializer()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Serializer\\PaginationMetadataSerializer',
+            'GoIntegro\\Hateoas\\JsonApi\\Serializer\\PaginationMetadataSerializer',
             ['serialize' => [
                 'page' => 5,
                 'size' => 3,
@@ -124,7 +124,7 @@ class MetadataSerializerTest extends TestCase
     public static function buildSearchResultSerializer()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Serializer\\SearchResultMetadataSerializer'
+            'GoIntegro\\Hateoas\\JsonApi\\Serializer\\SearchResultMetadataSerializer'
         );
     }
 
@@ -134,7 +134,7 @@ class MetadataSerializerTest extends TestCase
     public static function buildTranslationsSerializer()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Serializer\\TranslationsMetadataSerializer'
+            'GoIntegro\\Hateoas\\JsonApi\\Serializer\\TranslationsMetadataSerializer'
         );
     }
 }

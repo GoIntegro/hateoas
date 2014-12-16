@@ -5,16 +5,16 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Util;
+namespace GoIntegro\Hateoas\Util;
 
 // JSON.
 use JsonSchema\Validator;
 // Symfony 2.
 use Symfony\Component\HttpKernel\KernelInterface;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\JsonApiSpec;
+use GoIntegro\Hateoas\JsonApi\JsonApiSpec;
 // JSON Schema.
-use GoIntegro\Bundle\HateoasBundle\Raml\JsonSchemaSpec;
+use GoIntegro\Hateoas\Raml\JsonSchemaSpec;
 
 /**
  * La fachada del servicio de validación de JSON schemas.

@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Raml;
+namespace GoIntegro\Hateoas\Raml;
 
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
@@ -21,7 +21,7 @@ class DocParserTest extends TestCase
     {
         /* Given... (Fixture) */
         $jsonCoder = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Util\JsonCoder',
+            'GoIntegro\Hateoas\Util\JsonCoder',
             ['decode' => function($filePath) {
                 if (!is_readable($filePath)) {
                     throw new \ErrorException("The file is not readable.");
@@ -35,7 +35,7 @@ class DocParserTest extends TestCase
         $ramlDoc = $parser->parse(__DIR__ . self::RAML_PATH);
         /* Then... (Assertions) */
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Raml\RamlDoc', $ramlDoc
+            'GoIntegro\Hateoas\Raml\RamlDoc', $ramlDoc
         );
     }
 }

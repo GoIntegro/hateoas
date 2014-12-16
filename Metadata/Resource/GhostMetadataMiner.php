@@ -5,11 +5,11 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache,
-    GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceRelationships;
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache,
+    GoIntegro\Hateoas\Metadata\Resource\ResourceRelationships;
 
 class GhostMetadataMiner implements MetadataMinerInterface
 {
@@ -26,7 +26,7 @@ class GhostMetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $entityClassName
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClassName
      * @param ResourceMetadata
      */
     public function mine($entityClassName)
@@ -46,7 +46,7 @@ class GhostMetadataMiner implements MetadataMinerInterface
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $entityClass
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClass
      * @return string
      * @todo ¿Subtipo para ghosts?
      */

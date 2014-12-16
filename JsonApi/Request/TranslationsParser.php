@@ -5,13 +5,13 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // HTTP.
 use Symfony\Component\HttpFoundation\Request,
-    GoIntegro\Bundle\HateoasBundle\Http\Url;
+    GoIntegro\Hateoas\Http\Url;
 // Utils.
-use GoIntegro\Bundle\HateoasBundle\Util;
+use GoIntegro\Hateoas\Util;
 
 /**
  * @see https://github.com/l3pp4rd/DoctrineExtensions/blob/master/doc/translatable.md

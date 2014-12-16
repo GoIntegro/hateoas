@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity;
+namespace GoIntegro\Hateoas\Entity;
 
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Exception\ErrorException;
+use GoIntegro\Hateoas\JsonApi\Exception\ErrorException;
 
 class PersistenceException
     extends ErrorException

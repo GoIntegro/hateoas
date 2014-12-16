@@ -10,7 +10,7 @@ namespace Metadata\Resource;
 // Mocks.
 use Codeception\Util\Stub;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Resource\EntityMetadataMiner;
+use GoIntegro\Hateoas\Metadata\Resource\EntityMetadataMiner;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
@@ -31,12 +31,12 @@ class EntityMetadataMinerTest extends TestCase
         $this->assertEquals('workspaces', $metadata->subtype);
         $this->assertInstanceOf('ReflectionClass', $metadata->resourceClass);
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceFields',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceFields',
             $metadata->fields
         );
         $this->assertEquals(0, count($metadata->fields));
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceRelationships',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceRelationships',
             $metadata->relationships
         );
         $this->assertEquals(0, count($metadata->relationships));
@@ -72,14 +72,14 @@ class EntityMetadataMinerTest extends TestCase
         $this->assertEquals('workspaces', $metadata->subtype);
         $this->assertInstanceOf('ReflectionClass', $metadata->resourceClass);
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceFields',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceFields',
             $metadata->fields
         );
         $this->assertEquals(2, count($metadata->fields));
         $this->assertContains('some-property', $metadata->fields->original);
         $this->assertContains('a-property', $metadata->fields->injected);
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceRelationships',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceRelationships',
             $metadata->relationships
         );
         $this->assertEquals(0, count($metadata->relationships));
@@ -139,12 +139,12 @@ class EntityMetadataMinerTest extends TestCase
         $this->assertEquals('workspaces', $metadata->subtype);
         $this->assertInstanceOf('ReflectionClass', $metadata->resourceClass);
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceFields',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceFields',
             $metadata->fields
         );
         $this->assertEquals(0, count($metadata->fields));
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceRelationships',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceRelationships',
             $metadata->relationships
         );
         $this->assertEquals(2, count($metadata->relationships));
@@ -198,7 +198,7 @@ class EntityMetadataMinerTest extends TestCase
             ]
         );
         $cache = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache',
+            'GoIntegro\Hateoas\Metadata\Entity\MetadataCache',
             [
                 'getReflection'
                     => function($name) use (
@@ -208,7 +208,7 @@ class EntityMetadataMinerTest extends TestCase
                             case 'GoIntegro\\Entity\\Workspace':
                                 return $entityClass;
 
-                            case 'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\EntityResource':
+                            case 'GoIntegro\\Hateoas\\JsonApi\\EntityResource':
                             case 'GoIntegro\\Rest2\\Resource\\WorkspaceResource':
                                 return $resourceClass;
 

@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Colecciones.
-use GoIntegro\Bundle\HateoasBundle\Collections\Paginated;
+use GoIntegro\Hateoas\Collections\Paginated;
 
 class DocumentPagination
 {

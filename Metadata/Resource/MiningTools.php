@@ -5,20 +5,20 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Interfaces.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
 // Metadata.
-use GoIntegro\Bundle\HateoasBundle\Metadata\Entity\MetadataCache;
+use GoIntegro\Hateoas\Metadata\Entity\MetadataCache;
 // Datos.
-use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
+use GoIntegro\Hateoas\Util\Inflector;
 // ORM.
 use Doctrine\ORM\Mapping\ClassMetadata;
 // Reflexión.
-use GoIntegro\Bundle\HateoasBundle\Util\Reflection;
+use GoIntegro\Hateoas\Util\Reflection;
 // Recursos.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource;
+use GoIntegro\Hateoas\JsonApi\EntityResource;
 // Excepciones.
 use Exception;
 
@@ -84,7 +84,7 @@ trait MiningTools
     }
 
     /**
-     * @param \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface|string $entityClassName
+     * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClassName
      * @param ResourceRelationships $relationships
      * @return array
      * @todo Publicar o eliminar el parámetro $entityClassName.

@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Test\PHPUnit;
+namespace GoIntegro\Hateoas\Test\PHPUnit;
 
 // Testing.
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader,
     Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 // Test tools.
 use JsonSchema\Validator,
-    GoIntegro\Bundle\HateoasBundle\Http\Client;
+    GoIntegro\Hateoas\Http\Client;
 
 abstract class ApiTestCase extends WebTestCase
 {

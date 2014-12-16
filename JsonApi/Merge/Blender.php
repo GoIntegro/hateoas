@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Merge;
+namespace GoIntegro\Hateoas\JsonApi\Merge;
 
 /**
  * Handles merging two JSON-API documents into one, if possible.

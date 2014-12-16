@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Metadata\Resource;
+namespace GoIntegro\Hateoas\Metadata\Resource;
 
 // Iteración.
 use IteratorAggregate, ArrayIterator, Countable;
 // Colecciones.
-use GoIntegro\Bundle\HateoasBundle\Collections\Moonwalker;
+use GoIntegro\Hateoas\Collections\Moonwalker;
 // Datos.
 use Closure;
 

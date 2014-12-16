@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // JSON-API
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Document;
+use GoIntegro\Hateoas\JsonApi\Document;
 
 /**
  * @todo Move a un sub-namespace "JsonApi\Extension".

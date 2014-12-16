@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Exception;
+namespace GoIntegro\Hateoas\JsonApi\Exception;
 
 abstract class NotFoundException extends \RuntimeException
 {

@@ -5,14 +5,14 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Serializer;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Collections.
 use Doctrine\Common\Collections\Collection as CollectionInterface;
 // Inflection.
-use GoIntegro\Bundle\HateoasBundle\Util\Inflector;
+use GoIntegro\Hateoas\Util\Inflector;
 // JSON-API.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource;
+use GoIntegro\Hateoas\JsonApi\EntityResource;
 // Security.
 use Symfony\Component\Security\Core\SecurityContextInterface;
 

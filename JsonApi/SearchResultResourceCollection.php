@@ -5,12 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Búsqueda.
-use GoIntegro\Bundle\HateoasBundle\Search\FacetedSearchResult as SearchResult;
+use GoIntegro\Hateoas\Search\FacetedSearchResult as SearchResult;
 // Colecciones.
-use GoIntegro\Bundle\HateoasBundle\Collections\Paginated;
+use GoIntegro\Hateoas\Collections\Paginated;
 
 /**
  * @see http://www.solarium-project.org/documentation/

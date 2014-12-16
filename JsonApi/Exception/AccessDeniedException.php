@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Exception;
+namespace GoIntegro\Hateoas\JsonApi\Exception;
 
 // Security.
 use Symfony\Component\Security\Core\Exception;

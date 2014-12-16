@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -58,7 +58,7 @@ JSON;
     private static function createParams()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Request\\Params',
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             [
                 'primaryClass'
                     => 'HateoasInc\\Bundle\\ExampleBundle\\Entity\\User'
@@ -67,17 +67,17 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata
+     * @return \GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata
      */
     private static function createMetadataMiner()
     {
         $metadata = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\ResourceMetadata',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\ResourceMetadata',
             ['isField' => TRUE]
         );
 
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\MetadataMinerInterface',
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\MetadataMinerInterface',
             ['mine' => $metadata]
         );
     }

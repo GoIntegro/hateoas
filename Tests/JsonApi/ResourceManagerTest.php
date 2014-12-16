@@ -10,7 +10,7 @@ namespace JsonApi;
 // Mocks.
 use Codeception\Util\Stub;
 // Recursos.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceManager;
+use GoIntegro\Hateoas\JsonApi\ResourceManager;
 // Tests.
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
@@ -24,7 +24,7 @@ class ResourceManagerTest extends TestCase
         $resourceFactory = $resourceManager->createResourceFactory();
         /* Then... (Assertions) */
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResourceFactory',
+            'GoIntegro\Hateoas\JsonApi\EntityResourceFactory',
             $resourceFactory
         );
     }
@@ -37,7 +37,7 @@ class ResourceManagerTest extends TestCase
         $collectionFactory = $resourceManager->createCollectionFactory();
         /* Then... (Assertions) */
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollectionFactory',
+            'GoIntegro\Hateoas\JsonApi\ResourceCollectionFactory',
             $collectionFactory
         );
     }
@@ -50,7 +50,7 @@ class ResourceManagerTest extends TestCase
         $serializerFactory = $resourceManager->createDocumentFactory();
         /* Then... (Assertions) */
         $this->assertInstanceOf(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\DocumentFactory',
+            'GoIntegro\Hateoas\JsonApi\DocumentFactory',
             $serializerFactory
         );
     }
@@ -61,10 +61,10 @@ class ResourceManagerTest extends TestCase
     private function createResourceManager()
     {
         $metadataMiner = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\Metadata\\Resource\\MetadataMinerInterface'
+            'GoIntegro\\Hateoas\\Metadata\\Resource\\MetadataMinerInterface'
         );
         $resourceCache = Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceCache'
+            'GoIntegro\\Hateoas\\JsonApi\\ResourceCache'
         );
         $serviceContainer = Stub::makeEmpty(
             'Symfony\\Component\\DependencyInjection\\ContainerInterface'

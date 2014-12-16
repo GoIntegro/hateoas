@@ -5,10 +5,10 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Entity\Validation;
+namespace GoIntegro\Hateoas\Entity\Validation;
 
 // Exceptions.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\Exception\ConflictException;
+use GoIntegro\Hateoas\JsonApi\Exception\ConflictException;
 
 class EntityConflictException
     extends ConflictException

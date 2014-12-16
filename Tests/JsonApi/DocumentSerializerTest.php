@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\JsonApi;
+namespace GoIntegro\Hateoas\JsonApi;
 
 // Mocks.
 use Codeception\Util\Stub;
@@ -21,7 +21,7 @@ class DocumentSerializerTest extends TestCase
         /* Given... (Fixture) */
         $resources = self::createResourcesMock(0);
         $document = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\Document',
+            'GoIntegro\Hateoas\JsonApi\Document',
             [
                 'wasCollection' => FALSE, // Key to this test.
                 'resources' => $resources,
@@ -45,7 +45,7 @@ class DocumentSerializerTest extends TestCase
         /* Given... (Fixture) */
         $resources = self::createResourcesMock(1);
         $document = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\Document',
+            'GoIntegro\Hateoas\JsonApi\Document',
             [
                 'wasCollection' => FALSE, // Key to this test.
                 'resources' => $resources,
@@ -72,7 +72,7 @@ class DocumentSerializerTest extends TestCase
         /* Given... (Fixture) */
         $resources = self::createResourcesMock(3);
         $document = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\Document',
+            'GoIntegro\Hateoas\JsonApi\Document',
             [
                 'wasCollection' => TRUE, // Key to this test.
                 'resources' => $resources,
@@ -107,12 +107,12 @@ class DocumentSerializerTest extends TestCase
     /**
      * @param integer $amount
      * @param integer $offset
-     * @return \GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollection
+     * @return \GoIntegro\Hateoas\JsonApi\ResourceCollection
      */
     private static function createResourcesMock($amount, $offset = 0)
     {
         $metadata = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\Metadata\Resource\ResourceMetadata',
+            'GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata',
             [
                 'type' => self::RESOURCE_TYPE,
                 'subtype' => self::RESOURCE_TYPE,
@@ -123,7 +123,7 @@ class DocumentSerializerTest extends TestCase
         $resources = [];
         for ($i = 0; $i < $amount; ++$i) {
             $resources[] = Stub::makeEmpty(
-                'GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource',
+                'GoIntegro\Hateoas\JsonApi\EntityResource',
                 [
                     'id' => (string) $offset,
                     'getMetadata' => function() use ($metadata) {
@@ -135,7 +135,7 @@ class DocumentSerializerTest extends TestCase
         }
 
         $collection = Stub::makeEmpty(
-            'GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceCollection',
+            'GoIntegro\Hateoas\JsonApi\ResourceCollection',
             [
                 'getMetadata' => function() use ($metadata) {
                     return $metadata;
@@ -158,7 +158,7 @@ class DocumentSerializerTest extends TestCase
     public static function buildTopLevelLinksSerializer()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Serializer\\TopLevelLinksSerializer'
+            'GoIntegro\\Hateoas\\JsonApi\\Serializer\\TopLevelLinksSerializer'
         );
     }
 
@@ -168,7 +168,7 @@ class DocumentSerializerTest extends TestCase
     public static function buildLinkedResourcesSerializer()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Serializer\\LinkedResourcesSerializer'
+            'GoIntegro\\Hateoas\\JsonApi\\Serializer\\LinkedResourcesSerializer'
         );
     }
 
@@ -178,7 +178,7 @@ class DocumentSerializerTest extends TestCase
     public static function buildMetadataSerializer()
     {
         return Stub::makeEmpty(
-            'GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\Serializer\\MetadataSerializer'
+            'GoIntegro\\Hateoas\\JsonApi\\Serializer\\MetadataSerializer'
         );
     }
 

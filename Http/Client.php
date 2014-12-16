@@ -6,7 +6,7 @@
  * @author Juan Deladoey <juan.deladoey@gointegro.com>
  */
 
-namespace GoIntegro\Bundle\HateoasBundle\Http;
+namespace GoIntegro\Hateoas\Http;
 
 /**
  * Simple HTTP client.
