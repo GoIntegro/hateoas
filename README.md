@@ -53,6 +53,20 @@ ___
 
 # Usage
 
+Just point the bundle to your RAML API definition and register an entity as a *magic service*.
+
+```yaml
+# app/config/config.yml
+
+go_integro_hateoas:
+  raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/api.raml
+  json_api:
+    magic_services:
+      - resource_type: users
+        entity_class: GoIntegro\Bundle\ExampleBundle\Entity\User
+  cache: ~
+```
+
 Have your entity implement the resource interface.
 
 ```php
@@ -61,20 +75,6 @@ use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface
 
 class User implements ResourceEntityInterface {}
 ?>
-```
-
-Just register your entity as a *magic service*.
-
-```yaml
-# app/config/config.yml
-
-go_integro_hateoas:
-  json_api:
-    magic_services:
-      - resource_type: users
-        entity_class: GoIntegro\Bundle\ExampleBundle\Entity\User
-        raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/users.raml
-  cache: ~
 ```
 
 And you get the following for free.
@@ -128,21 +128,9 @@ Sweet, right?
 
 # API Definition
 
-But first - you need to define your API.
+The HATEOAS bundle needs to know which magic actions you want enabled for your resources. That's why we add a `raml_doc` key in the `config.yml`.
 
-The HATEOAS bundle needs to know which magic actions you want enabled for your resources. That's why each of them has a `raml_doc` key in the `config.yml`.
-
-```yaml
-# app/config/config.yml
-go_integro_hateoas:
-  json_api:
-    magic_services:
-      - resource_type: users
-        entity_class: GoIntegro\Bundle\ExampleBundle\Entity\User
-        raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/users.raml
-```
-
-Check out the [RAML docs](http://raml.org/docs.html) in order to learn more about what your API could look like. Nevertheless, the bundle will only pay attention to the [JSON-API URLs](http://jsonapi.org/format/#document-structure-resource-urls).
+Check out the [RAML docs](http://raml.org/docs.html) in order to learn more about what your API definition could look like. Nevertheless, the bundle will only pay attention to the [JSON-API URLs](http://jsonapi.org/format/#document-structure-resource-urls).
 
 ## JSON Schema
 
