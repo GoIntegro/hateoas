@@ -15,6 +15,13 @@ use GoIntegro\Hateoas\JsonApi\JsonApiSpec;
 class JsonResponse extends SymfonyJsonResponse
 {
     /**
+     * @todo Remove when Symfony 2.7 LTS is released.
+     */
+    const HTTP_OK = 200,
+        HTTP_CREATED = 201,
+        HTTP_NO_CONTENT = 204;
+
+    /**
      * @see SymfonyHttpResponse::__construct
      */
     public function __construct($data = NULL, $status = 200, $headers = [])
