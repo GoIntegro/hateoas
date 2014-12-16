@@ -169,4 +169,18 @@ class Document implements IteratorAggregate, Countable
 
         return $amount;
     }
+
+    /**
+     * @return array
+     */
+    public function getPrimaryResourceIds()
+    {
+        $ids = [];
+
+        foreach ($this->primaryResources as $resource) {
+            $ids[] = $resource->id;
+        }
+
+        return $ids;
+    }
 }
