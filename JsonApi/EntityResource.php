@@ -18,9 +18,11 @@ use Doctrine\Common\Collections\Collection as CollectionInterface;
 
 class EntityResource implements DocumentResource
 {
-    const DEFAULT_PAGE_SIZE = 10,
-        ERROR_NOT_RESOURCE_ENTITY = "La relación \"%s\" contiene un <%s>, se esperaba una entidad que implementase GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface.",
-        ERROR_NOT_ENTITY_COLLECTION = "La relación \"%s\" contiene un <%s>, se esperaba una colección de entidades que implementase Doctrine\Common\Collections\Collection.";
+    const DEFAULT_PAGE_SIZE = 10;
+
+    const ERROR_NOT_RESOURCE_ENTITY = "The relationship \"%s\" contains a \"%s\", an entity implementing GoIntegro\\Bundle\\HateoasBundle\\JsonApi\\ResourceEntityInterface was expected.",
+        ERROR_TO_MANY_RELATION_NULL = "The to-many relationship \"%s\" returns neither an array nor a collection. The corresponding property needs to be initialized with either during the construction of the entity.",
+        ERROR_NOT_ENTITY_COLLECTION = "The relationship \"%s\" contains a \"%s\", a collection of entities that implements Doctrine\\Common\\Collections\\Collection was expected.";
 
     /**
      * @var ResourceEntityInterface
@@ -166,16 +168,22 @@ class EntityResource implements DocumentResource
      */
     public static function normalizeToManyRelation($relation, $relationship)
     {
-        if (!$relation instanceof CollectionInterface) {
+        if (is_array($relation)) {
+            $relation = new ArrayCollection($relation);
+        } elseif (is_null($relation)) {
+            throw new \Exception(sprintf(
+                self::ERROR_TO_MANY_RELATION_NULL, $relationship
+            ));
+        } elseif (!$relation instanceof CollectionInterface) {
             $type = is_object($relation)
-                ? get_class($relation) : gettype($relation);
+                ? get_class($relation)
+                : gettype($relation);
+
             throw new \Exception(sprintf(
                 self::ERROR_NOT_ENTITY_COLLECTION, $relationship, $type
             ));
         }
 
-        return is_array($relation)
-            ? new ArrayCollection($relation)
-            : $relation;
+        return $relation;
     }
 }
