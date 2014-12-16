@@ -18,7 +18,7 @@ trait Validating
      * @param ResourceEntityInterface $entity
      * @throws Validation\EntityConflictException
      * @throws Validation\ValidationException
-     * @return \Symfony\Component\Validator\ConstraintViolationListInterface
+     * @return self
      */
     protected function validate(ResourceEntityInterface $entity)
     {
@@ -35,7 +35,7 @@ trait Validating
             }
         }
 
-        return $errors;
+        return $this;
     }
 
     /**

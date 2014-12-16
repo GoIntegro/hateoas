@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class DefaultBuilder implements AbstractBuilderInterface
 {
-    use Validating;
+    use Validating, AltersEntities;
 
     const GET = 'get', ADD = 'add', SET = 'set';
 
@@ -85,22 +85,9 @@ class DefaultBuilder implements AbstractBuilderInterface
             if ($class->hasMethod($method)) $entity->$method($value);
         }
 
-        foreach ($relationships as $relationship => $value) {
-            $camelCased = Inflector::camelize($relationship);
-
-            if (is_array($value)) {
-                $getter = self::GET . $camelCased;
-                $adder = self::ADD . Inflector::singularize($camelCased);
-
-                foreach ($value as $item) $entity->$adder($item);
-            } else {
-                $method = self::SET . $camelCased;
-
-                if ($class->hasMethod($method)) $entity->$method($value);
-            }
-        }
-
-        $this->validate($entity);
+        $this->setFields($class, $entity, $relationships)
+            ->setRelationships($class, $entity, $relationships)
+            ->validate($entity);
 
         try {
             $this->em->persist($entity);

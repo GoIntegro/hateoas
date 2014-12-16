@@ -16,12 +16,11 @@ use Doctrine\ORM\EntityManagerInterface,
     Doctrine\ORM\ORMException,
     Gedmo\Exception as GedmoException;
 // Validator.
-use Symfony\Component\Validator\ValidatorInterface,
-    GoIntegro\Hateoas\Entity\Validation\ValidationException;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class DefaultMutator implements MutatorInterface
 {
-    use Validating;
+    use Validating, AltersEntities;
 
     const GET = 'get', REMOVE = 'remove', ADD = 'add', SET = 'set';
 
@@ -60,7 +59,7 @@ class DefaultMutator implements MutatorInterface
      * @param array $metadata
      * @return ResourceEntityInterface
      * @throws EntityConflictExceptionInterface
-     * @throws ValidationExceptionInterface
+     * @throws Validation\ValidationExceptionInterface
      */
     public function update(
         ResourceEntityInterface $entity,
@@ -71,39 +70,14 @@ class DefaultMutator implements MutatorInterface
     {
         $class = new \ReflectionClass($entity);
 
-        foreach ($fields as $field => $value) {
-            $method = self::SET . Inflector::camelize($field);
+        $translations = !empty($metadata['translations'])
+            ? $metadata['translations']
+            : [];
 
-            if ($class->hasMethod($method)) $entity->$method($value);
-        }
-
-        foreach ($relationships as $relationship => $value) {
-            $camelCased = Inflector::camelize($relationship);
-
-            if (is_array($value)) {
-                $getter = self::GET . $camelCased;
-                $singular = Inflector::singularize($camelCased);
-                $remover = self::REMOVE . $singular;
-                $adder = self::ADD . $singular;
-
-                // @todo Improve algorithm.
-                foreach ($entity->$getter() as $item) $entity->$remover($item);
-
-                foreach ($value as $item) $entity->$adder($item);
-            } else {
-                $method = self::SET . $camelCased;
-
-                if ($class->hasMethod($method)) $entity->$method($value);
-            }
-        }
-
-        if (!empty($metadata['translations'])) {
-            $entity = $this->updateTranslations(
-                $entity, $metadata['translations']
-            );
-        }
-
-        $errors = $this->validate($entity);
+        $this->setFields($class, $entity, $relationships)
+            ->setRelationships($class, $entity, $relationships)
+            ->updateTranslations($entity, $translations)
+            ->validate($entity);
 
         try {
             $this->em->persist($entity);
@@ -142,6 +116,6 @@ class DefaultMutator implements MutatorInterface
             }
         }
 
-        return $entity;
+        return $this;
     }
 }
