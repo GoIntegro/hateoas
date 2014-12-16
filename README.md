@@ -341,6 +341,55 @@ hateoas.entity.builder | `GoIntegro\Hateoas\Entity\BuilderInterface`
 hateoas.entity.mutator | `GoIntegro\Hateoas\Entity\MutatorInterface`
 hateoas.entity.deleter | `GoIntegro\Hateoas\Entity\DeleterInterface`
 
+## Updating relationships and association ownership
+
+You've set everything up, made an HTTP request that should relate two resources, got a 200/204 status response, but *your relationship wasn't created*.
+
+What gives? [Here's a likely cause](http://doctrine-orm.readthedocs.org/en/latest/reference/unitofwork-associations.html).
+
+Remember that we will only operate on the entity associated to the resource you're altering. Even when relating resources, you're making a request to either one of them.
+
+> E.g. `POST /users/1/links/user-groups` is acting upon `/users`.
+
+If the entity you're acting upon isn't the owner of the association in the eyes of Doctrine, your changes will not be persisted.
+
+You need to do two things:
+- [Enable cascading](http://doctrine-orm.readthedocs.org/en/latest/reference/working-with-associations.html#transitive-persistence-cascade-operations) on the inverse side of the association;
+- Have the setter on the inverse side also alter the entity it got.
+
+Here's an example.
+
+```php
+<?php
+class Team
+{
+    /**
+     * @var ArrayCollection
+     * @OneToMany(
+     *   targetEntity="User",
+     *   mappedBy="team",
+     *   cascade={"persist", "remove"}
+     * )
+     */
+    private $members;
+
+    /**
+     * @param User $member
+     * @return self
+     */
+    public function addMember(User $member)
+    {
+        $this->members->add($member);
+        $member->setTeam($this); // This is what you need.
+
+        return $this;
+    }
+}
+?>
+```
+
+This bit of advice would fit a FAQ or [troubleshooting](http://upload.wikimedia.org/wikipedia/commons/a/a8/Windows_XP_BSOD.png) section just as well.
+
 ## Translatable content
 
 The framework provides support for working with the translatable entities feature of @l3pp4rd's [Doctrine Extensions](https://github.com/l3pp4rd/DoctrineExtensions) (AKA *Gedmo*) through @stof's [Bundle](https://github.com/stof/StofDoctrineExtensionsBundle/).
