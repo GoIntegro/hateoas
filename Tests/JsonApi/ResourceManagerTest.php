@@ -11,10 +11,8 @@ namespace JsonApi;
 use Codeception\Util\Stub;
 // Recursos.
 use GoIntegro\Hateoas\JsonApi\ResourceManager;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class ResourceManagerTest extends TestCase
+class ResourceManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreatingResourceFactory()
     {

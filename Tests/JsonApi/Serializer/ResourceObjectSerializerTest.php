@@ -9,10 +9,8 @@ namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class ResourceObjectSerializerTest extends TestCase
+class ResourceObjectSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \GoIntegro\Hateoas\JsonApi\Serializer\InvalidFieldException

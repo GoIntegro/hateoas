@@ -9,12 +9,10 @@ namespace JsonApi\Request;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Request.
 use GoIntegro\Hateoas\JsonApi\Request\ResourceLinksHydrant;
 
-class ResourceLinksHydrantTest extends TestCase
+class ResourceLinksHydrantTest extends \PHPUnit_Framework_TestCase
 {
     const AUTHOR_ENTITY = 'author-entity',
         COMMENT_ENTITIES = 'comment-entities';

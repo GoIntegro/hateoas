@@ -11,10 +11,8 @@ namespace Metadata\Resource;
 use Codeception\Util\Stub;
 // Metadata.
 use GoIntegro\Hateoas\Metadata\Resource\EntityMetadataMiner;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class EntityMetadataMinerTest extends TestCase
+class EntityMetadataMinerTest extends \PHPUnit_Framework_TestCase
 {
     const API_BASE_URL = '/api/v2',
         RESOURCE_CLASS_PATH = 'Rest2/Resource';

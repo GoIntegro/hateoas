@@ -9,10 +9,8 @@ namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class FilterParserTest extends TestCase
+class FilterParserTest extends \PHPUnit_Framework_TestCase
 {
     const API_BASE_URL = '/api/v1',
         HTTP_PUT_BODY = <<<'JSON'

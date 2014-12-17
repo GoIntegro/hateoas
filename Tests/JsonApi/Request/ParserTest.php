@@ -5,16 +5,12 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
-// Request.
-use GoIntegro\Hateoas\JsonApi\Request\Parser;
 
-class ParserTest extends TestCase
+class ParserTest extends \PHPUnit_Framework_TestCase
 {
     const API_BASE_URL = '/api/v1';
 

@@ -11,10 +11,8 @@ namespace Metadata\Entity;
 use Codeception\Util\Stub;
 // Metadata.
 use GoIntegro\Hateoas\Metadata\Entity\ArrayMetadataCache;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class ArrayMetadataCacheTest extends TestCase
+class ArrayMetadataCacheTest extends \PHPUnit_Framework_TestCase
 {
     public function testGettingReflectionForClass()
     {

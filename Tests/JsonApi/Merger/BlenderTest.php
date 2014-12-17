@@ -11,10 +11,8 @@ namespace JsonApi\Request;
 use Codeception\Util\Stub;
 // Request.
 use GoIntegro\Hateoas\JsonApi\Merge\Blender;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class BlenderTest extends TestCase
+class BlenderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array

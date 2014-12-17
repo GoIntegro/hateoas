@@ -9,10 +9,8 @@ namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class MetadataSerializerTest extends TestCase
+class MetadataSerializerTest extends \PHPUnit_Framework_TestCase
 {
     const RESOURCE_TYPE = 'resources';
 

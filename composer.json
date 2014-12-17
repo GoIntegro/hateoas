@@ -36,7 +36,10 @@
         "doctrine/annotations": "*",
         "symfony/security": "*",
         "symfony/validator": "*",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+
+        "gointegro/json": "dev-master",
+        "gointegro/raml": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

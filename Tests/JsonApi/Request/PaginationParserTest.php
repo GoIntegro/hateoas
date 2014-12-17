@@ -9,13 +9,11 @@ namespace JsonApi\Request;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Request.
 use GoIntegro\Hateoas\JsonApi\Request\PaginationParser,
     GoIntegro\Hateoas\JsonApi\Request\Parser;
 
-class PaginationParserTest extends TestCase
+class PaginationParserTest extends \PHPUnit_Framework_TestCase
 {
     const RESOURCE_CLASS = 'HateoasInc\\Bundle\\ExampleBundle\\Entity\\User';
 

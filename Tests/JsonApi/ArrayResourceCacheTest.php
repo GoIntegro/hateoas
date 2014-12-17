@@ -12,10 +12,8 @@ use Codeception\Util\Stub;
 // Recursos.
 use GoIntegro\Hateoas\JsonApi\ArrayResourceCache,
     GoIntegro\Hateoas\JsonApi\ResourceEntityInterface;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class ArrayResourceCacheTest extends TestCase
+class ArrayResourceCacheTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddingAResource()
     {

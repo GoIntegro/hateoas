@@ -9,10 +9,8 @@ namespace GoIntegro\Hateoas\Entity;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
-class MutatorTest extends TestCase
+class MutatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testDeletingWithDefaultService()
     {

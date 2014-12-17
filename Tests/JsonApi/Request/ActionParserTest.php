@@ -9,14 +9,12 @@ namespace JsonApi\Request;
 
 // Mocks.
 use Codeception\Util\Stub;
-// Tests.
-use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 // Request.
 use GoIntegro\Hateoas\JsonApi\Request\ActionParser,
     GoIntegro\Hateoas\JsonApi\Request\RequestAction,
     GoIntegro\Hateoas\JsonApi\Request\Parser;
 
-class ActionParserTest extends TestCase
+class ActionParserTest extends \PHPUnit_Framework_TestCase
 {
     const API_BASE_URL = '/api/v1',
         RESOURCE_TYPE = 'users',

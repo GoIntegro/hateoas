@@ -1,9 +1,12 @@
-# Git
-!.gitignore
-
 # Vim, nano, etc.
 *~
 .*
+
+# Git
+!.gitignore
+
+# Travis CI
+!.travis.yml
 
 # Composer
 composer.phar
