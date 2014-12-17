@@ -13,8 +13,10 @@ use Symfony\Component\HttpFoundation\Request,
 // JSON-API.
 use GoIntegro\Hateoas\JsonApi\DocumentPagination,
     GoIntegro\Hateoas\JsonApi\JsonApiSpec;
-// JSON.
+// Utils.
 use GoIntegro\Hateoas\Util;
+// JSON.
+use GoIntegro\Json\JsonCoder;
 // Metadata.
 use GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface;
 
@@ -27,7 +29,7 @@ class ActionParser
         ERROR_RESOURCE_CONTENT_MISSING = "The primary resource data is missing from the body.";
 
     /**
-     * @var Util\JsonCoder
+     * @var JsonCoder
      */
     protected $jsonCoder;
     /**
@@ -36,11 +38,11 @@ class ActionParser
     private $mm;
 
     /**
-     * @param Util\JsonCoder $jsonCoder
+     * @param JsonCoder $jsonCoder
      * @param MetadataMinerInterface $mm
      */
     public function __construct(
-        Util\JsonCoder $jsonCoder,
+        JsonCoder $jsonCoder,
         MetadataMinerInterface $mm
     )
     {

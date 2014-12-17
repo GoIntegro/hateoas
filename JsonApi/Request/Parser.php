@@ -10,7 +10,7 @@ namespace GoIntegro\Hateoas\JsonApi\Request;
 // HTTP.
 use Symfony\Component\HttpFoundation\Request;
 // RAML.
-use GoIntegro\Hateoas\Raml\DocNavigator;
+use GoIntegro\Raml\DocNavigator;
 // JSON-API.
 use GoIntegro\Hateoas\JsonApi\Document;
 // Metadata.

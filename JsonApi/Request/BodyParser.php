@@ -9,10 +9,12 @@ namespace GoIntegro\Hateoas\JsonApi\Request;
 
 // HTTP.
 use Symfony\Component\HttpFoundation\Request;
-// JSON.
+// Util.
 use GoIntegro\Hateoas\Util;
+// JSON.
+use GoIntegro\Json\JsonCoder;
 // RAML.
-use GoIntegro\Hateoas\Raml;
+use GoIntegro\Raml;
 
 /**
  * @see http://jsonapi.org/format/#crud
@@ -34,7 +36,7 @@ class BodyParser
 JSON;
 
     /**
-     * @var Util\JsonCoder
+     * @var JsonCoder
      */
     protected $jsonCoder;
     /**
@@ -63,7 +65,7 @@ JSON;
     protected $unlinkingBodyParser;
 
     /**
-     * @param Util\JsonCoder $jsonCoder
+     * @param JsonCoder $jsonCoder
      * @param Raml\DocNavigator $docNavigator
      * @param ResourceLinksHydrant $hydrant
      * @param CreateBodyParser $creationBodyParser
@@ -73,7 +75,7 @@ JSON;
      * @param TranslationsParser $translationsParser
      */
     public function __construct(
-        Util\JsonCoder $jsonCoder,
+        JsonCoder $jsonCoder,
         Raml\DocNavigator $docNavigator,
         ResourceLinksHydrant $hydrant,
         CreateBodyParser $creationBodyParser,

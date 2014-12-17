@@ -220,12 +220,12 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Hateoas\Util\JsonCoder
+     * @return \GoIntegro\Json\JsonCoder
      */
     private static function createJsonCoder()
     {
         $jsonCoder = Stub::makeEmpty(
-            'GoIntegro\Hateoas\Util\JsonCoder',
+            'GoIntegro\\Json\\JsonCoder',
             [
                 'decode' => function($json) {
                     return json_decode($json, TRUE);
@@ -238,7 +238,7 @@ JSON;
     }
 
     /**
-     * @return \GoIntegro\Hateoas\Raml\DocNavigator
+     * @return \GoIntegro\Raml\DocNavigator
      */
     private static function createDocNavigator()
     {
@@ -248,11 +248,11 @@ JSON;
             ]
         ];
         $docNavigator = Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\Raml\\DocNavigator',
+            'GoIntegro\\Raml\\DocNavigator',
             ['findRequestSchema' => $schema]
         );
         $ramlDoc = Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\Raml\\RamlDoc'
+            'GoIntegro\\Raml\\RamlDoc'
         );
 
         return $docNavigator;

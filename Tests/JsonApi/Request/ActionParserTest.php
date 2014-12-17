@@ -35,7 +35,7 @@ JSON;
             'getContent' => function() { return self::UPDATE_BODY; }
         ];
         $jsonCoder = Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\Util\\JsonCoder',
+            'GoIntegro\\Json\\JsonCoder',
             ['decode' => json_decode(self::HTTP_PUT_BODY, TRUE)]
         );
         $request = self::createRequest(

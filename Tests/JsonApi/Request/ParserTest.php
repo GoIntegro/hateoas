@@ -252,17 +252,17 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \GoIntegro\Hateoas\Raml\DocNavigator
+     * @return \GoIntegro\Raml\DocNavigator
      */
     private static function createDocNavigator()
     {
         $ramlDoc = Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\Raml\\RamlDoc',
+            'GoIntegro\\Raml\\RamlDoc',
             ['isDefined' => TRUE]
         );
 
         return Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\Raml\\DocNavigator',
+            'GoIntegro\\Raml\\DocNavigator',
             ['getDoc' => $ramlDoc]
         );
     }
