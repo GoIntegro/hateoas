@@ -118,12 +118,12 @@ JSON;
 
             return RequestAction::TARGET_RESOURCE == $params->action->target
                 ? $this->parseResourceRequest($request, $params)
-                : $this->parseRelationshipRequest($request, $params);
+                : $this->parseLinkRequest($request, $params);
         } elseif (
             RequestAction::TARGET_RELATIONSHIP == $params->action->target
             && RequestAction::ACTION_DELETE === $params->action->name
         ) {
-            return $this->parseRelationshipRequest($request, $params);
+            return $this->parseUnlinkRequest($request, $params);
         }
 
         return [];
@@ -169,22 +169,31 @@ JSON;
      * @param Params $params
      * @return array
      */
-    protected function parseRelationshipRequest(
+    protected function parseLinkRequest(
         Request $request, Params $params
     )
     {
         $rawBody = $request->getContent();
         $body = $this->jsonCoder->decode($rawBody);
-        $data = RequestAction::ACTION_DELETE == $params->action->name
-            ? $this->unlinkingBodyParser->parse(
-                $request, $params, $body
-            )
-            : $this->linkingBodyParser->parse(
-                $request, $params, $body
-            );
-        $schema = static::LINK_SCHEMA;
+        $data = $this->linkingBodyParser->parse($request, $params, $body);
 
-        return $this->prepareData($params, $schema, $data);
+        return $this->prepareData($params, static::LINK_SCHEMA, $data);
+    }
+
+    /**
+     * @param Request $request
+     * @param Params $params
+     * @return array
+     */
+    protected function parseUnlinkRequest(
+        Request $request, Params $params
+    )
+    {
+        $rawBody = $request->getContent();
+        $body = $this->jsonCoder->decode($rawBody);
+        $data = $this->unlinkingBodyParser->parse($request, $params, $body);
+
+        return $this->prepareData($params, static::LINK_SCHEMA, $data);
     }
 
     /**
