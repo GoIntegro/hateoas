@@ -7,22 +7,19 @@
 
 namespace GoIntegro\Hateoas\Util;
 
-// Reflexión.
-use ReflectionMethod;
-
 class Reflection
 {
-    public static function isMethodGetter(ReflectionMethod $method)
+    public static function isMethodGetter(\ReflectionMethod $method)
     {
         return self::isMethod($method, 'get');
     }
 
-    public static function isMethodInjector(ReflectionMethod $method)
+    public static function isMethodInjector(\ReflectionMethod $method)
     {
         return self::isMethod($method, 'inject');
     }
 
-    private static function isMethod(ReflectionMethod $method, $prefix)
+    private static function isMethod(\ReflectionMethod $method, $prefix)
     {
         return $method->isPublic()
             && !$method->isStatic()
@@ -35,7 +32,7 @@ class Reflection
      * @param array $params
      * @return ResourceEntityInterface
      */
-    private static function instance(
+    public static function instance(
         \ReflectionClass $class, array $params = []
     )
     {

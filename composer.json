@@ -33,7 +33,6 @@
         "symfony/routing": "*",
         "symfony/security-core": "*",
         "symfony/translation": "*",
-        "doctrine/annotations": "*",
         "symfony/security": "*",
         "symfony/validator": "*",
         "symfony/yaml": "*",
