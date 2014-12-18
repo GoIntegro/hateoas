@@ -27,7 +27,7 @@ trait AltersEntities
     )
     {
         foreach ($fields as $field => $value) {
-            $method = self::SET . Inflector::camelize($field);
+            $method = DefaultMutator::SET . Inflector::camelize($field);
 
             if ($class->hasMethod($method)) $entity->$method($value);
         }
@@ -51,17 +51,17 @@ trait AltersEntities
             $camelCased = Inflector::camelize($relationship);
 
             if (is_array($value)) {
-                $getter = self::GET . $camelCased;
+                $getter = DefaultMutator::GET . $camelCased;
                 $singular = Inflector::singularize($camelCased);
-                $remover = self::REMOVE . $singular;
-                $adder = self::ADD . $singular;
+                $remover = DefaultMutator::REMOVE . $singular;
+                $adder = DefaultMutator::ADD . $singular;
 
                 // @todo Improve algorithm.
                 foreach ($entity->$getter() as $item) $entity->$remover($item);
 
                 foreach ($value as $item) $entity->$adder($item);
             } else {
-                $method = self::SET . $camelCased;
+                $method = DefaultMutator::SET . $camelCased;
 
                 if ($class->hasMethod($method)) $entity->$method($value);
             }

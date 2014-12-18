@@ -200,6 +200,10 @@ JSON;
             'Symfony\Component\HttpFoundation\ParameterBag',
             $queryOverrides
         );
+        $headers = Stub::makeEmpty(
+            'Symfony\Component\HttpFoundation\HeaderBag',
+            ['get' => 'application/vnd.api+json']
+        );
         $request = Stub::makeEmpty(
             'Symfony\Component\HttpFoundation\Request',
             [
@@ -209,11 +213,10 @@ JSON;
                 'cookies' => new \stdClass,
                 'files' => new \stdClass,
                 'server' => new \stdClass,
-                'headers' => new \stdClass,
+                'headers' => $headers,
                 'getPathInfo' => $pathInfo,
                 'getMethod' => $method,
-                'getContent' => $body,
-                'getContentType' => 'application/vnd.api+json'
+                'getContent' => $body
             ]
         );
 

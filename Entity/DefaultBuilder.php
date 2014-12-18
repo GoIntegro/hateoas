@@ -24,8 +24,6 @@ class DefaultBuilder implements AbstractBuilderInterface
 {
     use Validating, AltersEntities;
 
-    const GET = 'get', ADD = 'add', SET = 'set';
-
     const AUTHOR_IS_OWNER = 'GoIntegro\\Hateoas\\Entity\\AuthorIsOwner',
         ERROR_COULD_NOT_CREATE = "Could not create the resource.";
 

@@ -106,19 +106,22 @@ JSON;
      */
     public function parse(Request $request, Params $params)
     {
-        if (!$this->isJsonApi($request)) {
-            $message = sprintf(
-                self::ERROR_UNSUPPORTED_CONTENT_TYPE,
-                JsonApiSpec::HATEOAS_CONTENT_TYPE,
-                $request->getContentType()
-            );
-            throw new UnsupportedMediaTypeException($message);
-        }
+        if (in_array(
+            $params->action->name,
+            [RequestAction::ACTION_CREATE, RequestAction::ACTION_UPDATE]
+        )) {
+            if (!$this->isJsonApi($request)) {
+                $message = sprintf(
+                    self::ERROR_UNSUPPORTED_CONTENT_TYPE,
+                    JsonApiSpec::HATEOAS_CONTENT_TYPE,
+                    $request->getContentType()
+                );
+                throw new UnsupportedMediaTypeException($message);
+            }
 
-        if (RequestAction::TARGET_RESOURCE == $params->action->target) {
-            return $this->parseResourceRequest($request, $params);
-        } elseif (RequestAction::ACTION_FETCH != $params->action->name) {
-            return $this->parseRelationshipRequest($request, $params);
+            return RequestAction::TARGET_RESOURCE == $params->action->target
+                ? $this->parseResourceRequest($request, $params)
+                : $this->parseRelationshipRequest($request, $params);
         }
 
         return [];
@@ -255,10 +258,11 @@ JSON;
     /**
      * @param Request $request
      * @return boolean
+     * @todo $request->getContentType() after registering the JSON-API type.
      */
     private function isJsonApi(Request $request)
     {
         return JsonApiSpec::HATEOAS_CONTENT_TYPE
-            === $request->getContentType();
+            === $request->headers->get('CONTENT_TYPE');
     }
 }
