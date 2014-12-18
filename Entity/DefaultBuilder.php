@@ -19,6 +19,8 @@ use Symfony\Component\Validator\ValidatorInterface,
 use Symfony\Component\Security\Core\SecurityContextInterface;
 // Metadata.
 use GoIntegro\Hateoas\Metadata\Entity\MetadataCache;
+// Reflection.
+use GoIntegro\Hateoas\Util\Reflection;
 
 class DefaultBuilder implements AbstractBuilderInterface
 {
@@ -80,7 +82,13 @@ class DefaultBuilder implements AbstractBuilderInterface
     )
     {
         $class = $this->metadataCache->getReflection($class);
-        $entity = $class->newInstance();
+        $params = array_merge($metadata, $relationships, $fields);
+        $entity = Reflection::instance($class, $params);
+
+        // Removes parameters used in the constructor of the entity.
+        $this->cleanParams(
+            $class->getConstructor(), $fields, $relationships, $metadata
+        );
 
         if ($class->implementsInterface(self::AUTHOR_IS_OWNER)) {
             $entity->setOwner($this->securityContext->getToken()->getUser());
@@ -98,5 +106,29 @@ class DefaultBuilder implements AbstractBuilderInterface
         }
 
         return $entity;
+    }
+
+    /**
+     * @param \ReflectionMethod $constructor
+     * @param array &$fields
+     * @param array &$relationships
+     * @param array &$metadata
+     * @return self
+     */
+    private function cleanParams(
+        \ReflectionMethod $constructor,
+        array &$fields,
+        array &$relationships,
+        array &$metadata
+    )
+    {
+        foreach ($constructor->getParameters() as $parameter) {
+            $name = $parameter->getName();
+            unset($fields[$name]);
+            unset($fields[$relationships]);
+            unset($fields[$metadata]);
+        }
+
+        return $this;
     }
 }

@@ -29,4 +29,28 @@ class Reflection
             && 0 === $method->getNumberOfRequiredParameters()
             && $prefix === substr($method->getShortName(), 0, strlen($prefix));
     }
+
+    /**
+     * @param \ReflectionClass $class
+     * @param array $params
+     * @return ResourceEntityInterface
+     */
+    private static function instance(
+        \ReflectionClass $class, array $params = []
+    )
+    {
+        $args = [];
+
+        foreach ($class->getConstructor()->getParameters() as $parameter) {
+            $name = $parameter->getName();
+
+            if (array_key_exists($name, $params)) {
+                $args[$parameter->getPosition()] = $params[$name];
+            }
+        }
+
+        ksort($args); // Indexed using the parameter position.
+
+        return $class->newInstanceArgs($args);
+    }
 }
