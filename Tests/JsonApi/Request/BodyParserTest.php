@@ -68,8 +68,7 @@ JSON;
             self::createCreationBodyParser(),
             self::createMutationBodyParser(),
             self::createLinkingBodyParser(),
-            self::createUnlinkingBodyParser(),
-            self::createTranslationsParser()
+            self::createUnlinkingBodyParser()
         );
         // When...
         $resources = $parser->parse($request, $params);
@@ -114,8 +113,7 @@ JSON;
             self::createCreationBodyParser(),
             self::createMutationBodyParser(),
             self::createLinkingBodyParser(),
-            self::createUnlinkingBodyParser(),
-            self::createTranslationsParser()
+            self::createUnlinkingBodyParser()
         );
         // When...
         $resources = $parser->parse($request, $params);
@@ -163,8 +161,7 @@ JSON;
             self::createCreationBodyParser(),
             self::createMutationBodyParser(),
             self::createLinkingBodyParser(),
-            self::createUnlinkingBodyParser(),
-            self::createTranslationsParser()
+            self::createUnlinkingBodyParser()
         );
         // When...
         $resources = $parser->parse($request, $params);
@@ -317,16 +314,6 @@ JSON;
     {
         return Stub::makeEmpty(
             'GoIntegro\\Hateoas\\JsonApi\\Request\\UnlinkBodyParser'
-        );
-    }
-
-    /**
-     * @return \GoIntegro\Hateoas\JsonApi\Request\TranslationsParser
-     */
-    private static function createTranslationsParser()
-    {
-        return Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\JsonApi\\Request\\TranslationsParser'
         );
     }
 }
