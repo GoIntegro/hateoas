@@ -103,6 +103,7 @@ JSON;
      * @param Request $request
      * @param Params $params
      * @return array
+     * @todo Refactor.
      */
     public function parse(Request $request, Params $params)
     {
@@ -122,6 +123,11 @@ JSON;
             return RequestAction::TARGET_RESOURCE == $params->action->target
                 ? $this->parseResourceRequest($request, $params)
                 : $this->parseRelationshipRequest($request, $params);
+        } elseif (
+            RequestAction::TARGET_RELATIONSHIP == $params->action->target
+            && RequestAction::ACTION_DELETE === $params->action->name
+        ) {
+            return $this->parseRelationshipRequest($request, $params);
         }
 
         return [];
