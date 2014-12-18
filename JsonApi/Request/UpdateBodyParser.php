@@ -16,7 +16,21 @@ use Symfony\Component\HttpFoundation\Request;
 class UpdateBodyParser implements BodyParserInterface
 {
     const ERROR_MISSING_ID = "A data set provided is missing the Id.",
-        ERROR_DUPLICATED_ID = "The Id \"%s\" was sent twice.";
+        ERROR_DUPLICATED_ID = "The Id \"%s\" was sent twice.",
+        ERROR_MISSING_TRANSLATION = "A translation is missing for the entity with the Id \"%s\".";
+
+    /**
+     * @var TranslationsParser
+     */
+    protected $translationsParser;
+
+    /**
+     * @param TranslationsParser $translationsParser
+     */
+    public function __construct(TranslationsParser $translationsParser)
+    {
+        $this->translationsParser = $translationsParser;
+    }
 
     /**
      * @param Request $request
@@ -46,6 +60,24 @@ class UpdateBodyParser implements BodyParserInterface
                 } else {
                     $entityData[$datum['id']] = $datum;
                 }
+            }
+        }
+
+        $translations = $this->translationsParser->parse(
+            $request, $params, $body
+        );
+
+        if (!empty($translations)) {
+            foreach ($entityData as $id => &$datum) {
+                if (empty($translations[$id])) {
+                    $message = sprintf(
+                        self::ERROR_MISSING_TRANSLATION, $id
+                    );
+                    throw new ParseException($message);
+                }
+
+                $datum['meta']['translations']
+                    = $translations[$id];
             }
         }
 

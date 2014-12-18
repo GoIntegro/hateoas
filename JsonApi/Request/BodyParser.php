@@ -27,7 +27,6 @@ class BodyParser
     const ERROR_PRIMARY_TYPE_KEY = "The resource type key is missing from the body.",
         ERROR_MISSING_SCHEMA = "A RAML schema was expected for the current action upon the resource \"%s\".",
         ERROR_MALFORMED_SCHEMA = "The RAML schema for the current action is missing the primary type key, \"%s\".",
-        ERROR_MISSING_TRANSLATION = "A translation is missing for the entity with the Id \"%s\".",
         ERROR_UNSUPPORTED_CONTENT_TYPE = "The expected content type is \"%s\". The content type \"%s\" is not supported.";
 
     const LINK_SCHEMA = <<<'JSON'
@@ -76,7 +75,6 @@ JSON;
      * @param UpdateBodyParser $mutationBodyParser
      * @param LinkBodyParser $linkingBodyParser
      * @param UnlinkBodyParser $unlinkingBodyParser
-     * @param TranslationsParser $translationsParser
      */
     public function __construct(
         JsonCoder $jsonCoder,
@@ -85,8 +83,7 @@ JSON;
         CreateBodyParser $creationBodyParser,
         UpdateBodyParser $mutationBodyParser,
         LinkBodyParser $linkingBodyParser,
-        UnlinkBodyParser $unlinkingBodyParser,
-        TranslationsParser $translationsParser
+        UnlinkBodyParser $unlinkingBodyParser
     )
     {
         $this->jsonCoder = $jsonCoder;
@@ -96,7 +93,6 @@ JSON;
         $this->mutationBodyParser = $mutationBodyParser;
         $this->linkingBodyParser = $linkingBodyParser;
         $this->unlinkingBodyParser = $unlinkingBodyParser;
-        $this->translationsParser = $translationsParser;
     }
 
     /**
@@ -159,24 +155,6 @@ JSON;
                 $data = $this->mutationBodyParser->parse(
                     $request, $params, $body
                 );
-                $translations = $this->translationsParser->parse(
-                    $request, $params, $body
-                );
-
-                if (!empty($translations)) {
-                    foreach ($data as $id => &$datum) {
-                        if (empty($translations[$id])) {
-                            $message = sprintf(
-                                self::ERROR_MISSING_TRANSLATION, $id
-                            );
-                            throw new ParseException($message);
-                        }
-
-                        $datum['meta']['translations']
-                            = $translations[$id];
-                    }
-                }
-
                 $schema = $this->findResourceObjectSchema(
                     $params, Raml\RamlSpec::HTTP_PUT
                 );
