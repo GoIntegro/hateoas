@@ -212,7 +212,8 @@ JSON;
                 'headers' => new \stdClass,
                 'getPathInfo' => $pathInfo,
                 'getMethod' => $method,
-                'getContent' => $body
+                'getContent' => $body,
+                'getContentType' => 'application/vnd.api+json'
             ]
         );
 

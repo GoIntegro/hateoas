@@ -7,6 +7,6 @@
 
 namespace GoIntegro\Hateoas\JsonApi\Exception;
 
-abstract class UnsupportedMediaTypeException extends \ErrorException
+class UnsupportedMediaTypeException extends \ErrorException
 {
 }

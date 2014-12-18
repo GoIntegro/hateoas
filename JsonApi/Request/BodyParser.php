@@ -15,6 +15,9 @@ use GoIntegro\Hateoas\Util;
 use GoIntegro\Json\JsonCoder;
 // RAML.
 use GoIntegro\Raml;
+// JSON-API.
+use GoIntegro\Hateoas\JsonApi\JsonApiSpec,
+    GoIntegro\Hateoas\JsonApi\Exception\UnsupportedMediaTypeException;
 
 /**
  * @see http://jsonapi.org/format/#crud
@@ -24,7 +27,8 @@ class BodyParser
     const ERROR_PRIMARY_TYPE_KEY = "The resource type key is missing from the body.",
         ERROR_MISSING_SCHEMA = "A RAML schema was expected for the current action upon the resource \"%s\".",
         ERROR_MALFORMED_SCHEMA = "The RAML schema for the current action is missing the primary type key, \"%s\".",
-        ERROR_MISSING_TRANSLATION = "A translation is missing for the entity with the Id \"%s\".";
+        ERROR_MISSING_TRANSLATION = "A translation is missing for the entity with the Id \"%s\".",
+        ERROR_UNSUPPORTED_CONTENT_TYPE = "The expected content type is \"%s\". The content type \"%s\" is not supported.";
 
     const LINK_SCHEMA = <<<'JSON'
         {
@@ -102,64 +106,98 @@ JSON;
      */
     public function parse(Request $request, Params $params)
     {
+        if (!$this->isJsonApi($request)) {
+            $message = sprintf(
+                self::ERROR_UNSUPPORTED_CONTENT_TYPE,
+                JsonApiSpec::HATEOAS_CONTENT_TYPE,
+                $request->getContentType()
+            );
+            throw new UnsupportedMediaTypeException($message);
+        }
+
+        if (RequestAction::TARGET_RESOURCE == $params->action->target) {
+            return $this->parseResourceRequest($request, $params);
+        } elseif (RequestAction::ACTION_FETCH != $params->action->name) {
+            return $this->parseRelationshipRequest($request, $params);
+        }
+
+        return [];
+    }
+
+    /**
+     * @param Request $request
+     * @param Params $params
+     * @return array
+     */
+    protected function parseResourceRequest(Request $request, Params $params)
+    {
         $data = NULL;
         $schema = NULL;
         $rawBody = $request->getContent();
         $body = $this->jsonCoder->decode($rawBody);
 
-        if (RequestAction::TARGET_RESOURCE == $params->action->target) {
-            switch ($params->action->name) {
-                case RequestAction::ACTION_CREATE:
-                    $data = $this->creationBodyParser->parse(
-                        $request, $params, $body
-                    );
-                    $schema = $this->findResourceObjectSchema(
-                        $params, Raml\RamlSpec::HTTP_POST
-                    );
-                    break;
-
-                case RequestAction::ACTION_UPDATE:
-                    $data = $this->mutationBodyParser->parse(
-                        $request, $params, $body
-                    );
-                    $translations = $this->translationsParser->parse(
-                        $request, $params, $body
-                    );
-
-                    if (!empty($translations)) {
-                        foreach ($data as $id => &$datum) {
-                            if (empty($translations[$id])) {
-                                $message = sprintf(
-                                    self::ERROR_MISSING_TRANSLATION, $id
-                                );
-                                throw new ParseException($message);
-                            }
-
-                            $datum['meta']['translations']
-                                = $translations[$id];
-                        }
-                    }
-
-                    $schema = $this->findResourceObjectSchema(
-                        $params, Raml\RamlSpec::HTTP_PUT
-                    );
-                    break;
-            }
-        } elseif (RequestAction::ACTION_FETCH != $params->action->name) {
-            $data = RequestAction::ACTION_DELETE == $params->action->name
-                ? $this->unlinkingBodyParser->parse(
+        switch ($params->action->name) {
+            case RequestAction::ACTION_CREATE:
+                $data = $this->creationBodyParser->parse(
                     $request, $params, $body
-                )
-                : $this->linkingBodyParser->parse(
+                );
+                $schema = $this->findResourceObjectSchema(
+                    $params, Raml\RamlSpec::HTTP_POST
+                );
+                break;
+
+            case RequestAction::ACTION_UPDATE:
+                $data = $this->mutationBodyParser->parse(
+                    $request, $params, $body
+                );
+                $translations = $this->translationsParser->parse(
                     $request, $params, $body
                 );
 
-            $schema = static::LINK_SCHEMA;
+                if (!empty($translations)) {
+                    foreach ($data as $id => &$datum) {
+                        if (empty($translations[$id])) {
+                            $message = sprintf(
+                                self::ERROR_MISSING_TRANSLATION, $id
+                            );
+                            throw new ParseException($message);
+                        }
+
+                        $datum['meta']['translations']
+                            = $translations[$id];
+                    }
+                }
+
+                $schema = $this->findResourceObjectSchema(
+                    $params, Raml\RamlSpec::HTTP_PUT
+                );
+                break;
         }
 
-        return !empty($data) && !empty($schema)
-            ? $this->prepareData($params, $schema, $data)
-            : [];
+        return $this->prepareData($params, $schema, $data);
+    }
+
+    /**
+     * @param Request $request
+     * @param Params $params
+     * @return array
+     */
+    protected function parseRelationshipRequest(
+        Request $request, Params $params
+    )
+    {
+        $rawBody = $request->getContent();
+        $body = $this->jsonCoder->decode($rawBody);
+        $data = RequestAction::ACTION_DELETE == $params->action->name
+            ? $this->unlinkingBodyParser->parse(
+                $request, $params, $body
+            )
+            : $this->linkingBodyParser->parse(
+                $request, $params, $body
+            );
+        $schema = static::LINK_SCHEMA;
+
+        return $this->prepareData($params, $schema, $data);
     }
 
     /**
@@ -212,5 +250,15 @@ JSON;
         }
 
         return $entityData;
+    }
+
+    /**
+     * @param Request $request
+     * @return boolean
+     */
+    private function isJsonApi(Request $request)
+    {
+        return JsonApiSpec::HATEOAS_CONTENT_TYPE
+            === $request->getContentType();
     }
 }
