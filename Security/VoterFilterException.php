@@ -13,6 +13,6 @@ use GoIntegro\Hateoas\JsonApi\Exception\LogicException;
 /**
  * When access controls are not being enforced properly through filters.
  */
-interface VoterFilterException extends LogicException
+class VoterFilterException extends LogicException
 {
 }
