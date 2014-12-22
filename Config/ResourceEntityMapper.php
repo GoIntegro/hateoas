@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Hateoas\Raml;
+namespace GoIntegro\Hateoas\Config;
 
 // ORM.
 use Doctrine\ORM\EntityManagerInterface;

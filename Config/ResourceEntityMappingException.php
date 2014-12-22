@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Hateoas\Raml;
+namespace GoIntegro\Hateoas\Config;
 
 // Config.
 use Symfony\Component\Config\Definition\Exception\Exception;
