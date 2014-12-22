@@ -16,7 +16,7 @@ use GoIntegro\Raml\DocNavigator;
 // Utils.
 use GoIntegro\Hateoas\Util;
 
-class ApiDefinition
+class ResourceEntityMapper
 {
     const RESOURCE_ENTITY_INTERFACE = 'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface';
 

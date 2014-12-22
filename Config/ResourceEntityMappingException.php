@@ -10,6 +10,6 @@ namespace GoIntegro\Hateoas\Raml;
 // Config.
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-class ApiDefinitionException
+class ResourceEntityMappingException
 {
 }
