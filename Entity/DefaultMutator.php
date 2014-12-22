@@ -78,13 +78,13 @@ class DefaultMutator implements MutatorInterface
     )
     {
         $class = $this->metadataCache->getReflection($entity);
-        $translations = !empty($metadata['translations'])
-            ? $metadata['translations']
-            : [];
+
+        if (!empty($metadata['translations'])) {
+            $this->updateTranslations($entity, $metadata['translations']);
+        }
 
         $this->setFields($class, $entity, $fields)
             ->setRelationships($class, $entity, $relationships)
-            ->updateTranslations($entity, $translations)
             ->validate($entity);
 
         try {
