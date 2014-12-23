@@ -36,7 +36,7 @@ class ResourceEntityMapper
      */
     private $docNavigator;
     /**
-     * @var ResourceEntityMapperCache
+     * @var ResourceEntityMapCache
      */
     private $mapCache;
     /**
@@ -48,13 +48,13 @@ class ResourceEntityMapper
      * @param EntityManagerInterface $em
      * @param MetadataCache $metadataCache
      * @param DocNavigator $docNavigator
-     * @param ResourceEntityMapperCache $mapCache
+     * @param ResourceEntityMapCache $mapCache
      */
     public function __construct(
         EntityManagerInterface $em,
         MetadataCache $metadataCache,
         DocNavigator $docNavigator,
-        ResourceEntityMapperCache $mapCache
+        ResourceEntityMapCache $mapCache
     )
     {
         $this->em = $em;
