@@ -75,6 +75,7 @@ class ResourceEntityMapper
             ->getAllClassNames();
 
         foreach ($entityClassNames as $name) {
+            // @todo Support subtypes.
             $resourceType = Util\Inflector::typify($name);
             $indexedClassNames[$resourceType][] = $name;
         }

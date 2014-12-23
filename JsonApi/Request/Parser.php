@@ -17,6 +17,8 @@ use GoIntegro\Hateoas\JsonApi\Document;
 use GoIntegro\Hateoas\Metadata\Resource\MetadataMinerInterface;
 // Events.
 use Doctrine\Common\EventSubscriber;
+// Config.
+use GoIntegro\Hateoas\Config\ResourceEntityMapper;
 
 /**
  * @see http://jsonapi.org/format/#fetching
@@ -49,6 +51,10 @@ class Parser
      * @var DocNavigator
      */
     private $docNavigator;
+    /**
+     * @var ResourceEntityMapper
+     */
+    private $resourceEntityMapper;
     /**
      * @var string
      */
@@ -91,6 +97,7 @@ class Parser
     private $mm;
 
     /**
+     * @param ResourceEntityMapper $resourceEntityMapper
      * @param DocNavigator $docNavigator
      * @param FilterParser $filterParser
      * @param PaginationParser $paginationParser
@@ -100,9 +107,9 @@ class Parser
      * @param LocaleNegotiator $localeNegotiator
      * @param MetadataMinerInterface $mm
      * @param string $apiUrlPath
-     * @param array $config
      */
     public function __construct(
+        ResourceEntityMapper $resourceEntityMapper,
         DocNavigator $docNavigator,
         FilterParser $filterParser,
         PaginationParser $paginationParser,
@@ -111,16 +118,12 @@ class Parser
         ParamEntityFinder $entityFinder,
         LocaleNegotiator $localeNegotiator,
         MetadataMinerInterface $mm,
-        $apiUrlPath = '',
-        array $config = []
+        $apiUrlPath = ''
     )
     {
+        $this->resourceEntityMapper = $resourceEntityMapper;
         $this->docNavigator = $docNavigator;
         $this->apiUrlPath = $apiUrlPath;
-        // @todo Esta verificación debería estar en el DI.
-        $this->magicServices = isset($config['magic_services'])
-            ? $config['magic_services']
-            : [];
         $this->paginationParser = $paginationParser;
         $this->filterParser = $filterParser;
         $this->bodyParser = $bodyParser;
@@ -419,11 +422,9 @@ class Parser
      */
     private function getEntityClass($type)
     {
-        foreach ($this->magicServices as $service) {
-            if ($type === $service['resource_type']) {
-                return $service['entity_class'];
-            }
-        }
+        $map = $this->resourceEntityMapper->map();
+
+        if (isset($map[$type])) return $map[$type];
 
         throw new ResourceNotFoundException(self::ERROR_RESOURCE_NOT_FOUND);
     }

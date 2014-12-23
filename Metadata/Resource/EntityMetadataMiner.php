@@ -78,6 +78,7 @@ class EntityMetadataMiner implements MetadataMinerInterface
     /**
      * @param \GoIntegro\Hateoas\JsonApi\ResourceEntityInterface|string $entityClass
      * @return string
+     * @todo Move to \GoIntegro\Hateoas\Config\ResourceEntityMapper.
      */
     protected function getEntityClass($entityClassName)
     {
