@@ -16,7 +16,7 @@ use GoIntegro\Raml\DocNavigator;
 // Utils.
 use GoIntegro\Hateoas\Util;
 
-interface ResourceEntityMapperCache
+interface ResourceEntityMapCache
 {
     /**
      * @return boolean
