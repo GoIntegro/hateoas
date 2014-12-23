@@ -103,20 +103,6 @@ mediaType: application/vnd.api+json
             description: Removes to-many relationships by Id.
 ```
 
-Point the bundle to your RAML API definition and register an entity as a *magic service*.
-
-```yaml
-# app/config/config.yml
-
-go_integro_hateoas:
-  raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/api.raml
-  json_api:
-    magic_services:
-      - resource_type: users
-        entity_class: GoIntegro\Bundle\ExampleBundle\Entity\User
-  cache: ~
-```
-
 Have your entity implement the resource interface.
 
 ```php
