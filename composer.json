@@ -38,7 +38,7 @@
         "symfony/yaml": "*",
 
         "gointegro/json": "dev-master",
-        "gointegro/raml": "dev-feature/conv-over-conf"
+        "gointegro/raml": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
