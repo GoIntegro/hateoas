@@ -70,7 +70,7 @@ class ResourceEntityMapper
     private function indexEntityClassNames()
     {
         $indexedClassNames = [];
-        $entityClassNames = $em->getConfiguration()
+        $entityClassNames = $this->em->getConfiguration()
             ->getMetadataDriverImpl()
             ->getAllClassNames();
 
@@ -130,7 +130,7 @@ class ResourceEntityMapper
 
         $resourceClasses = [];
 
-        foreach ($this->indexEntityClassNames[$type] as $className) {
+        foreach ($this->indexedClassNames[$type] as $className) {
             $class = $this->metadataCache->getReflection($className);
 
             if ($class->implementsInterface(self::RESOURCE_ENTITY_INTERFACE)) {
