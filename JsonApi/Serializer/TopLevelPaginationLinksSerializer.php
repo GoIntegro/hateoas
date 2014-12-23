@@ -41,7 +41,7 @@ class TopLevelPaginationLinksSerializer implements DocumentSerializerInterface
         if (!empty($pagination)) {
             foreach (self::$relationships as $relationship) {
                 $method = 'get' . Inflector::camelize($relationship);
-                $page = $this->$method();
+                $page = $this->$method($document);
 
                 if (is_null($page)) continue;
 
@@ -83,9 +83,10 @@ class TopLevelPaginationLinksSerializer implements DocumentSerializerInterface
     }
 
     /**
+     * @param Document $document
      * @return integer
      */
-    protected function getPrev()
+    protected function getPrev(Document $document)
     {
         $page = $document->pagination->page - 1;
 
@@ -93,19 +94,21 @@ class TopLevelPaginationLinksSerializer implements DocumentSerializerInterface
     }
 
     /**
+     * @param Document $document
      * @return integer
      */
-    protected function getNext()
+    protected function getNext(Document $document)
     {
         $page = $document->pagination->page + 1;
 
-        return $page <= $this->getLast() ? $page : NULL;
+        return $page <= $this->getLast($document) ? $page : NULL;
     }
 
     /**
+     * @param Document $document
      * @return integer
      */
-    protected function getLast()
+    protected function getLast(Document $document)
     {
         return floor(
             $document->pagination->total

@@ -10,7 +10,7 @@ namespace GoIntegro\Hateoas\JsonApi\Serializer;
 // Mocks.
 use Codeception\Util\Stub;
 
-class PaginationMetadataSerializerTest extends \PHPUnit_Framework_TestCase
+class TopLevelPaginationLinksSerializerTest extends \PHPUnit_Framework_TestCase
 {
     const RESOURCE_TYPE = 'resources';
 
@@ -20,13 +20,21 @@ class PaginationMetadataSerializerTest extends \PHPUnit_Framework_TestCase
         $size = 3;
         $offset = 10;
         $resources = self::createResourcesMock($size, $offset);
+        $url = Stub::makeEmpty(
+            'GoIntegro\\Hateoas\\Http\\Url',
+            [
+                'getQuery' => '',
+                'getOriginal' => ''
+            ]
+        );
         $pagination = Stub::makeEmpty(
             'GoIntegro\\Hateoas\\JsonApi\\DocumentPagination',
             [
                 'total' => 1000,
                 'size' => $size,
                 'page' => 5,
-                'offset' => $offset
+                'offset' => $offset,
+                'paginationlessUrl' => $url
             ]
         );
         $document = Stub::makeEmpty(
@@ -38,48 +46,27 @@ class PaginationMetadataSerializerTest extends \PHPUnit_Framework_TestCase
                 'pagination' => $pagination
             ]
         );
-        $serializer = new PaginationMetadataSerializer;
+        $serializer = new TopLevelPaginationLinksSerializer;
         /* When... (Action) */
         $json = $serializer->serialize($document);
         /* Then... (Assertions) */
         $this->assertEquals([
-            'page' => 5,
-            'size' => 3,
-            'total' => 1000
-        ], $json);
-    }
-
-    public function testSerializingEmptyPaginatedDocument()
-    {
-        /* Given... (Fixture) */
-        $offset = 10;
-        $resources = self::createResourcesMock(0, $offset);
-        $pagination = Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\JsonApi\\DocumentPagination',
-            [
-                'total' => 0,
-                'size' => 0,
-                'page' => 0,
-                'offset' => $offset
+            'resources:first' => [
+                'href' => '?page=1&size=3',
+                'type' => 'resources'
+            ],
+            'resources:prev' => [
+                'href' => '?page=4&size=3',
+                'type' => 'resources'
+            ],
+            'resources:next' => [
+                'href' => '?page=6&size=3',
+                'type' => 'resources'
+            ],
+            'resources:last' => [
+                'href' => '?page=334&size=3',
+                'type' => 'resources'
             ]
-        );
-        $document = Stub::makeEmpty(
-            'GoIntegro\\Hateoas\\JsonApi\\Document',
-            [
-                'wasCollection' => TRUE, // Key to this test.
-                'resources' => $resources,
-                'getResourceMeta' => function() { return []; },
-                'pagination' => $pagination
-            ]
-        );
-        $serializer = new PaginationMetadataSerializer;
-        /* When... (Action) */
-        $json = $serializer->serialize($document);
-        /* Then... (Assertions) */
-        $this->assertEquals([
-            'page' => 0,
-            'size' => 0,
-            'total' => 0
         ], $json);
     }
 

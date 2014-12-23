@@ -14,18 +14,6 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 {
     const API_BASE_URL = '/api/v1';
 
-    /**
-     * @var array
-     */
-    private static $config = [
-        'magic_services' => [
-            [
-                'resource_type' => 'users',
-                'entity_class' => 'Entity\User'
-            ]
-        ]
-    ];
-
     public function testParsingASimpleRequest()
     {
         // Given...
@@ -34,6 +22,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             ['has' => function() { return FALSE; }]
         );
         $parser = new Parser(
+            self::createResourceEntityMapper(),
             self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
@@ -42,8 +31,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             self::createParamEntityFinder(),
             self::createLocaleNegotiator(),
             self::createMetadataMiner(),
-            self::API_BASE_URL,
-            self::$config
+            self::API_BASE_URL
         );
         // When...
         $params = $parser->parse($request);
@@ -61,6 +49,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $queryOverrides = ['has' => $has, 'get' => $get];
         $request = self::createRequest('/api/v1/users', $queryOverrides);
         $parser = new Parser(
+            self::createResourceEntityMapper(),
             self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
@@ -69,8 +58,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             self::createParamEntityFinder(),
             self::createLocaleNegotiator(),
             self::createMetadataMiner(),
-            self::API_BASE_URL,
-            self::$config
+            self::API_BASE_URL
         );
         // When...
         $params = $parser->parse($request);
@@ -92,6 +80,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $queryOverrides = ['has' => $has, 'get' => $get];
         $request = self::createRequest('/api/v1/users', $queryOverrides);
         $parser = new Parser(
+            self::createResourceEntityMapper(),
             self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
@@ -100,8 +89,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             self::createParamEntityFinder(),
             self::createLocaleNegotiator(),
             self::createMetadataMiner(),
-            self::API_BASE_URL,
-            self::$config
+            self::API_BASE_URL
         );
         // When...
         $params = $parser->parse($request);
@@ -123,6 +111,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $queryOverrides = ['has' => $has, 'get' => $get];
         $request = self::createRequest('/api/v1/users', $queryOverrides);
         $parser = new Parser(
+            self::createResourceEntityMapper(),
             self::createDocNavigator(),
             self::createFilterParser(),
             self::createPaginationParser(),
@@ -131,8 +120,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             self::createParamEntityFinder(),
             self::createLocaleNegotiator(),
             self::createMetadataMiner(),
-            self::API_BASE_URL,
-            self::$config
+            self::API_BASE_URL
         );
         // When...
         $params = $parser->parse($request);
@@ -264,6 +252,17 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         return Stub::makeEmpty(
             'GoIntegro\\Raml\\DocNavigator',
             ['getDoc' => $ramlDoc]
+        );
+    }
+
+    /**
+     * @return \GoIntegro\Raml\DocNavigator
+     */
+    private static function createResourceEntityMapper()
+    {
+        return Stub::makeEmpty(
+            'GoIntegro\\Hateoas\\Config\\ResourceEntityMapper',
+            ['map' => ['users' => 'Entity\User']]
         );
     }
 

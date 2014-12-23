@@ -31,7 +31,7 @@ class DocumentPagination
      */
     public $offset;
     /**
-     * @var string
+     * @var \GoIntegro\Hateoas\Http\Url
      */
     public $paginationlessUrl;
 
