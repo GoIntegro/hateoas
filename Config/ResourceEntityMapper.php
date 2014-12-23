@@ -36,6 +36,10 @@ class ResourceEntityMapper
      */
     private $docNavigator;
     /**
+     * @var ResourceEntityMapperCache
+     */
+    private $mapCache;
+    /**
      * @var array
      */
     private $indexedClassNames;
@@ -44,16 +48,19 @@ class ResourceEntityMapper
      * @param EntityManagerInterface $em
      * @param MetadataCache $metadataCache
      * @param DocNavigator $docNavigator
+     * @param ResourceEntityMapperCache $mapCache
      */
     public function __construct(
         EntityManagerInterface $em,
         MetadataCache $metadataCache,
-        DocNavigator $docNavigator
+        DocNavigator $docNavigator,
+        ResourceEntityMapperCache $mapCache
     )
     {
         $this->em = $em;
         $this->metadataCache = $metadataCache;
         $this->docNavigator = $docNavigator;
+        $this->mapCache = $mapCache;
         $this->indexedClassNames = $this->indexEntityClassNames();
     }
 
@@ -82,6 +89,10 @@ class ResourceEntityMapper
      */
     public function map()
     {
+        if ($this->mapCache->isFresh()) {
+            return $this->mapCache->read();
+        }
+
         $map = [];
 
         foreach ($this->docNavigator->getDoc()->getResourceTypes() as $type) {
@@ -98,6 +109,8 @@ class ResourceEntityMapper
 
             $map[$type] = reset($resourceClasses);
         }
+
+        $this->mapCache->keep($map);
 
         return $map;
     }
