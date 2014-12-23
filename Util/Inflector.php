@@ -55,6 +55,17 @@ class Inflector
      */
     public static function typify($word)
     {
+        $word = self::shortenClassName($name);
+
         return self::pluralize(self::hyphenate($word));
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    private static function shortenClassName($name)
+    {
+        return substr($name, strrpos($name, '\\') + 1);
     }
 }
