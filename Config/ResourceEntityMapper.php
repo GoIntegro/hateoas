@@ -85,7 +85,7 @@ class ResourceEntityMapper
 
     /**
      * @return array
-     * @throws ApiDefinitionException
+     * @throws ResourceEntityMappingException
      * @todo The configuration doesn't actually allow overridding resource type to entity class mappings as the error message suggests. Oops.
      */
     public function map()
@@ -105,7 +105,7 @@ class ResourceEntityMapper
                     $type,
                     implode(', ', $resourceClasses)
                 );
-                throw new ApiDefinitionException($message);
+                throw new ResourceEntityMappingException($message);
             }
 
             $map[$type] = reset($resourceClasses);
@@ -119,13 +119,13 @@ class ResourceEntityMapper
     /**
      * @param string $type
      * @return array
-     * @throws ApiDefinitionException
+     * @throws ResourceEntityMappingException
      */
     private function getResourceClasses($type)
     {
         if (empty($this->indexedClassNames[$type])) {
             $message = sprintf(self::ERROR_MISSING_ENTITY, $type);
-            throw new ApiDefinitionException($message);
+            throw new ResourceEntityMappingException($message);
         }
 
         $resourceClasses = [];
