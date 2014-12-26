@@ -41,8 +41,8 @@ class ResourceMetadata implements \Serializable
         $blacklist = $resourceClass->getProperty('fieldBlacklist')->getValue();
         $this->fields = !empty($whitelist)
             ? $fields->reset($whitelist)
-            : $fields->clean($blacklist)
-                ->inject($injectedFields);
+            : $fields->clean($blacklist);
+        $this->fields->inject($injectedFields);
         $this->relationships = $relationships->clean(
             $resourceClass->getProperty('relationshipBlacklist')->getValue(),
             $resourceClass->getProperty('linkOnlyRelationships')->getValue()
