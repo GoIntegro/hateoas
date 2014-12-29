@@ -54,7 +54,7 @@ ___
 
 Design your API in [the RAML language](http://raml.org/docs.html) following [the JSON-API spec](http://jsonapi.org/format/#document-structure-resource-urls).
 
-Something like this.
+Something like this example, which assumes you have an entity class with the short-name `User`.
 
 ```yaml
 #%RAML 0.8
@@ -105,15 +105,19 @@ mediaType: application/vnd.api+json
 
 Have your entity implement the resource interface.
 
+The namespace isn't considered, only the short-name is used to match against the resources defined above.
+
 ```php
 <?php
+namespace HateoasInc\Entity;
+
 use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface
 
 class User implements ResourceEntityInterface {}
 ?>
 ```
 
-And voilà - you get the following for free.
+Voilà - you get the following for free.
 
 ```
 GET /users
