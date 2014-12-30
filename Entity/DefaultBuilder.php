@@ -91,7 +91,8 @@ class DefaultBuilder implements AbstractBuilderInterface
         );
 
         if ($class->implementsInterface(self::AUTHOR_IS_OWNER)) {
-            $entity->setOwner($this->securityContext->getToken()->getUser());
+            $relationships['owner']
+                = $this->securityContext->getToken()->getUser();
         }
 
         $this->setFields($class, $entity, $fields)
