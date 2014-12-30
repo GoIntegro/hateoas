@@ -10,6 +10,6 @@ namespace GoIntegro\Hateoas\Config;
 // Config.
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-class ResourceEntityMappingException
+class ResourceEntityMappingException extends Exception
 {
 }
