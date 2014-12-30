@@ -122,11 +122,12 @@ class DefaultBuilder implements AbstractBuilderInterface
         array &$metadata
     )
     {
+        $paramBags = [$fields, $relationships, $metadata];
+
         foreach ($constructor->getParameters() as $parameter) {
             $name = $parameter->getName();
-            unset($fields[$name]);
-            unset($fields[$relationships]);
-            unset($fields[$metadata]);
+
+            foreach ($paramBags as &$bag) unset($bag[$name]);
         }
 
         return $this;
