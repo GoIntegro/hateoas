@@ -23,7 +23,6 @@
         "symfony/doctrine-bridge": "*",
         "doctrine/doctrine-bundle": "*",
         "doctrine/orm": "*",
-        "justinrainbow/json-schema": "*",
         "rhumsaa/uuid": "*",
         "predis/predis": "*",
 
@@ -38,7 +37,7 @@
         "symfony/yaml": "*",
 
         "gointegro/json": "dev-master",
-        "gointegro/raml": "dev-master"
+        "gointegro/raml": "dev-develop"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
