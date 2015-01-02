@@ -96,7 +96,7 @@ class ResourceEntityMapper
 
         $map = [];
 
-        foreach ($this->docNavigator->getDoc()->getResourceTypes() as $type) {
+        foreach ($this->docNavigator->getDoc()->getResources() as $type) {
             $resourceClasses = $this->getResourceClasses($type);
 
             if (1 < count($resourceClasses)) {
