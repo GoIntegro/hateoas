@@ -91,7 +91,8 @@ class DefaultBuilder implements AbstractBuilderInterface
         );
 
         if ($class->implementsInterface(self::AUTHOR_IS_OWNER)) {
-            $entity->setOwner($this->securityContext->getToken()->getUser());
+            $relationships['owner']
+                = $this->securityContext->getToken()->getUser();
         }
 
         $this->setFields($class, $entity, $fields)
@@ -122,11 +123,12 @@ class DefaultBuilder implements AbstractBuilderInterface
         array &$metadata
     )
     {
+        $paramBags = [$fields, $relationships, $metadata];
+
         foreach ($constructor->getParameters() as $parameter) {
             $name = $parameter->getName();
-            unset($fields[$name]);
-            unset($fields[$relationships]);
-            unset($fields[$metadata]);
+
+            foreach ($paramBags as &$bag) unset($bag[$name]);
         }
 
         return $this;
