@@ -37,7 +37,7 @@
         "symfony/yaml": "*",
 
         "gointegro/json": "dev-master",
-        "gointegro/raml": "dev-develop"
+        "gointegro/raml": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
