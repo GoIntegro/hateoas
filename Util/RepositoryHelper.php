@@ -48,7 +48,8 @@ class RepositoryHelper
             $params->primaryClass,
             $params->filters,
             $params->getPageOffset(),
-            $params->getPageSize()
+            $params->getPageSize(),
+            $params->sorting
         );
     }
 
@@ -64,7 +65,8 @@ class RepositoryHelper
         $entityClass,
         array $criteria,
         $offset = Request\Params::DEFAULT_PAGE_OFFSET,
-        $limit = Request\Params::DEFAULT_PAGE_SIZE
+        $limit = Request\Params::DEFAULT_PAGE_SIZE,
+        $sorting = []
     )
     {
         $qb = $this->entityManager
@@ -76,6 +78,14 @@ class RepositoryHelper
         foreach ($this->filters as $filter) {
             if ($filter->supportsClass($entityClass)) {
                 $qb = $filter->filter($qb, $criteria, 'e');
+            }
+        }
+
+        // @todo Esto se podría abstraer en un DefaultSorting que se pueda extender
+        // @todo Faltaría definir la forma de filtrar por campos de entidades relacionadas
+        foreach($sorting as $entityName => $sort) {
+            foreach($sort as $field => $direction) {
+                $qb->addOrderBy('e.' . $field, $direction);
             }
         }
 

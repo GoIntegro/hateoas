@@ -27,9 +27,8 @@ class DefaultFilter implements FilterInterface
         QueryBuilder $qb, array $filters, $alias = 'e'
     ) {
         $expressions = [];
-
-        foreach ($filters as $type => $filters) {
-            foreach ($filters as $field => $value) {
+        foreach ($filters as $type => $filter) {
+            foreach ($filter as $field => $value) {
                 $holder = ':' . $field;
                 $expr = is_array($value) ? 'in' : 'eq';
                 $namespace = $alias . '.' . $field;
