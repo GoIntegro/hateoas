@@ -10,7 +10,7 @@ namespace GoIntegro\Hateoas\JsonApi\Request;
 // Mocks.
 use Codeception\Util\Stub;
 
-use \stdClass;
+use Symfony\Component\HttpFoundation\Request;
 
 class SortingParserTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,19 +33,9 @@ class SortingParserTest extends \PHPUnit_Framework_TestCase
      */
     private static function createRequest()
     {
-        $query = new stdClass();
-        $query->has = function($key) {
-            return true;
-        };
-        $query->get = function($key) {
-            return ['sort' => "name"];
-        };
-        $request = Stub::makeEmpty(
-            'Symfony\\Component\\HttpFoundation\\Request',
-            ['query' => $query]
+        return new Request(
+            ['sort' => "name"]
         );
-
-        return $request;
     }
 
     /**
