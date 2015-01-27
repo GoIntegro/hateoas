@@ -33,7 +33,14 @@ class SortingParserTest extends \PHPUnit_Framework_TestCase
     {
         $request = Stub::makeEmpty(
             'Symfony\\Component\\HttpFoundation\\Request',
-            ['query' => ['sort' => "name"]]
+            [
+                'query' => [
+                    'has' => function($key) {
+                        $query = ['sort' => "name"];
+                        return $query[$key];
+                    }
+                ]
+            ]
         );
 
         return $request;
