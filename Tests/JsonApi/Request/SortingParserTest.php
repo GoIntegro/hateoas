@@ -18,24 +18,64 @@ class SortingParserTest extends \PHPUnit_Framework_TestCase
     {
         /* Given... (Fixture) */
         $mm = self::createMetadataMiner();
-        $request = self::createRequest();
+        $has = function($param) { return 'sort' == $param; };
+        $get = function() { return 'surname,name,-registered-date'; };
+        $queryOverrides = ['has' => $has, 'get' => $get];
+        $request = self::createRequest('/users', $queryOverrides);
         $params = self::createParams();
         $parser = new SortingParser($mm);
         /* When... (Action) */
         $actual = $parser->parse($request, $params);
         /* Then... (Assertions) */
-        $expected = ['field' => ['user' => ['name' => 'ASC']]];
+        $expected = ['field' => [
+            'users' => [
+                'surname' => 'ASC',
+                'name' => 'ASC',
+                'registered-date' => 'DESC'
+            ]
+        ]];
         $this->assertSame($expected, $actual);
     }
 
     /**
+     * @param string $pathInfo
+     * @param array $queryOverrides
+     * @param string $method
+     * @param string $body
      * @return Request
      */
-    private static function createRequest()
+    private static function createRequest(
+        $pathInfo,
+        array $queryOverrides,
+        $method = Parser::HTTP_GET,
+        $body = NULL
+    )
     {
-        return new Request(
-            ['sort' => "name"]
+        $defaultOverrides = [
+            'getIterator' => function() { return new \ArrayIterator([]); }
+        ];
+        $queryOverrides = array_merge($defaultOverrides, $queryOverrides);
+        $query = Stub::makeEmpty(
+            'Symfony\Component\HttpFoundation\ParameterBag',
+            $queryOverrides
         );
+        $request = Stub::makeEmpty(
+            'Symfony\Component\HttpFoundation\Request',
+            [
+                'request' => new \stdClass,
+                'attributes' => new \stdClass,
+                'cookies' => new \stdClass,
+                'files' => new \stdClass,
+                'server' => new \stdClass,
+                'headers' => new \stdClass,
+                'query' => $query,
+                'getPathInfo' => $pathInfo,
+                'getMethod' => $method,
+                'getContent' => $body
+            ]
+        );
+
+        return $request;
     }
 
     /**
@@ -46,8 +86,8 @@ class SortingParserTest extends \PHPUnit_Framework_TestCase
         return Stub::makeEmpty(
             'GoIntegro\\Hateoas\\JsonApi\\Request\\Params',
             [
-                'primaryClass'
-                    => 'HateoasInc\\Bundle\\ExampleBundle\\Entity\\User'
+                'primaryClass' => 'HateoasInc\\Bundle\\ExampleBundle\\Entity\\User',
+                'primaryType' => 'users'
             ]
         );
     }

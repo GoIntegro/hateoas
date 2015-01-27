@@ -25,6 +25,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             self::createResourceEntityMapper(),
             self::createDocNavigator(),
             self::createFilterParser(),
+            self::createSortingParser(),
             self::createPaginationParser(),
             self::createBodyParser(),
             self::createActionParser(),
@@ -52,6 +53,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             self::createResourceEntityMapper(),
             self::createDocNavigator(),
             self::createFilterParser(),
+            self::createSortingParser(),
             self::createPaginationParser(),
             self::createBodyParser(),
             self::createActionParser(),
@@ -83,6 +85,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             self::createResourceEntityMapper(),
             self::createDocNavigator(),
             self::createFilterParser(),
+            self::createSortingParser(),
             self::createPaginationParser(),
             self::createBodyParser(),
             self::createActionParser(),
@@ -100,41 +103,6 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [['platform', 'account'], ['workspaces-joined']],
             $params->include
-        );
-    }
-
-    public function testParsingARequestWithSorting()
-    {
-        // Given...
-        $has = function($param) { return 'sort' == $param; };
-        $get = function() { return 'surname,name,-registered-date'; };
-        $queryOverrides = ['has' => $has, 'get' => $get];
-        $request = self::createRequest('/api/v1/users', $queryOverrides);
-        $parser = new Parser(
-            self::createResourceEntityMapper(),
-            self::createDocNavigator(),
-            self::createFilterParser(),
-            self::createPaginationParser(),
-            self::createBodyParser(),
-            self::createActionParser(),
-            self::createParamEntityFinder(),
-            self::createLocaleNegotiator(),
-            self::createMetadataMiner(),
-            self::API_BASE_URL
-        );
-        // When...
-        $params = $parser->parse($request);
-        // Then...
-        $this->assertEquals('users', $params->primaryType);
-        $this->assertEmpty($params->primaryIds);
-        $this->assertNull($params->relationship);
-        $this->assertEquals(
-            ['users' => [
-                'surname' => 'ASC',
-                'name' => 'ASC',
-                'registered-date' => 'DESC'
-            ]],
-            $params->sorting
         );
     }
 
@@ -186,6 +154,16 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     {
         return Stub::makeEmpty(
             'GoIntegro\\Hateoas\\JsonApi\\Request\\FilterParser'
+        );
+    }
+
+    /**
+     * @return \GoIntegro\Hateoas\JsonApi\Request\SortingParser
+     */
+    private static function createSortingParser()
+    {
+        return Stub::makeEmpty(
+            'GoIntegro\\Hateoas\\JsonApi\\Request\\SortingParser'
         );
     }
 
