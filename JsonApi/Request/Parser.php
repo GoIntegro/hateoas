@@ -193,15 +193,12 @@ class Parser
                 = $this->parseSparseFields($request, $params->primaryType);
         }
 
-        if ($request->query->has('sort')) {
-            $params->sorting = $this->sortingParser->parse($request, $params);
-        }
-
         if ($request->query->has('page')) {
             $params->pagination
                 = $this->paginationParser->parse($request, $params);
         }
 
+        $params->sorting = $this->sortingParser->parse($request, $params);
         $params->filters = $this->filterParser->parse($request, $params);
         $params->action = $this->actionParser->parse($request, $params);
 
