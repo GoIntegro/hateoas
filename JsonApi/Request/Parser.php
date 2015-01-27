@@ -377,39 +377,6 @@ class Parser
 
     /**
      * @param Request $request
-     * @param string $primaryType
-     * @return array
-     */
-    private function parseSorting(Request $request, $primaryType)
-    {
-        $sort = $request->query->get('sort');
-        $sorting = [];
-        $callback = function($sort, $type) use (&$sorting) {
-            var_dump($sort);
-            var_dump($type);
-            foreach (explode(',', $sort) as $field) {
-                if ('-' != substr($field, 0, 1)) {
-                    $order = Params::ASCENDING_ORDER;
-                } else {
-                    $order = Params::DESCENDING_ORDER;
-                    $field = substr($field, 1);
-                }
-
-                $sorting[$type][$field] = $order;
-            }
-        };
-
-        if (!is_array($sort)) {
-            $sort = [$primaryType => $sort];
-        }
-
-        array_walk($sort, $callback);die;
-
-        return $sorting;
-    }
-
-    /**
-     * @param Request $request
      * @return boolean
      */
     private function parseI18n(Request $request)
