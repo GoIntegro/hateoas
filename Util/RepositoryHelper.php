@@ -28,6 +28,10 @@ class RepositoryHelper
      * @var array
      */
     private $filters = [];
+    /**
+     * @var array
+     */
+    private $sorts = [];
 
     /**
      * @param EntityManagerInterface
@@ -47,9 +51,9 @@ class RepositoryHelper
         return $this->findPaginated(
             $params->primaryClass,
             $params->filters,
+            $params->sorting,
             $params->getPageOffset(),
-            $params->getPageSize(),
-            $params->sorting
+            $params->getPageSize()
         );
     }
 
@@ -57,6 +61,7 @@ class RepositoryHelper
      * Helper method to paginate "find by" queries.
      * @param string $entityClass
      * @param array $criteria
+     * @param array $sort
      * @param integer $offset
      * @param integer $limit
      * @return PaginatedCollection
@@ -64,9 +69,9 @@ class RepositoryHelper
     public function findPaginated(
         $entityClass,
         array $criteria,
+        $sorting = [],
         $offset = Request\Params::DEFAULT_PAGE_OFFSET,
-        $limit = Request\Params::DEFAULT_PAGE_SIZE,
-        $sorting = []
+        $limit = Request\Params::DEFAULT_PAGE_SIZE
     )
     {
         $qb = $this->entityManager
@@ -81,11 +86,9 @@ class RepositoryHelper
             }
         }
 
-        // @todo Esto se podría abstraer en un DefaultSorting que se pueda extender
-        // @todo Faltaría definir la forma de filtrar por campos de entidades relacionadas
-        foreach($sorting as $entityName => $sort) {
-            foreach($sort as $field => $direction) {
-                $qb->addOrderBy('e.' . $field, $direction);
+        foreach($this->sorts as $sort) {
+            if ($sort->supportsClass($entityClass)) {
+                $qb = $sort->sort($qb, $sorting, 'e');
             }
         }
 
@@ -103,5 +106,14 @@ class RepositoryHelper
     public function addFilter(Request\FilterInterface $filter)
     {
         $this->filters[] = $filter;
+    }
+
+    /**
+     * @param Request\SortingInterface $sort
+     * @return self
+     */
+    public function addSorting(Request\SortingInterface $sort)
+    {
+        $this->sorts[] = $sort;
     }
 }

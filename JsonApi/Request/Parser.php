@@ -72,6 +72,10 @@ class Parser
      */
     private $filterParser;
     /**
+     * @var SortingParser
+     */
+    private $sortingParser;
+    /**
      * @var BodyParser
      */
     private $bodyParser;
@@ -100,6 +104,7 @@ class Parser
      * @param ResourceEntityMapper $resourceEntityMapper
      * @param DocNavigator $docNavigator
      * @param FilterParser $filterParser
+     * @param SortingParser $sortingParser
      * @param PaginationParser $paginationParser
      * @param BodyParser $bodyParser
      * @param ActionParser $actionParser
@@ -112,6 +117,7 @@ class Parser
         ResourceEntityMapper $resourceEntityMapper,
         DocNavigator $docNavigator,
         FilterParser $filterParser,
+        SortingParser $sortingParser,
         PaginationParser $paginationParser,
         BodyParser $bodyParser,
         ActionParser $actionParser,
@@ -126,6 +132,7 @@ class Parser
         $this->apiUrlPath = $apiUrlPath;
         $this->paginationParser = $paginationParser;
         $this->filterParser = $filterParser;
+        $this->sortingParser = $sortingParser;
         $this->bodyParser = $bodyParser;
         $this->actionParser = $actionParser;
         $this->entityFinder = $entityFinder;
@@ -187,8 +194,7 @@ class Parser
         }
 
         if ($request->query->has('sort')) {
-            $params->sorting
-                = $this->parseSorting($request, $params->primaryType);
+            $params->sorting = $this->sortingParser->parse($request, $params);
         }
 
         if ($request->query->has('page')) {
@@ -382,6 +388,8 @@ class Parser
         $sort = $request->query->get('sort');
         $sorting = [];
         $callback = function($sort, $type) use (&$sorting) {
+            var_dump($sort);
+            var_dump($type);
             foreach (explode(',', $sort) as $field) {
                 if ('-' != substr($field, 0, 1)) {
                     $order = Params::ASCENDING_ORDER;
@@ -398,7 +406,7 @@ class Parser
             $sort = [$primaryType => $sort];
         }
 
-        array_walk($sort, $callback);
+        array_walk($sort, $callback);die;
 
         return $sorting;
     }
