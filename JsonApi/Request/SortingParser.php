@@ -40,6 +40,7 @@ class SortingParser
     public function parse(Request $request, Params $params)
     {
         $sorting = [];
+        if (!$request->query->has('sort')) return $sorting;
         if (empty($params->primaryClass)) return $sorting;
 
         $sort = $request->query->get('sort');
