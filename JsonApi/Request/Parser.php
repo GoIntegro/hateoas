@@ -72,6 +72,10 @@ class Parser
      */
     private $filterParser;
     /**
+     * @var SortingParser
+     */
+    private $sortingParser;
+    /**
      * @var BodyParser
      */
     private $bodyParser;
@@ -100,6 +104,7 @@ class Parser
      * @param ResourceEntityMapper $resourceEntityMapper
      * @param DocNavigator $docNavigator
      * @param FilterParser $filterParser
+     * @param SortingParser $sortingParser
      * @param PaginationParser $paginationParser
      * @param BodyParser $bodyParser
      * @param ActionParser $actionParser
@@ -112,6 +117,7 @@ class Parser
         ResourceEntityMapper $resourceEntityMapper,
         DocNavigator $docNavigator,
         FilterParser $filterParser,
+        SortingParser $sortingParser,
         PaginationParser $paginationParser,
         BodyParser $bodyParser,
         ActionParser $actionParser,
@@ -126,6 +132,7 @@ class Parser
         $this->apiUrlPath = $apiUrlPath;
         $this->paginationParser = $paginationParser;
         $this->filterParser = $filterParser;
+        $this->sortingParser = $sortingParser;
         $this->bodyParser = $bodyParser;
         $this->actionParser = $actionParser;
         $this->entityFinder = $entityFinder;
@@ -186,16 +193,12 @@ class Parser
                 = $this->parseSparseFields($request, $params->primaryType);
         }
 
-        if ($request->query->has('sort')) {
-            $params->sorting
-                = $this->parseSorting($request, $params->primaryType);
-        }
-
         if ($request->query->has('page')) {
             $params->pagination
                 = $this->paginationParser->parse($request, $params);
         }
 
+        $params->sorting = $this->sortingParser->parse($request, $params);
         $params->filters = $this->filterParser->parse($request, $params);
         $params->action = $this->actionParser->parse($request, $params);
 
@@ -370,37 +373,6 @@ class Parser
         }
 
         return $fields;
-    }
-
-    /**
-     * @param Request $request
-     * @param string $primaryType
-     * @return array
-     */
-    private function parseSorting(Request $request, $primaryType)
-    {
-        $sort = $request->query->get('sort');
-        $sorting = [];
-        $callback = function($sort, $type) use (&$sorting) {
-            foreach (explode(',', $sort) as $field) {
-                if ('-' != substr($field, 0, 1)) {
-                    $order = Params::ASCENDING_ORDER;
-                } else {
-                    $order = Params::DESCENDING_ORDER;
-                    $field = substr($field, 1);
-                }
-
-                $sorting[$type][$field] = $order;
-            }
-        };
-
-        if (!is_array($sort)) {
-            $sort = [$primaryType => $sort];
-        }
-
-        array_walk($sort, $callback);
-
-        return $sorting;
     }
 
     /**

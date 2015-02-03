@@ -28,6 +28,10 @@ class RepositoryHelper
      * @var array
      */
     private $filters = [];
+    /**
+     * @var array
+     */
+    private $sorts = [];
 
     /**
      * @param EntityManagerInterface
@@ -47,6 +51,7 @@ class RepositoryHelper
         return $this->findPaginated(
             $params->primaryClass,
             $params->filters,
+            $params->sorting,
             $params->getPageOffset(),
             $params->getPageSize()
         );
@@ -56,6 +61,7 @@ class RepositoryHelper
      * Helper method to paginate "find by" queries.
      * @param string $entityClass
      * @param array $criteria
+     * @param array $sort
      * @param integer $offset
      * @param integer $limit
      * @return PaginatedCollection
@@ -63,6 +69,7 @@ class RepositoryHelper
     public function findPaginated(
         $entityClass,
         array $criteria,
+        $sorting = [],
         $offset = Request\Params::DEFAULT_PAGE_OFFSET,
         $limit = Request\Params::DEFAULT_PAGE_SIZE
     )
@@ -76,6 +83,12 @@ class RepositoryHelper
         foreach ($this->filters as $filter) {
             if ($filter->supportsClass($entityClass)) {
                 $qb = $filter->filter($qb, $criteria, 'e');
+            }
+        }
+
+        foreach($this->sorts as $sort) {
+            if ($sort->supportsClass($entityClass)) {
+                $qb = $sort->sort($qb, $sorting, 'e');
             }
         }
 
@@ -93,5 +106,14 @@ class RepositoryHelper
     public function addFilter(Request\FilterInterface $filter)
     {
         $this->filters[] = $filter;
+    }
+
+    /**
+     * @param Request\SortingInterface $sort
+     * @return self
+     */
+    public function addSorting(Request\SortingInterface $sort)
+    {
+        $this->sorts[] = $sort;
     }
 }
