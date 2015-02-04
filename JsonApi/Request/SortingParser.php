@@ -65,7 +65,7 @@ class SortingParser
         };
 
         foreach ($sort as $resource => $sort) {
-            if ($resource == $params->primaryType) {
+            if ($resource == $params->primaryType && $metadata->isField($sort)) {
                 $add($resource, $sort, 'field');
             } elseif ($metadata->isToOneRelationship($resource)) {
                 $add($resource, $sort, 'association');

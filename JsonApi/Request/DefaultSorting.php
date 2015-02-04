@@ -35,6 +35,8 @@ class DefaultSorting implements SortingInterface
                         $field = $resourceName . '.' . $field;
                     } elseif ('field' == $type) {
                         $field = $alias . '.' . $field;
+                    } else {
+                        break;
                     }
                     $qb->addOrderBy($field, $order);
                 }
