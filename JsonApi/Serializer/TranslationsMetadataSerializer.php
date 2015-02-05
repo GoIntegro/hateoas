@@ -91,8 +91,16 @@ class TranslationsMetadataSerializer implements DocumentSerializerInterface
 
         if (!empty($repository)) { // Do we have Gedmo?
             foreach ($resources as $resource) {
-                $translations
-                    = $repository->findTranslations($resource->entity);
+                if(in_array('translations', $resource->getMetadata()->relationships->dbOnly)) {
+                    $translations =
+                        $resource->entity->getTranslations()->map(function($translation) {
+                            $result = [];
+                            $result[$translation->getLocale()][$translation->getField()] = $translation->getContent();
+                            return $result;
+                        })->toArray();
+                } else {
+                    $translations = $repository->findTranslations($resource->entity);
+                }
 
                 if (!empty($translations)) {
                     $allTranslations[(string) $resource->entity->getId()]
