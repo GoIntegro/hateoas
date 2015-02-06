@@ -49,8 +49,8 @@ class SortingParser
         }
 
         $metadata = $this->metadataMiner->mine($params->primaryClass);
-        $add = function($resource, $sort, $type) use (&$sorting) {
-            $resource = Inflector::camelize($resource);
+
+        foreach ($sort as $resource => $sort) {
             if (is_string($sort)) $sort = explode(',', $sort);
             foreach ($sort as $field) {
                 if ('-' != substr($field, 0, 1)) {
@@ -59,18 +59,16 @@ class SortingParser
                     $order = Params::DESCENDING_ORDER;
                     $field = substr($field, 1);
                 }
+                if ($resource == $params->primaryType && $metadata->isField($field)) {
+                    $type = 'field';
+                } elseif ($metadata->isToOneRelationship($resource)) {
+                    $type = 'association';
+                } else {
+                    $type = 'custom';
+                }
 
-                $sorting[$type][$resource][$field] = $order;
-            }
-        };
-
-        foreach ($sort as $resource => $sort) {
-            if ($resource == $params->primaryType && $metadata->isField($sort)) {
-                $add($resource, $sort, 'field');
-            } elseif ($metadata->isToOneRelationship($resource)) {
-                $add($resource, $sort, 'association');
-            } else {
-                $add($resource, $sort, 'custom');
+                $camelizeResource = Inflector::camelize($resource);
+                $sorting[$type][$camelizeResource][$field] = $order;
             }
         }
 

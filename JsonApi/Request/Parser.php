@@ -180,8 +180,11 @@ class Parser
         $params->locale = $this->localeNegotiator->negotiate($request);
 
         if (!empty($this->translatableListener) && !empty($params->locale)) {
+            $params->translatable = TRUE;
             $this->translatableListener
                 ->setTranslatableLocale($params->locale);
+        } else {
+            $params->translatable = FALSE;
         }
 
         if ($request->query->has('include')) {
