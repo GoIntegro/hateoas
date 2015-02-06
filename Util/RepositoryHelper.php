@@ -15,6 +15,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use GoIntegro\Hateoas\Collections\PaginatedCollection;
 // Request.
 use GoIntegro\Hateoas\JsonApi\Request;
+// Listener
+use Gedmo\Translatable\TranslatableListener;
 
 class RepositoryHelper
 {
@@ -53,7 +55,8 @@ class RepositoryHelper
             $params->filters,
             $params->sorting,
             $params->getPageOffset(),
-            $params->getPageSize()
+            $params->getPageSize(),
+            $params->translatable
         );
     }
 
@@ -64,6 +67,7 @@ class RepositoryHelper
      * @param array $sort
      * @param integer $offset
      * @param integer $limit
+     * @param boolean $translatable
      * @return PaginatedCollection
      */
     public function findPaginated(
@@ -71,7 +75,8 @@ class RepositoryHelper
         array $criteria,
         $sorting = [],
         $offset = Request\Params::DEFAULT_PAGE_OFFSET,
-        $limit = Request\Params::DEFAULT_PAGE_SIZE
+        $limit = Request\Params::DEFAULT_PAGE_SIZE,
+        $translatable = false
     )
     {
         $qb = $this->entityManager
@@ -93,6 +98,13 @@ class RepositoryHelper
         }
 
         $query = $qb->getQuery();
+        if($translatable) {
+            $query->setHint(
+                \Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER,
+                'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+            );
+            $query->setHint(\Gedmo\Translatable\TranslatableListener::HINT_FALLBACK, 1);
+        }
         $paginator = new Paginator($query);
         $collection = new PaginatedCollection($paginator);
 
