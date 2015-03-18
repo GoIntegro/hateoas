@@ -31,7 +31,7 @@ class SortingParserTest extends \PHPUnit_Framework_TestCase
             'users' => [
                 'surname' => 'ASC',
                 'name' => 'ASC',
-                'registered-date' => 'DESC'
+                'registeredDate' => 'DESC'
             ]
         ]];
         $this->assertSame($expected, $actual);
