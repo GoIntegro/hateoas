@@ -67,6 +67,7 @@ class SortingParser
                     $type = 'custom';
                 }
 
+                $field = Inflector::camelize($field);
                 $camelizeResource = Inflector::camelize($resource);
                 $sorting[$type][$camelizeResource][$field] = $order;
             }
