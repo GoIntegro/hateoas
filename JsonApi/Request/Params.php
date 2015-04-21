@@ -98,6 +98,11 @@ class Params
      * @var boolean
      */
     public $translatable;
+    
+    /**
+     * @var stdClass|null
+     */
+    public $resourceConfig;
 
     /**
      * @param string $field

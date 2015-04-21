@@ -16,6 +16,9 @@ use GoIntegro\Raml\DocNavigator;
 // Utils.
 use GoIntegro\Hateoas\Util;
 
+//Resources Config
+use GoIntegro\Hateoas\Config\ResourcesConfig as ResourcesConfigInterface;
+
 class ResourceEntityMapper
 {
     const RESOURCE_ENTITY_INTERFACE = 'GoIntegro\\Hateoas\\JsonApi\\ResourceEntityInterface';
@@ -43,6 +46,11 @@ class ResourceEntityMapper
      * @var array
      */
     private $indexedClassNames;
+    
+    /**
+     * @var ResourcesConfigInterface
+     */
+    private $resourcesConfig;
 
     /**
      * @param EntityManagerInterface $em
@@ -54,13 +62,15 @@ class ResourceEntityMapper
         EntityManagerInterface $em,
         MetadataCache $metadataCache,
         DocNavigator $docNavigator,
-        ResourceEntityMapCache $mapCache
+        ResourceEntityMapCache $mapCache,
+        ResourcesConfigInterface $resourcesConfig
     )
     {
         $this->em = $em;
         $this->metadataCache = $metadataCache;
         $this->docNavigator = $docNavigator;
         $this->mapCache = $mapCache;
+	$this->resourcesConfig = $resourcesConfig;
         $this->indexedClassNames = $this->indexEntityClassNames();
     }
 
@@ -79,7 +89,13 @@ class ResourceEntityMapper
             $resourceType = Util\Inflector::typify($name);
             $indexedClassNames[$resourceType][] = $name;
         }
-
+        
+        //Config class override
+        foreach ($this->getResourcesConfig()->getAll() as $resource) {
+            if (!empty($resource->type) && !empty($resource->class)) {
+                $indexedClassNames[$resource->type] = array($resource->class);
+            }
+        }
         return $indexedClassNames;
     }
 
@@ -140,4 +156,14 @@ class ResourceEntityMapper
 
         return $resourceClasses;
     }
+    
+    /**
+     * 
+     * @return ResourcesConfigInterface
+     */
+    public function getResourcesConfig()
+    {
+        return $this->resourcesConfig;
+    }
 }
+
