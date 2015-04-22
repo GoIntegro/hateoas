@@ -240,7 +240,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     {
         return Stub::makeEmpty(
             'GoIntegro\\Hateoas\\Config\\ResourceEntityMapper',
-            ['map' => ['users' => 'Entity\User']]
+            ['map' => ['users' => 'Entity\User'],
+            'getResourcesConfig' => new \GoIntegro\Hateoas\Config\Resources()]
         );
     }
 

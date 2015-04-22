@@ -205,11 +205,15 @@ class Parser
         $params->filters = $this->filterParser->parse($request, $params);
         $params->action = $this->actionParser->parse($request, $params);
 
+        $params->resourceConfig = $this->resourceEntityMapper
+                ->getResourcesConfig()->get($params->primaryType);
+                
         // Needs the params from the ActionParser.
         $params->entities = $this->entityFinder->find($params);
 
         // Needs the params from the ActionParser (and ParamEntityFinder).
         $params->resources = $this->bodyParser->parse($request, $params);
+        
 
         return $params;
     }
