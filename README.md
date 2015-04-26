@@ -124,8 +124,8 @@ GET /users
 GET /users/1
 GET /users/1,2,3
 GET /users/1/name
-GET /users/1/linked/posts
-GET /posts/1/linked/owner
+GET /users/1/links/posts
+GET /posts/1/links/owner
 GET /posts?owner=1
 GET /posts?owner=1,2,3
 GET /users?sort=name,-birth-date
