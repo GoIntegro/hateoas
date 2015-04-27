@@ -14,7 +14,8 @@ use GoIntegro\Hateoas\Metadata\Resource\ResourceMetadata;
 // Datos.
 use GoIntegro\Hateoas\Util\Inflector;
 // Colecciones.
-use Doctrine\Common\Collections\Collection as CollectionInterface;
+use Doctrine\Common\Collections\Collection as CollectionInterface,
+    Doctrine\Common\Collections\ArrayCollection;
 
 class EntityResource implements DocumentResource
 {
