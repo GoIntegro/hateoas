@@ -5,7 +5,7 @@
  * @author Javier Lorenzana <javier.lorenzana@gointegro.com>
  */
 
-namespace GoIntegro\Hateoas\JsonApi\Request;
+namespace GoIntegro\Hateoas\JsonApi\Serializer;
 
 // JSON-API.
 use GoIntegro\Hateoas\JsonApi\Exception\ErrorException;
