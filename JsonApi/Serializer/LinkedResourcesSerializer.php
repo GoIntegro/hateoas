@@ -235,10 +235,8 @@ class LinkedResourcesSerializer implements DocumentSerializerInterface
                 if (!empty($linkedResource)) {
                     $linkedResources[] = $linkedResource;
                 } else {
-                    // @todo This should never happen.
                     throw new SerializationException(sprintf(
-                        self::ERROR_INHERITANCE_MAPPING,
-                        implode('.', $relationships)
+                        self::ERROR_INHERITANCE_MAPPING, $relationship->type
                     ));
                 }
             }
