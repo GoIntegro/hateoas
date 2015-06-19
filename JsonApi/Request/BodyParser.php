@@ -255,7 +255,9 @@ JSON;
      */
     private function isJsonApi(Request $request)
     {
+        $ctype = explode(';', $request->headers->get('CONTENT_TYPE'));
+
         return JsonApiSpec::HATEOAS_CONTENT_TYPE
-            === $request->headers->get('CONTENT_TYPE');
+        === $ctype[0];
     }
 }
